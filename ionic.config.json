@@ -1,0 +1,7 @@
+{
+  "name": "odcAgileDayMobileApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

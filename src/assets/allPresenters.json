@@ -1,0 +1,88 @@
+[
+    {
+      "id": 1,
+      "name": "Rajendra Raskar",
+      "description": "World Of Product Owner",
+      "roomNumber": "TR01",
+      "timeSlot": "11:50 AM"
+    },
+    {
+      "id": 2,
+      "name": "Deepti Chilake",
+      "description": "Introduction to Agile Retrospective",
+      "roomNumber": "TR02",
+      "timeSlot": "11:50 AM"
+    },
+    {
+      "id": 3,
+      "name": "Trupti Dipke",
+      "description": "Pocker Planning Game",
+      "roomNumber": "TR03",
+      "timeSlot": "11:50 AM"
+    },
+    {
+      "id": 4,
+      "name": "Priyanka Kashyap",
+      "description": "Scrum Meeting",
+      "roomNumber": "TR04",
+      "timeSlot": "11:50 AM"
+    },
+    {
+      "id": 5,
+      "name": "Swapnil Kumbhar",
+      "description": "Agile Principles",
+      "roomNumber": "TR01",
+      "timeSlot": "2.00 PM"
+  
+    },
+    {
+      "id": 6,
+      "name": "Mayuresh Chandwadkar",
+      "description": "Agile Dashboard",
+      "roomNumber": "TR02",
+      "timeSlot": "2.00 PM"
+    },
+    {
+      "id": 7,
+      "name": "Manish Parikh",
+      "description": "Burn Down Chart",
+      "roomNumber": "TR03",
+      "timeSlot": "2.00 PM"
+     
+    },
+    {
+      "id": 8,
+      "name": "Ankita Shridhar ",
+      "description": "Jira process in Agile",
+      "roomNumber": "TR04",
+      "timeSlot": "2.00 PM"
+    },
+    {
+      "id": 9,
+      "name": "Nikhil Kumar",
+      "description": "Agile Glossary",
+      "roomNumber": "TR01",
+      "timeSlot": "4.00 PM"
+    },
+    {
+      "id": 10,
+      "name": "Prashant Gour",
+      "description": "Scope Creep in Agile",
+      "roomNumber": "TR02",
+      "timeSlot": "4.00 PM"
+    },
+    {
+      "id": 11,
+      "name": "Monika Singh",
+      "description": "Bio Team in Agile",
+      "roomNumber": "TR03",
+      "timeSlot": "4.00 PM"
+    },
+    {
+      "id": 12,
+      "name": "Pallavi Nimbalkar",
+      "description": "DevOpt in Agile",
+      "roomNumber": "TR04",
+      "timeSlot": "4.00 PM"
+    }
+  ]
