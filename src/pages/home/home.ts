@@ -28,7 +28,7 @@ export class HomePage {
 
   @ViewChild('mycontent') nav: NavController
 
-  rootPage : any = FeedbackPage;
+  rootPage : any = SessionsPage;
 
  pages: PageInterface[] = [
     { title: 'Sessions', pageName: 'SessionsPage', component: SessionsPage, index: 0, icon: 'alarm' },
