@@ -1,11 +1,12 @@
+
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule,IonicPageModule } from 'ionic-angular';
+import { FormsModule } from '@angular/forms';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { FormsModule } from '@angular/forms';
-import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
+import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
 import { FeedbackPage } from '../pages/feedback/feedback';
@@ -15,6 +16,7 @@ import { SessionsPage } from '../pages/sessions/sessions';
 import { ApiProvider } from '../providers/api/api';
 import { FilterPipe} from './filter.pipe';
 import { ServicesProvider } from '../providers/services/services';
+
 
 @NgModule({
   declarations: [
@@ -29,9 +31,10 @@ import { ServicesProvider } from '../providers/services/services';
 
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,FormsModule,HttpModule,
     IonicModule.forRoot(MyApp),
     IonicPageModule.forChild(MyApp)
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [

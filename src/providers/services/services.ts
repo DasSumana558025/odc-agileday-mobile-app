@@ -1,5 +1,4 @@
 import { Http } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable'
 
@@ -16,12 +15,6 @@ export class ServicesProvider {
     console.log('Hello ApiProvider Provider');
   }
 
-  getEmployees() {
-    this.http.get('assets/product.json').subscribe(data => {
-      console.log(data);
-    })
-  }
-
   getAllTopics() : Observable<any> {
     return this.http.get('assets/allPresenters.json');
   }
@@ -30,6 +23,27 @@ export class ServicesProvider {
     return this.http.get('assets/feedback.json');
   }
 
+  getEmployees() : Observable<any>{
+    return  this.http.get('assets/product.json');
+  }
 }
+
+interface Alltopics {
+  id: number;
+  name: string;
+  description: string;
+  roomNumber: string;
+  timeSlot: string;
+}
+
+interface AllFeedback {
+  id : number;
+  session : number;
+  description: string;
+  sessionId : number;
+  sessionName :string;
+  questionDescription :any;
+}
+
 
 

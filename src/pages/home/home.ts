@@ -31,10 +31,10 @@ export class HomePage {
   rootPage : any = FeedbackPage;
 
  pages: PageInterface[] = [
-    { title: 'Sessions', pageName: 'SessionsPage', component: SessionsPage, index: 0, icon: 'Sessions' },
-    { title: 'Register', pageName: 'RegisterPage', component: RegistrationPage, index: 1, icon: 'Register' },
-    { title: 'Poster', pageName: 'PosterPage', component: PosterPage, index: 2, icon: 'poster' },
-    { title: 'FeedBack', pageName: 'FeedbackPage', component: FeedbackPage, index: 3, icon: 'Feedback' }
+    { title: 'Sessions', pageName: 'SessionsPage', component: SessionsPage, index: 0, icon: 'alarm' },
+    { title: 'Register', pageName: 'RegisterPage', component: RegistrationPage, index: 1, icon: 'contacts' },
+    { title: 'Poster', pageName: 'PosterPage', component: PosterPage, index: 2, icon: 'albums' },
+    { title: 'FeedBack', pageName: 'FeedbackPage', component: FeedbackPage, index: 3, icon: 'chatbubbles' }
 
   ];
 

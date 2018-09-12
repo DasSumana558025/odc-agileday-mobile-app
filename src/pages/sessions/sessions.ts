@@ -1,6 +1,5 @@
 import { Component,OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Http } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterPipe } from './../../app/filter.pipe';
 import { ServicesProvider } from './../../providers/services/services';
