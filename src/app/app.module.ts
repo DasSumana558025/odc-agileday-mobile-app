@@ -9,8 +9,11 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { HomePage } from '../pages/home/home';
+import { AgendaPage } from '../pages/agenda/agenda';
+import { AttendancePage } from '../pages/attendance/attendance';
 import { FeedbackPage } from '../pages/feedback/feedback';
 import { PosterPage } from '../pages/poster/poster';
+import { LogoutPage } from '../pages/logout/logout';
 import { RegistrationPage } from '../pages/registration/registration';
 import { SessionsPage } from '../pages/sessions/sessions';
 import { ApiProvider } from '../providers/api/api';
@@ -23,10 +26,13 @@ import { ServicesProvider } from '../providers/services/services';
     MyApp,
     LoginPage,
     HomePage,
+    AgendaPage,
     SessionsPage,
     FeedbackPage,
     PosterPage,
+    AttendancePage,
     RegistrationPage,
+    LogoutPage,
     FilterPipe
 
   ],
@@ -42,8 +48,11 @@ import { ServicesProvider } from '../providers/services/services';
     LoginPage,
     SessionsPage,
     HomePage,
+    AgendaPage,
     FeedbackPage,
     PosterPage,
+    AttendancePage,
+    LogoutPage,
     RegistrationPage
   ],
   providers: [
