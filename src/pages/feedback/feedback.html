@@ -20,8 +20,9 @@
                 <ul class="list-wrapper pd-0">
                     <li style="    list-style-type: none;" class="pd-0"  *ngFor="let question of session.questionOptions">
                         <div class="menu-action">
-                             <input type="radio" class="radio-inline" value={{question.value}}  
-                            name="optionId"  [(ngModel)]=question.optionId>{{question.value}} 
+                             <!-- <input type="radio" class="radio-inline" value={{question.value}}  
+                            name="optionId"  [(ngModel)]=question.optionId>{{question.value}}  -->
+                            <input type="radio" class="radio-inline" value="{{question.value}}"  name="session.selectedAnswer"  [(ngModel)]=session.selectedAnswer>{{question.value}}
                             
                         </div>
                     </li>
@@ -30,5 +31,5 @@
         </div>
     </div>
 </div>
-
+{{allFeedback}}
 </ion-content>

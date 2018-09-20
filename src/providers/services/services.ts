@@ -1,6 +1,8 @@
-import { Http } from '@angular/http';
+import { Http  } from '@angular/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable'
+import {Observable} from 'rxjs/Observable';
+import { LoginPage } from '../../pages/login/login';
 
 /*
   Generated class for the ApiProvider provider.
@@ -23,8 +25,12 @@ export class ServicesProvider {
     return this.http.get('assets/feedback.json');
   }
 
-  getEmployees() : Observable<any>{
-    return  this.http.get('assets/product.json');
+  getEmployees() : any{
+    //return  this.http.get('http://localhost:9000/api/auth:dasId=?,dasPass=?');
+   // return this.http.get('http://localhost:9000/api/auth');
+
+    
+  
   }
 }
 

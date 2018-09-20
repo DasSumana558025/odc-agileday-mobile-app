@@ -13,12 +13,44 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Poster Starter</h3>
+<ion-content padding class="show-when-demo">
+  <h3>Poster Competition</h3>
+  
+  <ion-grid>
+      <ion-row *ngFor="let img of images">
+        <ion-col text-center >
+          <ion-icon name="logo-apple" showWhen="img.index"></ion-icon>
+            <img alt="logo" height="90" style="align-items: center;" src="{{img.imageName}}" />
+         </ion-col>
+         <ion-col>
+           <code>
+              Image detail == {{img.imageDetail}}
+          </code>
+        </ion-col>
+      </ion-row>
+      
+    </ion-grid>
+  
+  </ion-content>
+  
+  <style>
+    .show-when-demo ion-col {
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      margin: 1%;
+      max-width: 48%;
+      flex: 0 0 48%;
+      min-height: 120px;
+    }
+    .show-when-demo code {
+      background: #f8f8f8;
+    }
+    .show-when-demo ion-icon {
+      font-size: 100px;
+    }
+  </style>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+   
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
-</ion-content>
+
+

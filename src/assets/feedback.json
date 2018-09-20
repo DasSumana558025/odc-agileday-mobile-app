@@ -7,6 +7,7 @@
       "correctOption": 0,
       "description": "How do you rate session overall?",
       "sessionId": 1,
+      "selectedAnswer" : "",
       "questionOptions": [
         {
           "optionId": 1,
@@ -35,6 +36,7 @@
       "correctOption": 0,
       "description": "To what extent do you think you can apply the information presented in the session?",
       "sessionId": 2,
+      "selectedAnswer" : "",
       "questionOptions": [
         {
           "optionId": 5,
@@ -63,6 +65,7 @@
       "correctOption": 0,
       "description": "For my experience level, the workshop was?",
       "sessionId": 3,
+      "selectedAnswer" : "",
       "questionOptions": [
         {
           "optionId": 9,
@@ -91,6 +94,7 @@
       "correctOption": 0,
       "description": "How do you rate the content of the session?",
       "sessionId":4,
+      "selectedAnswer" : "",
       "questionOptions": [
         {
           "optionId": 13,
@@ -119,6 +123,7 @@
       "correctOption": 0,
       "description": "How do you rate session overall?",
       "sessionId": 5,
+      "selectedAnswer" : "",
       "questionOptions": [
         {
           "optionId": 17,
