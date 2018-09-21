@@ -34,7 +34,7 @@ export class ServicesProvider {
     header.append('Accept' ,'application/json');
     header.append('Authorization', data);
     let options = new RequestOptions({headers: header});
-        return this.http.get('http://localhost:8080/wlodc-techhub/api/auth/', options)
+        return this.http.post('http://localhost:9000/wlodc-techhub/api/auth/','test', options)
     };
 }
 
@@ -55,5 +55,13 @@ interface AllFeedback {
   questionDescription :any;
 }
 
-
+interface Employee {
+  id: number,
+  userId: string,
+  firstName: string,
+  lastName: string,
+  location: string,
+  email: string,
+  mobile:string
+}
 
