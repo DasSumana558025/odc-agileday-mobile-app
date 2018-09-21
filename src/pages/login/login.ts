@@ -33,11 +33,13 @@ export class LoginPage{
     localStorage.setItem('auth_token', this.encriptDaseId);
      this.apiProvider.getEmployees().subscribe(data => {
       console.log("Inside submit login");
-    
-      console.log("test = "+ JSON.stringify(data.json()));
+     const user = data.json();
+      console.log("test = "+ user.id ) ;
      
-     this.employee = new Employee(data.id,data.userId,data.firstName,data.lastName,data.location,data.email,data.mobile);
-      console.log("Inside ContactPage and onInit() = "+ this.employee);
+     this.employee = new Employee(user.id,user.userId,user.firstName,
+      user.lastName,user.location,user.email,user.mobile);
+
+      console.log("Inside ContactPage and onInit() userName = "+  this.employee.firstName);
      this.navCtrl.setRoot(HomePage);
      });
 
