@@ -21,36 +21,32 @@ export class LoginPage {
   encriptDaseId : string;
   encriptPass : string;
   model : any = {};
-
+  public employee: Employee [];
   constructor(public navCtrl: NavController,public http: Http, public navParams: NavParams,public apiProvider : ServicesProvider) {
   }
 
   onSubmit()
   {
-  this.encriptDaseId =  btoa(this.model.dasid + ":" + this.model.pwd);
- 
-  this.http.post('http://localhost:9000/api/auth', {
-        //  headers: new HttpHeaders().set({'Access-Control-Allow-Origin' : '*' ,
-        //  'Authorization ':  this.encriptDaseId});
-         headers: new HttpHeaders({
-          'Access-Control-Allow-Origin' : '*',
-         // 'Access-Control-Allow-Methods' :'POST, GET, OPTIONS, PUT',
-          'Accept' : 'application/json',
-          'content-type' : 'application/json',
-          'Authorization': this.encriptDaseId
-        })
-  })
-  .subscribe(
-    result => {
-      console.log("Result = "+result);
-    },
-    err => {
-      console.log("Error- something is wrong!")
-});
-    console.log(this.model.dasid + " encriptDaseId = "+this.encriptDaseId );
+    this.encriptDaseId =  btoa(this.model.dasid + ":" + this.model.pwd);
+    localStorage.setItem('auth_token', this.encriptDaseId);
+    this.apiProvider.getEmployees().subscribe(data => {
+      const parsedJSON = JSON.parse(data);
+      const employeeObj: Employee = parsedJSON as Employee; 
+     console.log("Inside ContactPage and onInit() = "+ employeeObj);
     this.navCtrl.setRoot(HomePage);
-  }
+  });
   
-  
+
+}
+}
+
+interface Employee {
+  id: number,
+  userId: string,
+  firstName: string,
+  lastName: string,
+  location: string,
+  email: string,
+  mobile:string
 }
 

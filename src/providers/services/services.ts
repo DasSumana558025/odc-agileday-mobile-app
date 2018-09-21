@@ -1,8 +1,7 @@
-import { Http  } from '@angular/http';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Http ,RequestOptions,Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import { LoginPage } from '../../pages/login/login';
+
 
 /*
   Generated class for the ApiProvider provider.
@@ -25,13 +24,18 @@ export class ServicesProvider {
     return this.http.get('assets/feedback.json');
   }
 
-  getEmployees() : any{
-    //return  this.http.get('http://localhost:9000/api/auth:dasId=?,dasPass=?');
-   // return this.http.get('http://localhost:9000/api/auth');
-
-    
-  
-  }
+  getEmployees():Observable<any> {
+    let data = localStorage.getItem('auth_token');
+    data = "BASIC "+ data;
+    console.log(data);
+    let header = new Headers();
+    header.append('Access-Control-Allow-Origin','*');
+    header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    header.append('Accept' ,'application/json');
+    header.append('Authorization', data);
+    let options = new RequestOptions({headers: header});
+        return this.http.get('http://localhost:8080/wlodc-techhub/api/auth/', options)
+    };
 }
 
 interface Alltopics {
