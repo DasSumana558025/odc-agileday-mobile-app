@@ -24,7 +24,7 @@ export class ServicesProvider {
     return this.http.get('assets/feedback.json');
   }
 
-  getEmployees():Observable<any> {
+  getUser():Observable<any> {
     let data = localStorage.getItem('auth_token');
     data = "BASIC "+ data;
     console.log(data);
@@ -55,7 +55,7 @@ interface AllFeedback {
   questionDescription :any;
 }
 
-interface Employee {
+interface User {
   id: number,
   userId: string,
   firstName: string,
