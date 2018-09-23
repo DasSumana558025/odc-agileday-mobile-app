@@ -31,6 +31,7 @@ export class LoginPage{
   {
     this.encriptDaseId =  btoa(this.model.dasid + ":" + this.model.pwd);
     localStorage.setItem('auth_token', this.encriptDaseId);
+    localStorage.setItem('user_id', this.model.dasid);
      this.apiProvider.getUser().subscribe(data => {
       console.log("Inside submit login");
      const user = data.json();

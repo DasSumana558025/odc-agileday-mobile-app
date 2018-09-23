@@ -36,6 +36,18 @@ export class ServicesProvider {
     let options = new RequestOptions({headers: header});
         return this.http.post('http://localhost:9000/wlodc-techhub/api/auth/','test', options)
     };
+
+    postUserVote(param:any) : Observable<any> {
+      console.log("Inside uservote()..");
+      let header = new Headers();
+      header.append('Access-Control-Allow-Origin','*');
+      header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.append('Accept' ,'application/json');
+      let body = JSON.stringify(param);
+     // header.append('Authorization', data);
+      let options = new RequestOptions({headers: header});
+          return this.http.post('http://localhost:9000/wlodc-techhub/api/vote/',body, options)
+    }
 }
 
 interface Alltopics {
@@ -63,5 +75,12 @@ interface User {
   location: string,
   email: string,
   mobile:string
+}
+
+interface Vote{
+  id : number,
+  topicId : number,
+  userId : string,
+  voteType : string
 }
 
