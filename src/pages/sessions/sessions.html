@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-list radio-group [(ngModel)]="roomNumber">
+   <!-- <ion-list radio-group [(ngModel)]="roomNumber">
         <ion-row>
           <ion-col> Show All <ion-radio value="showAll" checked></ion-radio></ion-col>
           <ion-col> {{filterValues[0]}}  <ion-radio value="{{filterValues[0]}}"></ion-radio></ion-col>
@@ -53,8 +53,8 @@
              </ion-col>
          </ion-row>
        </ion-grid> 
-     </ion-list>   
-  <!-- <form #userform = "ngForm">
+     </ion-list>  --> 
+  
     <div class="vd_content clearfix">
     <div class="vd_radio radio-success height-95">
     <div class="pull-right  breadcrumb ">
@@ -68,36 +68,29 @@
      </div>
      <div class="vd_content-section clearfix it-align">
      <div class="panel-body pd-0">
-      <table class="table table-striped">
-        <thead>
+      <table class="table table-hover">
+        <thead class="thead-light">
            <tr>
               <th>Topic</th>
               <th>Presenter</th>
               <th>Time-Slot</th>
               <th>Room No</th>
+              <th>Register/Unregister</th>
             </tr>
         </thead>
         <tbody>
           <tr *ngFor="let session of topics | filter :  roomNumber">
-            <td>{{session.description}}</td>
-            <td>{{session.presenterName}}</td>
-            <td>{{session.timeSlot}}</td>
-            <td>{{session.roomNumber}}</td>
+            <td style="font-size: 15px;">{{session.description}}</td>
+            <td style="font-size: 15px;">{{session.presenterName}}</td>
+            <td style="font-size: 15px;">{{session.timeSlot}}</td>
+            <td style="font-size: 15px;">{{session.roomNumber}}</td>
             <td>
-                <div ngSwitch="{{session.registered}}">
-                    <div *ngSwitchCase="'false'">
-                      <input type="button" (click)="Register(1)" value="Register"/>
-                    </div>
-                    <div *ngSwitchCase="'true'">
-                        <input type="button" (click)="UnRegister(1)" value="UnRegister"/>
-                    </div>
-                </div>
-                 </td>
+                <button *ngIf="session.registered == 'false' " class="btn btn-info" style="font-size: 15px;" (click)="register(session)">Register</button>
+                <button *ngIf="session.registered == 'true' " class="btn btn-info"  style="font-size: 15px;" (click)="unregister(session)">Unregister</button>
+            </td>
           </tr>
         </tbody>
     </table>
     </div>
     </div>
-    </form>               -->
-
 </ion-content>
