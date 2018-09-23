@@ -48,6 +48,22 @@ export class ServicesProvider {
       let options = new RequestOptions({headers: header});
           return this.http.post('http://localhost:9000/wlodc-techhub/api/vote/',body, options)
     }
+
+    getRegisteredTopicForUser(param:any):Observable<any>{
+      return this.http.get('http://localhost:8080/wlodc-techhub/api/topics/user/'+ param);
+    }
+
+    registerUserForTopic(param1:any,param2:any):Observable<any>{
+      console.log("http://localhost:8080/wlodc-techhub/api/topics/" + param1 + "/registerUser/" + param2);
+      return this.http.put("http://localhost:8080/wlodc-techhub/api/topics/" + param1 + "/registerUser/" + param2,'test');
+      
+    }
+
+    unRegisterUserForTopic(param1:any,param2:any):Observable<any>{
+      console.log("http://localhost:8080/wlodc-techhub/api/topics/" + param1 + "/unRegisterUser/" + param2);
+      return this.http.put("http://localhost:8080/wlodc-techhub/api/topics/" + param1 + "/unRegisterUser/" + param2,'test');
+      
+    }
 }
 
 interface Alltopics {

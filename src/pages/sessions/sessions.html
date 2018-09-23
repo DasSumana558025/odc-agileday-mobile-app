@@ -48,7 +48,8 @@
                 {{session.roomNumber}}
             </ion-col>
             <ion-col text-center>
-                
+                <button *ngIf="session.registered == 'false' " ion-button class="submit-btn" (click)="register(session)">Register</button>
+                <button *ngIf="session.registered == 'true' " ion-button class="submit-btn" (click)="unregister(session)">Unregister</button>
              </ion-col>
          </ion-row>
        </ion-grid> 

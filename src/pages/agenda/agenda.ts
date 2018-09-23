@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import {Events } from 'ionic-angular';
 import { ServicesProvider } from './../../providers/services/services';
 import 'rxjs/add/operator/map';
+
 /**
  * Generated class for the PosterPage page.
  *
@@ -13,6 +14,7 @@ import 'rxjs/add/operator/map';
 @Component({
   selector: 'page-agenda',
   templateUrl: 'agenda.html',
+  
 })
 export class AgendaPage implements OnInit {
   topics: any[];

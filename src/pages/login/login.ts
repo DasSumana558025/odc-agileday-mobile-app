@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams ,AlertController, LoadingController, Loading } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ServicesProvider } from './../../providers/services/services';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http  } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -61,6 +60,7 @@ export class LoginPage{
       this.employee = new User(user.id,user.userId,user.firstName,
       user.lastName,user.location,user.email,user.mobile);
       console.log("Inside login = "+  this.employee.userId);
+      localStorage.setItem('user_id',this.employee.userId);
       this.navCtrl.setRoot(HomePage);
     }
     else{

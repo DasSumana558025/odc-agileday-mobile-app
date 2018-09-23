@@ -1,17 +1,9 @@
 import { Component,OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,AlertController } from 'ionic-angular';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterPipe } from './../../app/filter.pipe';
 import {Events } from 'ionic-angular';
 import { ServicesProvider } from './../../providers/services/services';
-
-/**
- * Generated class for the FeedbackPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 
 @Component({
   selector: 'page-sessions',
@@ -20,16 +12,20 @@ import { ServicesProvider } from './../../providers/services/services';
 export class SessionsPage implements OnInit{
 
   topics: any[];
-
+  registedredTopic : any[];
   filterValues = ["PN_TR01","PN_TR02"];
-
   public roomNumber : string = "showAll";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider,private alertCtrl: AlertController) {
   }
 
   ngOnInit(){
+    let strUserId = localStorage.getItem('user_id');
+    this.apiProvider.getRegisteredTopicForUser(strUserId).map(res=>res.json()).subscribe(data => {
+      this.registedredTopic=data;
+      console.log("this.registedredTopic",this.registedredTopic);
+    });
+
     this.apiProvider.getAllTopics().map(res=>res.json()).subscribe(data => {
       this.topics = data;
       for(var i = 0; i < this.topics.length; i++){
@@ -43,11 +39,74 @@ export class SessionsPage implements OnInit{
             this.topics[i].presenterName = this.topics[i].presenterName + " , " + this.topics[i].presenters[j].firstName + " " + this.topics[i].presenters[j].lastName;
           }
         }
-        console.log(this.topics[i].presenterName);
-        this.topics[i]["registered"] = 'false';
+        
+        if(this.registedredTopic.length > 0){
+          let object =  this.registedredTopic.find(x => x.id == this.topics[i].id );
+          if(object !== undefined){
+            this.topics[i]["registered"] = 'true';
+          }
+          else{
+            this.topics[i]["registered"] = 'false';
+          }
+        }
+        else
+        {
+          this.topics[i]["registered"] = 'false';
+        }
       }
-     
-  });
+    });
+  }
+
+  register(session){
+    console.log("session",session);
+    let strUserId = localStorage.getItem('user_id');
+    if(this.registedredTopic.length > 0){
+      let object =  this.registedredTopic.find(x => x.timeSlot == session.timeSlot );
+      if(object !== undefined){
+        let alert = this.alertCtrl.create({
+          title: 'Fail',
+          subTitle: "This timeslot is already booked for another session. Please unregister and then register",
+          buttons: ['OK']
+        });
+        alert.present();
+      }
+      else{
+        this.apiProvider.registerUserForTopic(session.id,strUserId).subscribe(data => {
+          if(data.status == 200){
+            session.registered = 'true';
+            this.registedredTopic.push(session);
+            console.log(this.registedredTopic);
+          }
+        });
+       
+      }
+     }
+     else
+     {
+      this.apiProvider.registerUserForTopic(session.id,strUserId).subscribe(data => {
+        if(data.status == 200){
+          session.registered = 'true';
+          this.registedredTopic.push(session);
+          console.log(this.registedredTopic);
+        }
+       });
+     }
+
+  }
+
+  unregister(session){
+    let strUserId = localStorage.getItem('user_id');
+  //  this.apiProvider.unRegisterUserForTopic(session.id,strUserId).subscribe(data => {
+     // if(data.status == 200){
+      let object =  this.registedredTopic.find(x => x.id == session.id );
+      const index: number = this.registedredTopic.indexOf(object);
+        if (index !== -1) {
+            this.registedredTopic.splice(index, 1);
+        } 
+        console.log(this.registedredTopic);
+        session.registered='false';
+      //}
+    // });
   }
 }
 
