@@ -5,14 +5,47 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>login</ion-title>
-  </ion-navbar>
-
 </ion-header>
-<ion-content padding>
-  <form #userform = "ngForm" (ngSubmit)="onSubmit()">
+<ion-content center text-center>
+    <ion-row class="logo-row center">
+        <ion-col></ion-col>
+        <ion-col col-2>
+          <img src="../../assets/imgs/agileDayLogo.jpg"/>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+      <ion-row center>
+      <ion-col>
+      <ion-list>
+
+        <ion-item>
+          <ion-label floating>Username</ion-label>
+          <ion-input [(ngModel)]="model.dasid" type="text" #dasid="ngModel"></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input [(ngModel)]="model.pwd"  type="password" value=""></ion-input>
+        </ion-item>
+      
+      </ion-list>
+      </ion-col>
+      </ion-row>
+       
+      <ion-row center>
+      <ion-col class="signup-col">
+      <button ion-button class="submit-btn" full  (click)="onSubmit()">Sign In</button>
+      </ion-col>
+     </ion-row>
+     <ion-row center text-center> <ion-col></ion-col><ion-col col-12>Worldline ODC Agile Day</ion-col></ion-row>
+     <ion-row center text-center><ion-col></ion-col><ion-col col-12>Sponsored by: worldline</ion-col></ion-row>
+     <ion-row center text-center><ion-col></ion-col><ion-col col-12>Powered by: ODC Agile club</ion-col></ion-row>
+
+
+
+
+
+     <!-- <form #userform = "ngForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
     <label>DasID</label>
       <input type="text" class="form-control" name="dasid" [(ngModel)]="model.dasid" #dasid="ngModel" class="form-control" required minlength="7" >
@@ -29,5 +62,5 @@
         </div>
    </div>
    <button type = "submit" [disabled]= "!userform.form.valid" class="btn btn-primary">Submit</button>
-  </form>
+  </form>-->
 </ion-content>

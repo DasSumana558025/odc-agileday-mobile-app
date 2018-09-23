@@ -8,16 +8,60 @@
 </ion-header>
 
 <ion-content padding>
-  <form #userform = "ngForm">
+    <ion-list radio-group [(ngModel)]="roomNumber">
+        <ion-row>
+          <ion-col> Show All <ion-radio value="showAll" checked></ion-radio></ion-col>
+          <ion-col> {{filterValues[0]}}  <ion-radio value="{{filterValues[0]}}"></ion-radio></ion-col>
+          <ion-col> {{filterValues[1]}}  <ion-radio value="{{filterValues[1]}}"></ion-radio></ion-col>
+          </ion-row>
+  </ion-list>
+  <ion-list>
+      <ion-grid>
+        <ion-row>
+           <ion-col text-center>
+              Topic
+          </ion-col>
+          <ion-col text-center>
+              Presenter
+          </ion-col>
+          <ion-col text-center>
+              Time Slot
+          </ion-col>
+          <ion-col text-center>
+             Room Number
+          </ion-col>
+          <ion-col text-center>
+              Register/Unregister
+           </ion-col>
+         </ion-row>
+         <ion-row *ngFor="let session of topics | filter :  roomNumber">
+            <ion-col text-center>
+                {{session.description}}
+            </ion-col>
+            <ion-col text-center>
+                {{session.presenterName}}
+            </ion-col>
+            <ion-col text-center>
+                {{session.timeSlot}}
+            </ion-col>
+            <ion-col text-center>
+                {{session.roomNumber}}
+            </ion-col>
+            <ion-col text-center>
+                
+             </ion-col>
+         </ion-row>
+       </ion-grid> 
+     </ion-list>   
+  <!-- <form #userform = "ngForm">
     <div class="vd_content clearfix">
     <div class="vd_radio radio-success height-95">
     <div class="pull-right  breadcrumb ">
-        Filter by:
+        Filter by :
      <input type="radio" class="radio-inline" value="showAll" name="roomNumber" [(ngModel)]=roomNumber>showAll
      <input type="radio" class="radio-inline" value={{filterValues[0]}} name="roomNumber"  [(ngModel)]=roomNumber>{{filterValues[0]}}
      <input type="radio" class="radio-inline" value={{filterValues[1]}} name="roomNumber"  [(ngModel)]=roomNumber>{{filterValues[1]}}
-     <input type="radio" class="radio-inline" value={{filterValues[2]}} name="roomNumber"  [(ngModel)]=roomNumber>{{filterValues[1]}}
-     <input type="radio" class="radio-inline" value={{filterValues[3]}} name="roomNumber"  [(ngModel)]=roomNumber>{{filterValues[3]}}
+    
      </div>
      </div>
      </div>
@@ -33,16 +77,26 @@
             </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let session of alltopics | filter :  roomNumber">
+          <tr *ngFor="let session of topics | filter :  roomNumber">
             <td>{{session.description}}</td>
-            <td>{{session.name}}</td>
+            <td>{{session.presenterName}}</td>
             <td>{{session.timeSlot}}</td>
             <td>{{session.roomNumber}}</td>
+            <td>
+                <div ngSwitch="{{session.registered}}">
+                    <div *ngSwitchCase="'false'">
+                      <input type="button" (click)="Register(1)" value="Register"/>
+                    </div>
+                    <div *ngSwitchCase="'true'">
+                        <input type="button" (click)="UnRegister(1)" value="UnRegister"/>
+                    </div>
+                </div>
+                 </td>
           </tr>
-       </tbody>
+        </tbody>
     </table>
     </div>
     </div>
-    </form>              
+    </form>               -->
 
 </ion-content>

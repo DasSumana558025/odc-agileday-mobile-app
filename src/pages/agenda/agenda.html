@@ -7,6 +7,14 @@
     </ion-navbar>
   </ion-header>
 
-  <ion-content padding>
-      <h3>Agenda screen </h3>
+  <ion-content>
+      <ion-list>
+          <ion-grid>
+            <ion-row *ngFor="let session of topics">
+               <ion-col col-12 text-center>
+                  {{session.description}}
+              </ion-col>
+             </ion-row>
+           </ion-grid> 
+         </ion-list>   
   </ion-content>

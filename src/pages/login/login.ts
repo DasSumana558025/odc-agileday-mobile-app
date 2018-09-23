@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams ,AlertController, LoadingController, Loading } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { ServicesProvider } from './../../providers/services/services';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Http  } from '@angular/http';
 import 'rxjs/add/operator/map';
+
 
 
 /**
@@ -20,32 +21,58 @@ import 'rxjs/add/operator/map';
   templateUrl: 'login.html',
 })
 export class LoginPage{
+  loading: Loading;
   encriptDaseId : string;
   encriptPass : string;
   model : any = {};
   public employee: Employee;
-  constructor(public navCtrl: NavController,public http: Http, public navParams: NavParams,public apiProvider : ServicesProvider) {
+  constructor(public navCtrl: NavController,public http: Http, public navParams: NavParams,public apiProvider : ServicesProvider,private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
   }
+
+  showLoading() {
+    this.loading = this.loadingCtrl.create({
+    content: 'Please wait...',
+    dismissOnPageChange: true
+    });
+    this.loading.present();
+  }
+ 
+  showError(text) {
+    this.loading.dismiss();
+    let alert = this.alertCtrl.create({
+      title: 'Fail',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present();
+    this.model.dasid="";
+    this.model.pwd="";
+  }
+
 
   onSubmit()
   {
+    this.showLoading();
     this.encriptDaseId =  btoa(this.model.dasid + ":" + this.model.pwd);
     localStorage.setItem('auth_token', this.encriptDaseId);
-     this.apiProvider.getEmployees().subscribe(data => {
-      console.log("Inside submit login");
-     const user = data.json();
-      console.log("test = "+ user.id ) ;
-     
-     this.employee = new Employee(user.id,user.userId,user.firstName,
+    this.apiProvider.getEmployees().subscribe(data => {
+    if(data){
+      const user = data.json();
+      this.employee = new Employee(user.id,user.userId,user.firstName,
       user.lastName,user.location,user.email,user.mobile);
+      console.log("Inside login = "+  this.employee.userId);
+      this.navCtrl.setRoot(HomePage);
+    }
+    else{
+      this.showError("Access Denied");
+    }
+  },
+  error => {
+    this.showError("Access Denied");
+  });
+}
 
-      console.log("Inside ContactPage and onInit() userName = "+  this.employee.firstName);
-     this.navCtrl.setRoot(HomePage);
-     });
-
-    
-  }
-
+ 
   //end class
 }
 

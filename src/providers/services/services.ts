@@ -17,7 +17,7 @@ export class ServicesProvider {
   }
 
   getAllTopics() : Observable<any> {
-    return this.http.get('assets/allPresenters.json');
+    return this.http.get('http://localhost:8080/wlodc-techhub/api/topics');
   }
 
   getFeedbacks() : Observable<any> {
@@ -34,7 +34,7 @@ export class ServicesProvider {
     header.append('Accept' ,'application/json');
     header.append('Authorization', data);
     let options = new RequestOptions({headers: header});
-        return this.http.post('http://localhost:9000/wlodc-techhub/api/auth/','test', options)
+        return this.http.post('http://localhost:8080/wlodc-techhub/api/auth/','test', options)
     };
 }
 
