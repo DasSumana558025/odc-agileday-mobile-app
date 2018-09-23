@@ -4,52 +4,62 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Poster</ion-title>
+    <ion-title>Poster Competition</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding class="show-when-demo">
-  <h3>Poster Competition</h3>
-  
-  <ion-grid>
-      <ion-row *ngFor="let img of images">
-        <ion-col text-center >
-          <ion-icon name="logo-apple" showWhen="img.index"></ion-icon>
-            <img alt="logo" height="90" style="align-items: center;" src="{{img.imageName}}" />
-         </ion-col>
-         <ion-col>
-           <code>
-              Image detail == {{img.imageDetail}}
-          </code>
-        </ion-col>
-      </ion-row>
-      
-    </ion-grid>
-  
+ 
+  <div class="panel panel-default">
+    <div class="panel-body">
+       
+            <div class="row" >
+                  <div *ngFor="let img of posterPart1"  class="col-md-3">
+                      <div class="thumbnail">
+                          <a href="{{img.imageName}}" target="_blank">
+                            <img alt="logo" height="90" style="align-items: center;" src="{{img.imageName}}" class="img-thumbnail" />
+                            <div class="caption">
+                              <p>{{img.imageDetail}} </p>
+                               <p class="text-right">  <a href="#" class="btn btn-info btn-sm " (click)="postVote()" >
+                                      <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                                    </a>
+                                  </p> 
+                            </div>
+                          </a>
+                      </div>
+                  </div>
+                </div>
+            
+            
+              <div class="row" > 
+                      <div *ngFor="let img of posterPart2" class="col-md-3">
+                          <div class="thumbnail">
+                              <a href="{{img.imageName}}" target="_blank">
+                                <img alt="logo" height="90" style="align-items: center;" src="{{img.imageName}}" class="img-thumbnail" />
+                                <div class="caption">
+                                  <p>{{img.imageDetail}}</p>
+                                    <p class="text-right"><a href="#" class="btn btn-info btn-sm ">
+                                        <span class="glyphicon glyphicon-thumbs-up"></span> Like
+                                      </a>
+                                  </p>
+                                </div>
+                              </a>
+                        </div>
+                      </div>
+                  </div> 
+            
+        
+    </div>
+  </div>
   </ion-content>
   
-  <style>
-    .show-when-demo ion-col {
-      background: #f8f8f8;
-      border: 1px solid #ddd;
-      margin: 1%;
-      max-width: 48%;
-      flex: 0 0 48%;
-      min-height: 120px;
-    }
-    .show-when-demo code {
-      background: #f8f8f8;
-    }
-    .show-when-demo ion-icon {
-      font-size: 100px;
-    }
-  </style>
-
+ 
    
 
 

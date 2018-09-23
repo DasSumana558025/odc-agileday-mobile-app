@@ -25,7 +25,7 @@ export class LoginPage{
   encriptDaseId : string;
   encriptPass : string;
   model : any = {};
-  public employee: Employee;
+  public employee: User;
   constructor(public navCtrl: NavController,public http: Http, public navParams: NavParams,public apiProvider : ServicesProvider,private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
   }
 
@@ -55,10 +55,10 @@ export class LoginPage{
     this.showLoading();
     this.encriptDaseId =  btoa(this.model.dasid + ":" + this.model.pwd);
     localStorage.setItem('auth_token', this.encriptDaseId);
-    this.apiProvider.getEmployees().subscribe(data => {
+    this.apiProvider.getUser().subscribe(data => {
     if(data){
       const user = data.json();
-      this.employee = new Employee(user.id,user.userId,user.firstName,
+      this.employee = new User(user.id,user.userId,user.firstName,
       user.lastName,user.location,user.email,user.mobile);
       console.log("Inside login = "+  this.employee.userId);
       this.navCtrl.setRoot(HomePage);
@@ -76,7 +76,7 @@ export class LoginPage{
   //end class
 }
 
-class Employee {
+class User {
   id: number;
   userId: string;
   firstName: string;
