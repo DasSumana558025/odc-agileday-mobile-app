@@ -8,5 +8,13 @@
   </ion-header>
 
   <ion-content padding>
-      <h3>Attendance screen </h3>
+      <div class = "form-group row">
+      <label id="selectid" class="col-3 control-label" style="font-size: 15px;">Select room no for attendence</label>
+        <select id = "selectid" class="selectpicker show-menu-arrow form-control col-3" style="font-size: 15px;" [(ngModel)]="roomNumber">
+          <option value="Select">"Select"</option>
+          <option value="PN_TR01">PN_TR01</option>
+          <option value="PN_TR02">PN_TR02</option>
+        </select>
+      </div>
+      <button class="btn btn-info"  style="font-size: 15px;" (click)="attendence(roomNumber)">Give Attendence</button>
   </ion-content>

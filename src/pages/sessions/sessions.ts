@@ -96,8 +96,8 @@ export class SessionsPage implements OnInit{
 
   unregister(session){
     let strUserId = localStorage.getItem('user_id');
-  //  this.apiProvider.unRegisterUserForTopic(session.id,strUserId).subscribe(data => {
-     // if(data.status == 200){
+     this.apiProvider.unRegisterUserForTopic(session.id,strUserId).subscribe(data => {
+     if(data.status == 200){
       let object =  this.registedredTopic.find(x => x.id == session.id );
       const index: number = this.registedredTopic.indexOf(object);
         if (index !== -1) {
@@ -105,8 +105,8 @@ export class SessionsPage implements OnInit{
         } 
         console.log(this.registedredTopic);
         session.registered='false';
-      //}
-    // });
+    }
+    });
   }
 }
 

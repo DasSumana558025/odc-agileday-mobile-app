@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
 
+
 /*
   Generated class for the ApiProvider provider.
 
@@ -17,7 +18,7 @@ export class ServicesProvider {
   }
 
   getAllTopics() : Observable<any> {
-    return this.http.get('http://localhost:8080/wlodc-techhub/api/topics');
+    return this.http.get('http://localhost:5000/wlodc-techhub/api/topics');
   }
 
   getFeedbacks() : Observable<any> {
@@ -34,7 +35,7 @@ export class ServicesProvider {
     header.append('Accept' ,'application/json');
     header.append('Authorization', data);
     let options = new RequestOptions({headers: header});
-        return this.http.post('http://localhost:8080/wlodc-techhub/api/auth/','test', options)
+        return this.http.post('http://localhost:5000/wlodc-techhub/api/auth/','test', options)
     };
 
     postUserVote(param:any) : Observable<any> {
@@ -46,23 +47,33 @@ export class ServicesProvider {
       let body = JSON.stringify(param);
      // header.append('Authorization', data);
       let options = new RequestOptions({headers: header});
-          return this.http.post('http://localhost:9000/wlodc-techhub/api/vote/',body, options)
+          return this.http.post('http://localhost:5000/wlodc-techhub/api/vote/',body, options)
     }
 
     getRegisteredTopicForUser(param:any):Observable<any>{
-      return this.http.get('http://localhost:8080/wlodc-techhub/api/topics/user/'+ param);
+      return this.http.get('http://localhost:5000/wlodc-techhub/api/topics/user/'+ param);
     }
 
     registerUserForTopic(param1:any,param2:any):Observable<any>{
-      console.log("http://localhost:8080/wlodc-techhub/api/topics/" + param1 + "/registerUser/" + param2);
-      return this.http.put("http://localhost:8080/wlodc-techhub/api/topics/" + param1 + "/registerUser/" + param2,'test');
+      console.log("http://localhost:5000/wlodc-techhub/api/topics/" + param1 + "/registerUser/" + param2);
+      return this.http.put("http://localhost:5000/wlodc-techhub/api/topics/" + param1 + "/registerUser/" + param2,'test');
       
     }
 
     unRegisterUserForTopic(param1:any,param2:any):Observable<any>{
-      console.log("http://localhost:8080/wlodc-techhub/api/topics/" + param1 + "/unRegisterUser/" + param2);
-      return this.http.put("http://localhost:8080/wlodc-techhub/api/topics/" + param1 + "/unRegisterUser/" + param2,'test');
+      console.log("http://localhost:5000/wlodc-techhub/api/topics/" + param1 + "/unRegisterUser/" + param2);
+      return this.http.put("http://localhost:5000/wlodc-techhub/api/topics/" + param1 + "/unRegisterUser/" + param2,'test');
       
+    }
+
+    attendenceUser(attendenceData:any):Observable<any>{
+      let header = new Headers();
+      header.append('Access-Control-Allow-Origin','*');
+      header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.append('Accept' ,'application/json');
+     // let body = JSON.stringify(param);
+      let options = new RequestOptions({headers: header});
+      return this.http.post("http://localhost:5000/wlodc-techhub/api/attendance/",attendenceData,options);
     }
 }
 
