@@ -21,7 +21,8 @@ export interface PosterImageInterface {
 })
 export class PosterPage implements OnInit  {
   posters: Poster[];
-
+  display='none';
+  selectedPosterUrl = '';
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider) {
   }
 
@@ -32,6 +33,14 @@ export class PosterPage implements OnInit  {
     });
   }
   
+  openModalDialog(currPoster){
+    this.display='block'; //Set block css
+    this.selectedPosterUrl = currPoster;
+ }
+
+ closeModalDialog(){
+  this.display='none'; //set none css after close dialog
+ }
       postVote(currPosterId)
       {
         let strUserId = localStorage.getItem('user_id');
