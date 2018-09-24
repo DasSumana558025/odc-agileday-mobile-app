@@ -44,10 +44,10 @@ export class ServicesProvider {
       header.append('Access-Control-Allow-Origin','*');
       header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
       header.append('Accept' ,'application/json');
-      let body = JSON.stringify(param);
+    //  let body = JSON.stringify(param);
      // header.append('Authorization', data);
       let options = new RequestOptions({headers: header});
-          return this.http.post('http://localhost:5000/wlodc-techhub/api/vote/',body, options)
+          return this.http.post('http://localhost:5000/wlodc-techhub/api/vote/',param, options)
     }
 
     getRegisteredTopicForUser(param:any):Observable<any>{
@@ -74,6 +74,10 @@ export class ServicesProvider {
      // let body = JSON.stringify(param);
       let options = new RequestOptions({headers: header});
       return this.http.post("http://localhost:5000/wlodc-techhub/api/attendance/",attendenceData,options);
+    }
+
+    getPosters():Observable<any>{
+      return this.http.get('http://localhost:5000/wlodc-techhub/api/posters');
     }
 }
 

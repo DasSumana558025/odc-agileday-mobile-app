@@ -4,7 +4,7 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
@@ -19,40 +19,22 @@
   <div class="panel panel-default">
     <div class="panel-body">
        
-            <div class="row" >
-                  <div *ngFor="let img of posterPart1"  class="col-md-3">
-                      <div class="thumbnail">
-                          <a href="{{img.imageName}}" target="_blank">
-                            <img alt="logo" height="90" style="align-items: center;" src="{{img.imageName}}" class="img-thumbnail" />
-                            <div class="caption">
-                              <p>{{img.imageDetail}} </p>
-                               <p class="text-right">  <a href="#" class="btn btn-info btn-sm " (click)="postVote()" >
-                                      <span class="glyphicon glyphicon-thumbs-up"></span> Like
-                                    </a>
-                                  </p> 
-                            </div>
+      <div class="row" >
+        <div *ngFor="let img of posters"  class="col-md-3">
+            <div class="thumbnail">
+                <a href="{{img.name}}" target="_blank">
+                  <img alt="logo" height="90" style="align-items: center;" src="{{img.name}}" class="img-thumbnail" />
+                  <div class="caption">
+                    <p><label style="color: black">Created By</label> - {{img.participants}} </p>
+                     <p class="text-right">  <a href="#" class="btn btn-info btn-lg " (click)="postVote(img.id)" >
+                            <span class="glyphicon glyphicon-thumbs-up"></span> Vote
                           </a>
-                      </div>
+                        </p> 
                   </div>
-                </div>
-            
-            
-              <div class="row" > 
-                      <div *ngFor="let img of posterPart2" class="col-md-3">
-                          <div class="thumbnail">
-                              <a href="{{img.imageName}}" target="_blank">
-                                <img alt="logo" height="90" style="align-items: center;" src="{{img.imageName}}" class="img-thumbnail" />
-                                <div class="caption">
-                                  <p>{{img.imageDetail}}</p>
-                                    <p class="text-right"><a href="#" class="btn btn-info btn-sm ">
-                                        <span class="glyphicon glyphicon-thumbs-up"></span> Like
-                                      </a>
-                                  </p>
-                                </div>
-                              </a>
-                        </div>
-                      </div>
-                  </div> 
+                </a>
+            </div>
+        </div>
+      </div>
             
         
     </div>
