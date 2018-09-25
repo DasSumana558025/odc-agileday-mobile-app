@@ -90,6 +90,10 @@ export class ServicesProvider {
       let options = new RequestOptions({headers: header});
           return this.http.post('http://localhost:5000/wlodc-techhub/api/vote/',param, options)
     }
+
+    getPosterUserVote() : Observable<any>{
+      return this.http.get('http://localhost:5000/wlodc-techhub/api/vote/stats/' + "POSTER");
+    }
 }
 
 interface Alltopics {

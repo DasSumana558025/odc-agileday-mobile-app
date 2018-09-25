@@ -28,15 +28,25 @@ export class PosterPage implements OnInit  {
   selectedPosterName = '';
   confirmationMsg = 'By voting for this poster,your earlier vote will be unregistered,are your sure you want to proceed.';
   isAgileDay = false;
- 
+  posterDetail: Vote[];
+  currPosterVote = false;
+  currPostVoteId = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider,private flashMessagesService: FlashMessagesService) {
   }
 
+  
   ngOnInit(){
     this.apiProvider.getPosters().subscribe(data => {
       this.posters = data.json() as Poster[];
       //console.log("test posters = "+this.posters[1].url);
+    });
+
+    
+    this.apiProvider.getPosterUserVote().subscribe(data => {
+      this.posterDetail = data.json() as Vote[];
+      this.currPostVoteId = this.posterDetail[0].posterId;
+      console.log("test posters = "+JSON.stringify(data.json()) + "vote id = "+this.currPostVoteId);
     });
 
         let date = new Date();
@@ -106,12 +116,21 @@ export class PosterPage implements OnInit  {
         classes: ['alert', 'alert-success'], // You can pass as many classes as you need
         timeout: 3000, // Default is 3000
       });
+      this.navCtrl.setRoot(PosterPage);
       }
       
       cancelled() {
        console.log('cancelled');
       }
     
+      checkPosterVoteId(postId){
+        this.currPosterVote = false;
+        if(this.currPostVoteId == postId){
+         this.currPosterVote = true;
+        }
+        console.log("test currPosterVote = "+this.currPosterVote);
+        return this.currPosterVote;
+      }
       
 
  
@@ -120,5 +139,10 @@ interface Poster{
   id : number,
   name : string,
   participants : string,
-  url : string
+  url : string,
+  }
+
+interface Vote{
+  posterId:number,
+  totalVotes:number
 }
