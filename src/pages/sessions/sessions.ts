@@ -40,7 +40,7 @@ export class SessionsPage implements OnInit{
           }
         }
         
-        if(this.registedredTopic.length > 0){
+        if(this.registedredTopic != undefined && this.registedredTopic.length > 0){
           let object =  this.registedredTopic.find(x => x.id == this.topics[i].id );
           if(object !== undefined){
             this.topics[i]["registered"] = 'true';
@@ -54,6 +54,9 @@ export class SessionsPage implements OnInit{
           this.topics[i]["registered"] = 'false';
         }
       }
+      this.topics = this.topics.filter(x => x.description != 'Opening Key Notes');
+      this.topics = this.topics.filter(x => x.description != 'Closing Notes and Prize Distribution')
+    
     });
   }
 
@@ -65,7 +68,7 @@ export class SessionsPage implements OnInit{
       if(object !== undefined){
         let alert = this.alertCtrl.create({
           title: 'Fail',
-          subTitle: "This timeslot is already booked for another session. Please unregister and then register",
+          subTitle: "This timeslot is already booked for another session. Please unregister the registered session and then register it",
           buttons: ['OK']
         });
         alert.present();
@@ -76,7 +79,7 @@ export class SessionsPage implements OnInit{
             session.registered = 'true';
             this.registedredTopic.push(session);
             console.log(this.registedredTopic);
-            this.showSuccess("You have sucessfully registered " +session.description);
+            this.showSuccess('You have sucessfully registered for " '+  '<span class="alertclass">' +session.description +'</span> "');
           }
           else
           {
@@ -93,7 +96,7 @@ export class SessionsPage implements OnInit{
           session.registered = 'true';
           this.registedredTopic.push(session);
           console.log(this.registedredTopic);
-          this.showSuccess("You have sucessfully registered " +session.description);
+          this.showSuccess('You have sucessfully registered for " '+  '<span class="alertclass">' +session.description +'</span> "');
         }
         else
         {
@@ -115,7 +118,7 @@ export class SessionsPage implements OnInit{
         } 
         console.log(this.registedredTopic);
         session.registered='false';
-        this.showSuccess("You have sucessfully Unregistered " +session.description);
+        this.showSuccess('You have sucessfully unregistered for " '+  '<span class="alertclass">' +session.description +'</span> "');
     }
     else
     {
@@ -128,6 +131,7 @@ export class SessionsPage implements OnInit{
     let alert = this.alertCtrl.create({
       title: 'Sucess',
       subTitle: text,
+      cssClass:'customAlert',
       buttons: ['OK']
     });
     alert.present();
