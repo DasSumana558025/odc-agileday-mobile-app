@@ -27,7 +27,7 @@ export class PosterPage implements OnInit  {
   selectedPosterName = '';
   confirmationMsg = 'By voting for this poster,your earlier vote will be unregistered,are your sure you want to proceed.';
   isAgileDay = false;
-  titleMsg = '';
+ 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider) {
   }
@@ -49,11 +49,9 @@ export class PosterPage implements OnInit  {
         console.log("test techForumDateStart = "+techForumDateStart);
         console.log("test techForumDateEnd = "+techForumDateEnd);
         if(date > techForumDateStart && date < techForumDateEnd) {
-          this.titleMsg = "Vote for poster";
-          this.isAgileDay = true;
+            this.isAgileDay = true;
         } else {
-          this.titleMsg = "Active on agileDay";
-          this.isAgileDay = false;
+           this.isAgileDay = false;
         }
          
       console.log("test this.isAgileDay = "+ this.isAgileDay);
