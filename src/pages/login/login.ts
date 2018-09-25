@@ -56,6 +56,7 @@ export class LoginPage{
     localStorage.setItem('auth_token', this.encriptDaseId);
     this.apiProvider.getUser().subscribe(data => {
     if(data){
+      console.log("data",data);
       const user = data.json();
       this.employee = new User(user.id,user.userId,user.firstName,
       user.lastName,user.location,user.email,user.mobile);
@@ -64,11 +65,23 @@ export class LoginPage{
       this.navCtrl.setRoot(HomePage);
     }
     else{
-      this.showError("Access Denied");
+     
+      this.showError("Sorry,we are experiencing system issue,please try again after some time");
     }
   },
   error => {
-    this.showError("Access Denied");
+   if(error.status == 400)
+   {
+    this.showError("Das id or password is incorrect,please try again with correct id and password");
+   }
+   else if (error.status == 403)
+   {
+    this.showError("Sorry,you are not registered for this event");
+   }
+   else
+   {
+    this.showError("Sorry,we are experiencing system issue,please try again after some time");
+   }
   });
 }
 

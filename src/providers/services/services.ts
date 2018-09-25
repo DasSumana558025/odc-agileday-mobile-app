@@ -71,7 +71,6 @@ export class ServicesProvider {
       header.append('Access-Control-Allow-Origin','*');
       header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
       header.append('Accept' ,'application/json');
-     // let body = JSON.stringify(param);
       let options = new RequestOptions({headers: header});
       return this.http.post("http://localhost:5000/wlodc-techhub/api/attendance/",attendenceData,options);
     }

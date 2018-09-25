@@ -22,10 +22,10 @@ export class AttendancePage {
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider,private alertCtrl: AlertController) {
   }
 
-  attendence(roomNumber){
-    console.log(roomNumber);
+  attendence(){
+   
     let strUserId = localStorage.getItem('user_id');
-    let attendenceData = {"roomNumber":roomNumber,"userId":strUserId};
+    let attendenceData = {"userId":strUserId};
     this.apiProvider.attendenceUser(attendenceData).subscribe(data => {
     console.log(data);;
     if(data.status == 200){
