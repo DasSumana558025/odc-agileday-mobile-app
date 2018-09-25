@@ -1,7 +1,7 @@
 import { Component ,OnInit} from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ServicesProvider } from './../../providers/services/services';
-
+import { FlashMessagesService } from 'ngx-flash-messages';
 
 /**
  * Generated class for the PosterPage page.
@@ -19,7 +19,8 @@ export interface PosterImageInterface {
 @Component({
   selector: 'page-poster',
   templateUrl: 'poster.html',
-})
+ 
+  })
 export class PosterPage implements OnInit  {
   posters: Poster[];
   display='none';
@@ -29,7 +30,7 @@ export class PosterPage implements OnInit  {
   isAgileDay = false;
  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider,private flashMessagesService: FlashMessagesService) {
   }
 
   ngOnInit(){
@@ -40,10 +41,10 @@ export class PosterPage implements OnInit  {
 
         let date = new Date();
         let techForumDateStart = new Date(2018,8,25);
-        techForumDateStart.setHours(10,25,0);
+        techForumDateStart.setHours(10,0,0);
         
         let techForumDateEnd = new Date(2018,8,25);
-        techForumDateEnd.setHours(17,25,0);
+        techForumDateEnd.setHours(19,0,0);
 
         console.log("test date = "+date);
         console.log("test techForumDateStart = "+techForumDateStart);
@@ -101,12 +102,18 @@ export class PosterPage implements OnInit  {
       
       confirmed(currPosterId) {
        this.postVote(currPosterId);
+       this.flashMessagesService.show('you are vote is sucessfully post.', {
+        classes: ['alert', 'alert-success'], // You can pass as many classes as you need
+        timeout: 3000, // Default is 3000
+      });
       }
       
       cancelled() {
        console.log('cancelled');
       }
+    
       
+
  
 }
 interface Poster{

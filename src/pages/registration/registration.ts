@@ -34,7 +34,7 @@ export class RegistrationPage implements OnInit {
         } else {
            this.isAgileDayVideo = false;
         }
-        console.log("test isAgileDayVideo = "+isAgileDayVideo);
+        console.log("test isAgileDayVideo = "+this.isAgileDayVideo);
       }
   options: any = {
     confirmBtnClass: 'btn btn-success',      //DEFAULT VALUE
@@ -57,7 +57,7 @@ export class RegistrationPage implements OnInit {
   postVideoVote(currVideoId)
       {
         let strUserId = localStorage.getItem('user_id');
-        let userVoteDetail = { "posterId" : currVideoId, userId : strUserId, voteType : "VIDEO"} ;
+        let userVoteDetail = { "videoId" : currVideoId, userId : strUserId, voteType : "VIDEO"} ;
         this.apiProvider.postUserVoteForVideo(userVoteDetail).subscribe(data => {
         console.log("Inside submit login");
           if(data.status == 200){

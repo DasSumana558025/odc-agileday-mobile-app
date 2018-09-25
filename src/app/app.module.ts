@@ -20,6 +20,7 @@ import { ApiProvider } from '../providers/api/api';
 import { FilterPipe} from './filter.pipe';
 import { ServicesProvider } from '../providers/services/services';
 import { ConfirmationModalModule } from 'ng-confirmation-modal';
+import { FlashMessagesModule } from 'ngx-flash-messages';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { ConfirmationModalModule } from 'ng-confirmation-modal';
 
   ],
   imports: [
-    BrowserModule,FormsModule,HttpModule,
+    BrowserModule,FormsModule,HttpModule,FlashMessagesModule,
     IonicModule.forRoot(MyApp),
     IonicPageModule.forChild(MyApp),
     ConfirmationModalModule.forRoot({
