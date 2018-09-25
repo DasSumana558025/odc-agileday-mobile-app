@@ -10,5 +10,12 @@ page-poster {
 
     .modal{
         top:100 !important;
+        margin-top: 100px;
+        overflow: auto;
+   }
+
+    .modal-content{
+       height: 500px;
+       width:600px; 
     }
 }
