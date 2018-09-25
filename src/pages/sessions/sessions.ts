@@ -76,6 +76,11 @@ export class SessionsPage implements OnInit{
             session.registered = 'true';
             this.registedredTopic.push(session);
             console.log(this.registedredTopic);
+            this.showSuccess("You have sucessfully registered " +session.description);
+          }
+          else
+          {
+            this.showError("Sorry session cant be registered");
           }
         });
        
@@ -88,6 +93,11 @@ export class SessionsPage implements OnInit{
           session.registered = 'true';
           this.registedredTopic.push(session);
           console.log(this.registedredTopic);
+          this.showSuccess("You have sucessfully registered " +session.description);
+        }
+        else
+        {
+          this.showError("Sorry session cant be registered"); 
         }
        });
      }
@@ -105,8 +115,31 @@ export class SessionsPage implements OnInit{
         } 
         console.log(this.registedredTopic);
         session.registered='false';
+        this.showSuccess("You have sucessfully Unregistered " +session.description);
+    }
+    else
+    {
+      this.showError("Sorry session can be unregistered");
     }
     });
+  }
+
+  showSuccess(text) {
+    let alert = this.alertCtrl.create({
+      title: 'Sucess',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  showError(text) {
+    let alert = this.alertCtrl.create({
+      title: 'Fail',
+      subTitle: text,
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }
 

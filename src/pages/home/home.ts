@@ -1,4 +1,4 @@
-import { Component ,ViewChild } from '@angular/core';
+import { Component ,ViewChild ,AfterViewInit, OnInit } from '@angular/core';
 import { NavController, NavParams, Nav } from 'ionic-angular';
 import { FeedbackPage } from './../../pages/feedback/feedback';
 import { PosterPage } from './../../pages/poster/poster';
@@ -7,6 +7,9 @@ import { AttendancePage } from './../../pages/attendance/attendance';
 import { LogoutPage} from './../../pages/logout/logout';
 import {RegistrationPage} from './../../pages/registration/registration';
 import {SessionsPage} from './../../pages/sessions/sessions';
+import { ServicesProvider } from './../../providers/services/services';
+import 'rxjs/add/operator/map';
+import {Events } from 'ionic-angular';
 
 /**
  * Generated class for the LoginPage page.
@@ -27,11 +30,13 @@ export interface PageInterface {
   selector: 'page-home',
   templateUrl: 'home.html',
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   @ViewChild('mycontent') nav: NavController
-
+  attendenceDisplay = 'false';
   rootPage : any = AgendaPage;
+
+  topics: any[];
 
  pages: PageInterface[] = [
   { title: 'Agenda', pageName: 'AgendaPage', component: AgendaPage, index: 0, icon: 'alarm' },
@@ -43,15 +48,41 @@ export class HomePage {
     { title: 'Logout', pageName: 'LogoutPage', component: LogoutPage, index: 6, icon: 'lock' }
   ];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public events: Events,public apiProvider: ServicesProvider) {
+
+  }
+
+  ngOnInit(){
+    let dateToBeCheckOut = new Date('Fri Sep 27 2018');
+    let today = new Date();
+    console.log("dateToBeCheckOut",dateToBeCheckOut,"today",today);
+    if(dateToBeCheckOut >  today){
+      this.attendenceDisplay = 'true';
+    }
+    console.log(this.attendenceDisplay);
+    if(this.attendenceDisplay == 'false'){
+    let object =  this.pages.find(x => x.pageName == 'AttendancePage' );
+    const index: number = this.pages.indexOf(object);
+      if (index !== -1) {
+          this.pages.splice(index, 1);
+      }
+    }
+    console.log("pages",this.pages);
   }
 
   openPage(page) {
     console.log(page.component);
+   // this.events.publish('allTopics:fetched', this.topics);
     this.nav.setRoot(page.component);
     
   }
 
-  }
- 
   
+
+  // ngOnInit(){
+  //   this.apiProvider.getAllTopics().map(res=>res.json()).subscribe(data => {
+  //     this.topics = data;
+  //     console.log("under HomePage",  data);
+  // });
+  // }
+}
