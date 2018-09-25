@@ -20,6 +20,7 @@
               <div class="caption">
                   <p><label style="color: black">Created By</label> - Trupti Dipke </p>
                   <p class="text-right"> 
+                      <a *ngIf="checkVideoVoteId(1)" style="color:red">*</a>
                      <button *ngIf="isAgileDayVideo" href="#" class="btn btn-info btn-lg "   ngConfirm  [title]="'Confirm'"
                      [message]="'By voting for this video, your earlier vote will be unregistered,are your sure you want to proceed.'"  [options]="options"  (onConfirm)="confirmedVideo(1)"  (onCancel)="cancelledVideo()" >
                           <span class="glyphicon glyphicon-thumbs-up"></span> Vote
@@ -39,7 +40,9 @@
                 </video>
                 <div class="caption">
                     <p><label style="color: black">Created By</label> - Trupti Dipke </p>
-                    <p class="text-right">   <button *ngIf="isAgileDayVideo" class="btn btn-info btn-lg "   ngConfirm  [title]="'Confirm'"
+                    <p class="text-right"> 
+                        <a *ngIf="checkVideoVoteId(2)" style="color:red">*</a>
+                      <button *ngIf="isAgileDayVideo" class="btn btn-info btn-lg "   ngConfirm  [title]="'Confirm'"
                       [message]="'By voting for this video, your earlier vote will be unregistered,are your sure you want to proceed.'"  [options]="options"  (onConfirm)="confirmedVideo(2)"  (onCancel)="cancelledVideo()" >
                            <span class="glyphicon glyphicon-thumbs-up"></span> Vote
                       </button>
@@ -58,7 +61,9 @@
                   </video>
                   <div class="caption">
                       <p><label style="color: black">Created By</label> - Trupti Dipke </p>
-                      <p class="text-right">   <button *ngIf="isAgileDayVideo" class="btn btn-info btn-lg "   ngConfirm  [title]="'Confirm'"
+                      <p class="text-right">  
+                          <a *ngIf="checkVideoVoteId(3)" style="color:red">*</a>
+                        <button *ngIf="isAgileDayVideo" class="btn btn-info btn-lg "   ngConfirm  [title]="'Confirm'"
                         [message]="'By voting for this video, your earlier vote will be unregistered,are your sure you want to proceed.'"  [options]="options"  (onConfirm)="confirmedVideo(1)"  (onCancel)="cancelledVideo()" >
                              <span class="glyphicon glyphicon-thumbs-up"></span> Vote
                         </button>

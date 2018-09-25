@@ -15,10 +15,17 @@ import { ServicesProvider } from './../../providers/services/services';
 })
 export class RegistrationPage implements OnInit {
   isAgileDayVideo = false;
+  currVideoVoteId = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider) {
   }
   ngOnInit(){
+    this.apiProvider.getVideoUserVote().subscribe(data => {
+      const videoDetail = data.json() as VoteDetail[];
+      this.currVideoVoteId = videoDetail[0].videoId;
+      console.log("test video = "+JSON.stringify(data.json()) + "vote id = "+this.currVideoVoteId);
+    });
+
   let date = new Date();
         let techForumDateStart = new Date(2018,8,25);
         techForumDateStart.setHours(10,25,0);
@@ -35,7 +42,7 @@ export class RegistrationPage implements OnInit {
            this.isAgileDayVideo = false;
         }
         console.log("test isAgileDayVideo = "+this.isAgileDayVideo);
-      }
+   }
   options: any = {
     confirmBtnClass: 'btn btn-success',      //DEFAULT VALUE
    confirmBtnText: 'Confirm',      				//DEFAULT VALUE
@@ -73,4 +80,17 @@ export class RegistrationPage implements OnInit {
            }
       }
 
+      checkVideoVoteId(postId){
+       
+        if(this.currVideoVoteId == postId){
+        return true;
+        }
+        console.log("test video = "+postId);
+        return false;
+      }
+
+}
+interface VoteDetail{
+  videoId:number,
+  totalVotes:number
 }

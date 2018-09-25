@@ -94,6 +94,10 @@ export class ServicesProvider {
     getPosterUserVote() : Observable<any>{
       return this.http.get('http://localhost:5000/wlodc-techhub/api/vote/stats/' + "POSTER");
     }
+
+    getVideoUserVote() : Observable<any>{
+      return this.http.get('http://localhost:5000/wlodc-techhub/api/vote/stats/' + "VIDEO");
+    }
 }
 
 interface Alltopics {
