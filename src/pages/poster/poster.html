@@ -22,13 +22,17 @@
       <div class="row" >
         <div *ngFor="let img of posters"  class="col-md-3">
             <div class="thumbnail">
-                <a href="#"  (click)="openModalDialog(img.name)">
-                  <img alt="logo" height="90" style="align-items: center;" src="{{img.name}}" class="img-thumbnail" />
+                <a href="#"   >
+                  <img alt="logo" height="90" (click)="openModalDialog(img.url,img.name)" style="align-items: center;" src="{{img.url}}" class="img-thumbnail" />
                   <div class="caption">
                     <p style="height: 30px;"><label style="color: black">Created By</label> - {{img.participants}} </p>
-                     <p class="text-right">  <a href="#" class="btn btn-info btn-lg " (click)="postVote(img.id)" >
+                     <p class="text-right">  
+                       <button *ngIf="isAgileDay" class="btn btn-info btn-lg "    (click)="closeModalDialog()" ngConfirm  [title]="'Confirm'"
+                      [message]="'By voting for this poster, your earlier vote will be unregistered,are your sure you want to proceed.'"  [options]="options"  (onConfirm)="confirmed(img.id)"  (onCancel)="cancelled()"   >
                             <span class="glyphicon glyphicon-thumbs-up"></span> Vote
-                          </a>
+                     </button>
+                     <button *ngIf="!isAgileDay" type="button" class="btn btn-default btn-lg" title="activate on agile day" disabled="disabled">Vote</button>
+                       
                         </p> 
                   </div>
                 </a>
@@ -43,8 +47,11 @@
  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
     <!-- modal-dialog -->
     <div class="modal-dialog" role="document">
-      <!-- modal-content -->
+     <!-- modal-content -->
       <div class="modal-content">
+          <div class="modal-header">
+             <h3>{{selectedPosterName}}</h3> 
+            </div>
                <!-- modal-body -->
         <div class="modal-body">
             <img alt="logo" height="800" width="700" style="align-items: center;" src="{{selectedPosterUrl}}" class="img-thumbnail" />
@@ -52,13 +59,13 @@
         
         <!-- modal-footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" (click)="closeModalDialog()" >Close</button>
+          <button type="button" class="btn btn-primary btn-lg" (click)="closeModalDialog()" >Close</button>
         </div>
       </div>
     </div>
   </div>
 
-      
+  
         
     </div>
   </div>

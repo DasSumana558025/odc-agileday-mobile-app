@@ -19,7 +19,7 @@ import { SessionsPage } from '../pages/sessions/sessions';
 import { ApiProvider } from '../providers/api/api';
 import { FilterPipe} from './filter.pipe';
 import { ServicesProvider } from '../providers/services/services';
-
+import { ConfirmationModalModule } from 'ng-confirmation-modal';
 
 @NgModule({
   declarations: [
@@ -39,9 +39,10 @@ import { ServicesProvider } from '../providers/services/services';
   imports: [
     BrowserModule,FormsModule,HttpModule,
     IonicModule.forRoot(MyApp),
-    IonicPageModule.forChild(MyApp)
-    
-  ],
+    IonicPageModule.forChild(MyApp),
+    ConfirmationModalModule.forRoot({
+      })
+   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
