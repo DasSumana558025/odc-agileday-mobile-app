@@ -50,10 +50,10 @@ export class PosterPage implements OnInit  {
     });
 
         let date = new Date();
-        let techForumDateStart = new Date(2018,8,25);
+        let techForumDateStart = new Date(2018,8,28);
         techForumDateStart.setHours(10,0,0);
         
-        let techForumDateEnd = new Date(2018,8,25);
+        let techForumDateEnd = new Date(2018,8,28);
         techForumDateEnd.setHours(23,0,0);
 
         console.log("test date = "+date);
