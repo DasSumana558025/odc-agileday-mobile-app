@@ -78,6 +78,18 @@ export class ServicesProvider {
     getPosters():Observable<any>{
       return this.http.get('http://localhost:5000/wlodc-techhub/api/posters');
     }
+
+    postUserVoteForVideo(param:any) : Observable<any> {
+      console.log("Inside uservote()..");
+      let header = new Headers();
+      header.append('Access-Control-Allow-Origin','*');
+      header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.append('Accept' ,'application/json');
+    //  let body = JSON.stringify(param);
+     // header.append('Authorization', data);
+      let options = new RequestOptions({headers: header});
+          return this.http.post('http://localhost:5000/wlodc-techhub/api/vote/',param, options)
+    }
 }
 
 interface Alltopics {

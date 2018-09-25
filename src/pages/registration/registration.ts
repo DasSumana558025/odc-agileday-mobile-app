@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { ServicesProvider } from './../../providers/services/services';
 
 /**
  * Generated class for the RegistrationPage page.
@@ -12,11 +13,64 @@ import { NavController, NavParams } from 'ionic-angular';
   selector: 'page-registration',
   templateUrl: 'registration.html',
 })
-export class RegistrationPage {
+export class RegistrationPage implements OnInit {
+  isAgileDayVideo = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider) {
+  }
+  ngOnInit(){
+  let date = new Date();
+        let techForumDateStart = new Date(2018,8,25);
+        techForumDateStart.setHours(10,25,0);
+        
+        let techForumDateEnd = new Date(2018,8,25);
+        techForumDateEnd.setHours(17,25,0);
+
+        console.log("test date = "+date);
+        console.log("test techForumDateStart = "+techForumDateStart);
+        console.log("test techForumDateEnd = "+techForumDateEnd);
+        if(date > techForumDateStart && date < techForumDateEnd) {
+            this.isAgileDayVideo = true;
+        } else {
+           this.isAgileDayVideo = false;
+        }
+        console.log("test isAgileDayVideo = "+isAgileDayVideo);
+      }
+  options: any = {
+    confirmBtnClass: 'btn btn-success',      //DEFAULT VALUE
+   confirmBtnText: 'Confirm',      				//DEFAULT VALUE
+   cancelBtnClass: 'btn btn-danger',      //DEFAULT VALUE
+   cancelBtnText: 'Cancel',      				//DEFAULT VALUE
+   modalSize: 'lg',      							 //DEFAULT VALUE
+   modalClass: '' ,
+                    //DEFAULT VALUE
+  }
+  
+  confirmedVideo(currPosterId) {
+   this.postVideoVote(currPosterId);
+  }
+  
+  cancelledVideo() {
+   console.log('cancelled');
   }
 
-
+  postVideoVote(currVideoId)
+      {
+        let strUserId = localStorage.getItem('user_id');
+        let userVoteDetail = { "posterId" : currVideoId, userId : strUserId, voteType : "VIDEO"} ;
+        this.apiProvider.postUserVoteForVideo(userVoteDetail).subscribe(data => {
+        console.log("Inside submit login");
+          if(data.status == 200){
+            console.log("vote post sucessfully...");
+          }
+          else{
+            console.log("fail during post...");
+          }     
+              
+           }), err => {
+          console.log(err);
+          
+           }
+      }
 
 }
