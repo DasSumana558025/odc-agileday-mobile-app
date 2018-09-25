@@ -54,7 +54,7 @@ export class PosterPage implements OnInit  {
         techForumDateStart.setHours(10,0,0);
         
         let techForumDateEnd = new Date(2018,8,25);
-        techForumDateEnd.setHours(19,0,0);
+        techForumDateEnd.setHours(23,0,0);
 
         console.log("test date = "+date);
         console.log("test techForumDateStart = "+techForumDateStart);

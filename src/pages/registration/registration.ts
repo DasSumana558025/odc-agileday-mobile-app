@@ -22,8 +22,9 @@ export class RegistrationPage implements OnInit {
   ngOnInit(){
     this.apiProvider.getVideoUserVote().subscribe(data => {
       const videoDetail = data.json() as VoteDetail[];
+      console.log("test videoObj = "+JSON.stringify(data.json()));
       this.currVideoVoteId = videoDetail[0].videoId;
-      console.log("test video = "+JSON.stringify(data.json()) + "vote id = "+this.currVideoVoteId);
+      console.log("video vote id = "+this.currVideoVoteId);
     });
 
   let date = new Date();
@@ -82,10 +83,10 @@ export class RegistrationPage implements OnInit {
 
       checkVideoVoteId(postId){
        
-        if(this.currVideoVoteId == postId){
-        return true;
-        }
-        console.log("test video = "+postId);
+        // if(this.currVideoVoteId == postId){
+        // return true;
+        // }
+        // console.log("test video = "+postId);
         return false;
       }
 
