@@ -13,15 +13,27 @@
   </ion-header>
 
   <ion-content>
-      <div class="panel-body pd-0">
+    <ion-scroll style="width:100%;height:100vh;overflow-y: scroll" scrollY="true">
+      <div class="panel-body overflow">
         <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <td class="allign-middle topicClass">Time Slot</td>
+              <td class="allign-middle topicClass">Room 1 - Topic/Speaker</td>
+              <td class="allign-middle topicClass">Romm 2 - Topic/Speaker</td>
+            </tr>
+          </thead>
             <tbody>
-              <tr *ngFor="let session of topics">
-                <td class="text-center text-primary" style="font-size: 15px;">{{session.description}}</td>
-              </tr>
+            <tr *ngFor="let timeSlotSpecificTopic of timeSlotSpecificTopics">
+              <td class="allign-middle">{{timeSlotSpecificTopic.timeSlot}}</td>
+              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.room2 == undefined"  colspan="2"><span class="topicClass">{{timeSlotSpecificTopic.room1}}</span> <span *ngIf="timeSlotSpecificTopic.room1Presenter != undefined"> by <span class="presenterClass">{{timeSlotSpecificTopic.room1Presenter}}</span></span></td>
+              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.room2 != undefined"><span class="topicClass">{{timeSlotSpecificTopic.room1}}</span> by <span class="presenterClass">{{timeSlotSpecificTopic.room1Presenter}}</span></td>
+              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.room2 != undefined"><span class="topicClass">{{timeSlotSpecificTopic.room2}}</span> by <span class="presenterClass">{{timeSlotSpecificTopic.room2Presenter}}</span></td>
+            </tr>
             </tbody>
           </table>
        </div>
+       </ion-scroll>
 
     <!--  <ion-list>
           <ion-grid>
