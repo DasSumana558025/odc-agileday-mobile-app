@@ -56,13 +56,12 @@ export class LoginPage{
     localStorage.setItem('auth_token', this.encriptDaseId);
     this.apiProvider.getUser().subscribe(data => {
     if(data){
-      console.log("data",data);
-      const user = data.json();
-      this.employee = new User(user.id,user.userId,user.firstName,
-      user.lastName,user.location,user.email,user.mobile);
-      console.log("Inside login = "+  this.employee.userId);
-      localStorage.setItem('user_id',this.employee.userId);
+      const token = data.json();
+      console.log("user",token.access_token);
+      localStorage.setItem('token', token.access_token);
+      localStorage.setItem('userId', this.model.dasid);
       this.navCtrl.setRoot(HomePage);
+      
     }
     else{
      

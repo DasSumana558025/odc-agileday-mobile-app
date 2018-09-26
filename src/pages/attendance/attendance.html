@@ -6,21 +6,18 @@
       <ion-title>
           <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/agileDayLogo.jpg" style="float:left;" />
           Attendance
-          <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/worldlineLogo.png" style="float:right;" />
+          <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/worldlineresized.png" style="float:right;" />
         </ion-title>
 
     </ion-navbar>
   </ion-header>
 
   <ion-content padding>
-      <div class="divmiddleallign">
-        <div class="row>"></div>
-        <div class="row>"></div>
-        <div class="row>"></div>
-        <div class="row>"></div>
+      <div class="divmiddleallign bordered" style="margin-top:150px;">
+        &nbsp;&nbsp;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     s 
         <form #userform = "ngForm">
-          <label>Input 4 digit number for authentication</label>
-          <input type="text" class="form-control" name="code" [(ngModel)]="code" class="form-control" required minlength="4" >
+          <label class="middleallign">Input 4 digit number for authentication</label>&nbsp;&nbsp;
+          <input  type="text" class="form-control" style="width:200px;" name="code" [(ngModel)]="code" class="form-control middleallign" required minlength="4" >&nbsp;&nbsp;
           <button class="btn btn-info middleallign" [disabled]= "!userform.form.valid && code == '4321'"  style="font-size: 15px;" (click)="attendence(roomNumber)">Click Here to Mark Your Attendence</button>
         </form>
       </div>

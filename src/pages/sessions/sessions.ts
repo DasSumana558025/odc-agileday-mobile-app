@@ -13,60 +13,106 @@ export class SessionsPage implements OnInit{
 
   topics: any[] = [];
   registedredTopic : any[] = [];
-  filterValues = ["PN_TR01","PN_TR02"];
+  filterValues = ["TR02","TR03"];
   public roomNumber : string = "showAll";
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider,private alertCtrl: AlertController) {
   }
 
   ngOnInit(){
-    let strUserId = localStorage.getItem('user_id');
-    this.apiProvider.getRegisteredTopicForUser(strUserId).map(res=>res.json()).subscribe(data => {
-      this.registedredTopic=data as Topics[];
-      console.log("this.registedredTopic",this.registedredTopic);
-    });
+    let strUserId = localStorage.getItem('userId');
+    let promise = new Promise((resolve, reject) => {
+      this.apiProvider.getRegisteredTopicForUser(strUserId)
+        .toPromise()
+        .then(
+          res => {
+             // Success
+           this.registedredTopic=(res.json()) as Topics[];
+          console.log("this.registedredTopic",this.registedredTopic);
 
-    this.apiProvider.getAllTopics().map(res=>res.json()).subscribe(data => {
-      this.topics = data as Topics[];
-      console.log( this.topics);
-      for(var i = 0; i < this.topics.length; i++){
-        for(var j = 0; j < this.topics[i].presenters.length; j++)
-        {
-          if(this.topics[i].presenterName === undefined){
-            this.topics[i]["presenterName"]= this.topics[i].presenters[j].firstName + " " + this.topics[i].presenters[j].lastName;
+          ///ANOTHER rest CALL///////////////
+          this.apiProvider.getAllTopics().map(res=>res.json()).subscribe(data => {
+            this.topics = data as Topics[];
+            console.log( this.topics);
+            for(var i = 0; i < this.topics.length; i++){
+              for(var j = 0; j < this.topics[i].presenters.length; j++)
+              {
+                if(this.topics[i].presenterName === undefined){
+                  this.topics[i]["presenterName"]= this.topics[i].presenters[j].firstName + " " + this.topics[i].presenters[j].lastName;
+                }
+                else
+                {
+                  this.topics[i].presenterName = this.topics[i].presenterName + " , " + this.topics[i].presenters[j].firstName + " " + this.topics[i].presenters[j].lastName;
+                }
+              }
+              
+              if(this.registedredTopic != undefined && this.registedredTopic.length > 0){
+                let object =  this.registedredTopic.find(x => x.id == this.topics[i].id );
+                console.log(object);
+                if(object != undefined){
+                  this.topics[i].registered = true;
+                }
+                else{
+                  this.topics[i].registered= false;
+                }
+              }
+              else
+              {
+                this.topics[i]["registered"] = false;
+              }
+            }
+           this.topics = this.topics.filter(x => x.description != 'Opening Key Notes');
+           this.topics = this.topics.filter(x => x.description != 'Closing Notes and Prize Distribution')
+           
+          });
+          resolve();
           }
-          else
-          {
-            this.topics[i].presenterName = this.topics[i].presenterName + " , " + this.topics[i].presenters[j].firstName + " " + this.topics[i].presenters[j].lastName;
-          }
-        }
-        
-        if(this.registedredTopic != undefined && this.registedredTopic.length > 0){
-          let object =  this.registedredTopic.find(x => x.id == this.topics[i].id );
-          console.log(object);
-          if(object != undefined){
-            this.topics[i].registered = true;
-          }
-          else{
-            this.topics[i].registered= false;
-          }
-        }
-        else
-        {
-          this.topics[i]["registered"] = false;
-        }
-      }
-     this.topics = this.topics.filter(x => x.description != 'Opening Key Notes');
-     this.topics = this.topics.filter(x => x.description != 'Closing Notes and Prize Distribution')
-     
+        );
     });
-    //console.log("this.topics",this.topics);
-    //console.log("this.registedredTopic",this.registedredTopic);
+    console.log(promise);
+    // this.apiProvider.getRegisteredTopicForUser(strUserId).map(res=>res.json()).subscribe(data => {
+     
+    // });
+
+    // this.apiProvider.getAllTopics().map(res=>res.json()).subscribe(data => {
+    //   this.topics = data as Topics[];
+    //   console.log( this.topics);
+    //   for(var i = 0; i < this.topics.length; i++){
+    //     for(var j = 0; j < this.topics[i].presenters.length; j++)
+    //     {
+    //       if(this.topics[i].presenterName === undefined){
+    //         this.topics[i]["presenterName"]= this.topics[i].presenters[j].firstName + " " + this.topics[i].presenters[j].lastName;
+    //       }
+    //       else
+    //       {
+    //         this.topics[i].presenterName = this.topics[i].presenterName + " , " + this.topics[i].presenters[j].firstName + " " + this.topics[i].presenters[j].lastName;
+    //       }
+    //     }
+        
+    //     if(this.registedredTopic != undefined && this.registedredTopic.length > 0){
+    //       let object =  this.registedredTopic.find(x => x.id == this.topics[i].id );
+    //       console.log(object);
+    //       if(object != undefined){
+    //         this.topics[i].registered = true;
+    //       }
+    //       else{
+    //         this.topics[i].registered= false;
+    //       }
+    //     }
+    //     else
+    //     {
+    //       this.topics[i]["registered"] = false;
+    //     }
+    //   }
+    //  this.topics = this.topics.filter(x => x.description != 'Opening Key Notes');
+    //  this.topics = this.topics.filter(x => x.description != 'Closing Notes and Prize Distribution')
+     
+    // });
   }
 
   register(session){
     console.log("session",session);
-    let strUserId = localStorage.getItem('user_id');
+    let strUserId = localStorage.getItem('userId');
     if(this.registedredTopic.length > 0){
       let object =  this.registedredTopic.find(x => x.timeSlot == session.timeSlot );
       if(object !== undefined){
@@ -87,8 +133,11 @@ export class SessionsPage implements OnInit{
           }
           else
           {
-            this.showError("Sorry session cant be registered");
+            this.showError("Sorry,we are experiencing system issue,please try again after some time");
           }
+        },
+        error =>{
+          this.showError("Sorry,we are experiencing system issue,please try again after some time");
         });
        
       }
@@ -112,7 +161,7 @@ export class SessionsPage implements OnInit{
   }
 
   unregister(session){
-    let strUserId = localStorage.getItem('user_id');
+    let strUserId = localStorage.getItem('userId');
      this.apiProvider.unRegisterUserForTopic(session.id,strUserId).subscribe(data => {
      if(data.status == 200){
       let object =  this.registedredTopic.find(x => x.id == session.id );
