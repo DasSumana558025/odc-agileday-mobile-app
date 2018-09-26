@@ -1,7 +1,7 @@
 import { Http ,RequestOptions,Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-
+import * as constants from '../constant/constants';
 
 
 /*
@@ -18,7 +18,7 @@ export class ServicesProvider {
   }
 
   getAllTopics() : Observable<any> {
-    return this.http.get('http://localhost:5000/wlodc-techhub/api/topics');
+    return this.http.get(constants.API_URL + 'topics');
   }
 
   getFeedbacks() : Observable<any> {
@@ -35,7 +35,7 @@ export class ServicesProvider {
     header.append('Accept' ,'application/json');
     header.append('Authorization', data);
     let options = new RequestOptions({headers: header});
-        return this.http.post('http://localhost:5000/wlodc-techhub/api/auth/','test', options)
+        return this.http.post(constants.API_URL + 'auth/','test', options)
     };
 
     postUserVote(param:any) : Observable<any> {
@@ -44,25 +44,23 @@ export class ServicesProvider {
       header.append('Access-Control-Allow-Origin','*');
       header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
       header.append('Accept' ,'application/json');
-    //  let body = JSON.stringify(param);
-     // header.append('Authorization', data);
       let options = new RequestOptions({headers: header});
-          return this.http.post('http://localhost:5000/wlodc-techhub/api/vote/',param, options)
+      return this.http.post(constants.API_URL +'vote/',param, options)
     }
 
     getRegisteredTopicForUser(param:any):Observable<any>{
-      return this.http.get('http://localhost:5000/wlodc-techhub/api/topics/user/'+ param);
+      return this.http.get(constants.API_URL +'topics/user/'+ param);
     }
 
     registerUserForTopic(param1:any,param2:any):Observable<any>{
-      console.log("http://localhost:5000/wlodc-techhub/api/topics/" + param1 + "/registerUser/" + param2);
-      return this.http.put("http://localhost:5000/wlodc-techhub/api/topics/" + param1 + "/registerUser/" + param2,'test');
+      console.log(constants.API_URL +"topics/" + param1 + "/registerUser/" + param2);
+      return this.http.put(constants.API_URL +"topics/" + param1 + "/registerUser/" + param2,'test');
       
     }
 
     unRegisterUserForTopic(param1:any,param2:any):Observable<any>{
-      console.log("http://localhost:5000/wlodc-techhub/api/topics/" + param1 + "/unRegisterUser/" + param2);
-      return this.http.put("http://localhost:5000/wlodc-techhub/api/topics/" + param1 + "/unRegisterUser/" + param2,'test');
+      console.log(constants.API_URL +"topics/" + param1 + "/unRegisterUser/" + param2);
+      return this.http.put(constants.API_URL +"topics/" + param1 + "/unRegisterUser/" + param2,'test');
       
     }
 
@@ -72,11 +70,11 @@ export class ServicesProvider {
       header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
       header.append('Accept' ,'application/json');
       let options = new RequestOptions({headers: header});
-      return this.http.post("http://localhost:5000/wlodc-techhub/api/attendance/",attendenceData,options);
+      return this.http.post(constants.API_URL +"attendance/",attendenceData,options);
     }
 
     getPosters():Observable<any>{
-      return this.http.get('http://localhost:5000/wlodc-techhub/api/posters');
+      return this.http.get(constants.API_URL +'posters');
     }
 
     postUserVoteForVideo(param:any) : Observable<any> {
@@ -85,18 +83,16 @@ export class ServicesProvider {
       header.append('Access-Control-Allow-Origin','*');
       header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
       header.append('Accept' ,'application/json');
-    //  let body = JSON.stringify(param);
-     // header.append('Authorization', data);
-      let options = new RequestOptions({headers: header});
-          return this.http.post('http://localhost:5000/wlodc-techhub/api/vote/',param, options)
+   let options = new RequestOptions({headers: header});
+          return this.http.post(constants.API_URL +'vote/',param, options)
     }
 
     getPosterUserVote() : Observable<any>{
-      return this.http.get('http://localhost:5000/wlodc-techhub/api/vote/stats/' + "POSTER");
+      return this.http.get(constants.API_URL +'vote/stats/' + "POSTER");
     }
 
     getVideoUserVote() : Observable<any>{
-      return this.http.get('http://localhost:5000/wlodc-techhub/api/vote/stats/' + "VIDEO");
+      return this.http.get(constants.API_URL +'vote/stats/' + "VIDEO");
     }
 }
 
