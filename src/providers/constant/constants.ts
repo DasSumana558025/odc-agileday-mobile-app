@@ -1,1 +1,1 @@
-export const API_URL: string = 'http://wlodctechhub-env.pimp4pppm5.ap-south-1.elasticbeanstalk.com/api/';
+export const API_URL: string = 'http://wlodctechhub-env.pimp4pppm5.ap-south-1.elasticbeanstalk.com/wlodc-techhub/api/';

@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ServicesProvider } from './../../providers/services/services';
-
+import { FlashMessagesService } from 'ngx-flash-messages';
 /**
  * Generated class for the RegistrationPage page.
  *
@@ -17,22 +17,25 @@ export class RegistrationPage implements OnInit {
   isAgileDayVideo = false;
   currVideoVoteId = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider,private flashMessagesService: FlashMessagesService) {
   }
   ngOnInit(){
     this.apiProvider.getVideoUserVote().subscribe(data => {
       const videoDetail = data.json() as VoteDetail[];
       console.log("test videoObj = "+JSON.stringify(data.json()));
-      this.currVideoVoteId = videoDetail[0].videoId;
+      if( videoDetail.length != 0){
+        this.currVideoVoteId = videoDetail[0].videoId;
+      }
+      
       console.log("video vote id = "+this.currVideoVoteId);
     });
 
   let date = new Date();
-        let techForumDateStart = new Date(2018,8,28);
+        let techForumDateStart = new Date(2018,8,26);
         techForumDateStart.setHours(10,0,0);
         
-        let techForumDateEnd = new Date(2018,8,28);
-        techForumDateEnd.setHours(18,0,0);
+        let techForumDateEnd = new Date(2018,8,26);
+        techForumDateEnd.setHours(23,0,0);
 
         console.log("test date = "+date);
         console.log("test techForumDateStart = "+techForumDateStart);
@@ -56,6 +59,11 @@ export class RegistrationPage implements OnInit {
   
   confirmedVideo(currPosterId) {
    this.postVideoVote(currPosterId);
+   this.navCtrl.setRoot(RegistrationPage);
+       this.flashMessagesService.show('you are vote is sucessfully post.', {
+        classes: ['alert', 'alert-success'], // You can pass as many classes as you need
+        timeout: 3000, // Default is 3000
+      });
   }
   
   cancelledVideo() {
@@ -83,10 +91,10 @@ export class RegistrationPage implements OnInit {
 
       checkVideoVoteId(postId){
        
-        // if(this.currVideoVoteId == postId){
-        // return true;
-        // }
-        // console.log("test video = "+postId);
+         if(this.currVideoVoteId == postId){
+         return true;
+         }
+        console.log("test video = "+postId);
         return false;
       }
 

@@ -39,21 +39,24 @@ export class PosterPage implements OnInit  {
   ngOnInit(){
     this.apiProvider.getPosters().subscribe(data => {
       this.posters = data.json() as Poster[];
-      //console.log("test posters = "+this.posters[1].url);
+      console.log("test posters = "+this.posters[1].url);
     });
 
     
     this.apiProvider.getPosterUserVote().subscribe(data => {
       this.posterDetail = data.json() as Vote[];
-      this.currPostVoteId = this.posterDetail[0].posterId;
+      if(this.posterDetail.length != 0){
+        this.currPostVoteId = this.posterDetail[0].posterId;
+      }
+      
       console.log("test posters = "+JSON.stringify(data.json()) + "vote id = "+this.currPostVoteId);
     });
 
         let date = new Date();
-        let techForumDateStart = new Date(2018,8,28);
+        let techForumDateStart = new Date(2018,8,26);
         techForumDateStart.setHours(10,0,0);
         
-        let techForumDateEnd = new Date(2018,8,28);
+        let techForumDateEnd = new Date(2018,8,26);
         techForumDateEnd.setHours(23,0,0);
 
         console.log("test date = "+date);
@@ -112,11 +115,12 @@ export class PosterPage implements OnInit  {
       
       confirmed(currPosterId) {
        this.postVote(currPosterId);
+       this.navCtrl.setRoot(PosterPage);
        this.flashMessagesService.show('you are vote is sucessfully post.', {
         classes: ['alert', 'alert-success'], // You can pass as many classes as you need
         timeout: 3000, // Default is 3000
       });
-      this.navCtrl.setRoot(PosterPage);
+     
       }
       
       cancelled() {

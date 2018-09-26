@@ -92,17 +92,6 @@
       "session": null,
       "options": [],
       "correctOption": 0,
-      "description": "Give any suggestions / feedback",
-      "sessionId":4,
-      "selectedAnswer" : "",
-      "sessionName": "Deep Neural Network"
-    },
-    {
-      "id": 5,
-      "feedback": true,
-      "session": null,
-      "options": [],
-      "correctOption": 0,
       "description": "Overall rating",
       "sessionId": 5,
       "selectedAnswer" : "",
@@ -122,12 +111,24 @@
         {
           "optionId": 4,
           "value": "4"
-        }
+        },
         {
           "optionId": 5,
           "value": "5"
         }
       ],
       "sessionName": "Angular2"
+    },
+    {
+      "id": 5,
+      "feedback": true,
+      "session": null,
+      "options": [],
+      "correctOption": 0,
+      "description": "Give any suggestions / feedback",
+      "sessionId":4,
+      "selectedAnswer" : "",
+      "sessionName": "Deep Neural Network"
     }
+    
 ]
