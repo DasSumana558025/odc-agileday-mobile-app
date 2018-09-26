@@ -5,25 +5,25 @@
       "session": null,
       "options": [],
       "correctOption": 0,
-      "description": "How do you rate session overall?",
+      "description": "How relevant were the topics for the event?",
       "sessionId": 1,
       "selectedAnswer" : "",
       "questionOptions": [
         {
           "optionId": 1,
-          "value": "Poor"
+          "value": "All topics were relevant"
         },
         {
           "optionId": 2,
-          "value": "Ok"
+          "value": "Most topics were relevant"
         },
         {
           "optionId": 3,
-          "value": "Good"
+          "value": "Most topics were NOT relevant"
         },
         {
           "optionId": 4,
-          "value": "Excellent"
+          "value": "No relevance at all"
         }
       ],
       "sessionName": "Deep Neural Network"
@@ -34,25 +34,25 @@
       "session": null,
       "options": [],
       "correctOption": 0,
-      "description": "To what extent do you think you can apply the information presented in the session?",
+      "description": "Do you think the learning from this event will be useful to you?",
       "sessionId": 2,
       "selectedAnswer" : "",
       "questionOptions": [
         {
-          "optionId": 5,
-          "value": "No"
+          "optionId": 1,
+          "value": "Very much"
         },
         {
-          "optionId": 6,
-          "value": "May be"
-        },
-        {
-          "optionId": 7,
+          "optionId": 2,
           "value": "Yes"
         },
         {
-          "optionId": 8,
-          "value": "For sure"
+          "optionId": 3,
+          "value": "To a small extent"
+        },
+        {
+          "optionId": 4,
+          "value": "Not at all"
         }
       ],
       "sessionName": "Deep Neural Network"
@@ -63,25 +63,25 @@
       "session": null,
       "options": [],
       "correctOption": 0,
-      "description": "For my experience level, the workshop was?",
+      "description": "How well was the event organized?",
       "sessionId": 3,
       "selectedAnswer" : "",
       "questionOptions": [
         {
-          "optionId": 9,
-          "value": "Poor"
+          "optionId": 1,
+          "value": "Excellently organized"
         },
         {
-          "optionId": 10,
-          "value": "Ok"
+          "optionId": 2,
+          "value": "Overall ok"
         },
         {
-          "optionId": 11,
-          "value": "Good"
+          "optionId": 3,
+          "value": "Overall not so good"
         },
         {
-          "optionId": 12,
-          "value": "Excellent"
+          "optionId": 4,
+          "value": "Completely unorganized"
         }
       ],
       "sessionName": "Deep Neural Network"
@@ -92,27 +92,9 @@
       "session": null,
       "options": [],
       "correctOption": 0,
-      "description": "How do you rate the content of the session?",
+      "description": "Give any suggestions / feedback",
       "sessionId":4,
       "selectedAnswer" : "",
-      "questionOptions": [
-        {
-          "optionId": 13,
-          "value": "Poor"
-        },
-        {
-          "optionId": 14,
-          "value": "Ok"
-        },
-        {
-          "optionId": 15,
-          "value": "Good"
-        },
-        {
-          "optionId": 16,
-          "value": "Excellent"
-        }
-      ],
       "sessionName": "Deep Neural Network"
     },
     {
@@ -121,25 +103,29 @@
       "session": null,
       "options": [],
       "correctOption": 0,
-      "description": "How do you rate session overall?",
+      "description": "Overall rating",
       "sessionId": 5,
       "selectedAnswer" : "",
-      "questionOptions": [
+      "ratingOptions": [
         {
-          "optionId": 17,
-          "value": "Poor"
+          "optionId": 1,
+          "value": "1"
         },
         {
-          "optionId": 18,
-          "value": "Ok"
+          "optionId": 2,
+          "value": "2"
         },
         {
-          "optionId": 19,
-          "value": "Good"
+          "optionId": 3,
+          "value": "3"
         },
         {
-          "optionId": 20,
-          "value": "Excellent"
+          "optionId": 4,
+          "value": "4"
+        }
+        {
+          "optionId": 5,
+          "value": "5"
         }
       ],
       "sessionName": "Angular2"
