@@ -6,19 +6,20 @@
     <ion-title>
             <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/agileDayLogo.jpg" style="float:left;" />
             Sessions
-            <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/worldlineLogo.png" style="float:right;" />
+            <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/atosWorldline.png" style="float:right;" />
         
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <div class="row allign-middl">
-        Filter by : &nbsp;
+  <div class="row allign-middl" style="font-size:16px;">
+      &nbsp;&nbsp;&nbsp; Filter by : &nbsp;
+      <label class="radio-inline" style="font-size:16px;"> 
      <input type="radio" class="radio-inline" value="showAll" name="roomNumber" [(ngModel)]=roomNumber>Show All&nbsp;&nbsp;
      <input type="radio" class="radio-inline" value={{filterValues[0]}} name="roomNumber"  [(ngModel)]=roomNumber>{{filterValues[0]}}&nbsp;&nbsp;
      <input type="radio" class="radio-inline" value={{filterValues[1]}} name="roomNumber"  [(ngModel)]=roomNumber>{{filterValues[1]}}
-    
+    </label>
      </div>
  
     <div class="panel-body overflow" >
