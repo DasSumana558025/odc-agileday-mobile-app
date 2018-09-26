@@ -40,7 +40,6 @@ export class AgendaPage implements OnInit {
       }
       for(var i=0;i<this.filterValues.length;i++){
         let sessions = this.topics.filter(x=> x.timeSlot == this.filterValues[i]);
-        console.log(sessions);
         if(sessions != undefined && sessions.length == 0){
           this.timeSlotSpecificTopics.push({"timeSlot":this.filterValues[i],"room1": 'Lunch Break'});
         }

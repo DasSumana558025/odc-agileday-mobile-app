@@ -48,7 +48,6 @@ export class SessionsPage implements OnInit{
               
               if(this.registedredTopic != undefined && this.registedredTopic.length > 0){
                 let object =  this.registedredTopic.find(x => x.id == this.topics[i].id );
-                console.log(object);
                 if(object != undefined){
                   this.topics[i].registered = true;
                 }
@@ -69,45 +68,8 @@ export class SessionsPage implements OnInit{
           }
         );
     });
-    console.log(promise);
-    // this.apiProvider.getRegisteredTopicForUser(strUserId).map(res=>res.json()).subscribe(data => {
-     
-    // });
-
-    // this.apiProvider.getAllTopics().map(res=>res.json()).subscribe(data => {
-    //   this.topics = data as Topics[];
-    //   console.log( this.topics);
-    //   for(var i = 0; i < this.topics.length; i++){
-    //     for(var j = 0; j < this.topics[i].presenters.length; j++)
-    //     {
-    //       if(this.topics[i].presenterName === undefined){
-    //         this.topics[i]["presenterName"]= this.topics[i].presenters[j].firstName + " " + this.topics[i].presenters[j].lastName;
-    //       }
-    //       else
-    //       {
-    //         this.topics[i].presenterName = this.topics[i].presenterName + " , " + this.topics[i].presenters[j].firstName + " " + this.topics[i].presenters[j].lastName;
-    //       }
-    //     }
-        
-    //     if(this.registedredTopic != undefined && this.registedredTopic.length > 0){
-    //       let object =  this.registedredTopic.find(x => x.id == this.topics[i].id );
-    //       console.log(object);
-    //       if(object != undefined){
-    //         this.topics[i].registered = true;
-    //       }
-    //       else{
-    //         this.topics[i].registered= false;
-    //       }
-    //     }
-    //     else
-    //     {
-    //       this.topics[i]["registered"] = false;
-    //     }
-    //   }
-    //  this.topics = this.topics.filter(x => x.description != 'Opening Key Notes');
-    //  this.topics = this.topics.filter(x => x.description != 'Closing Notes and Prize Distribution')
-     
-    // });
+    
+    
   }
 
   register(session){
