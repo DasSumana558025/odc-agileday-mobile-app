@@ -157,6 +157,18 @@ export class ServicesProvider {
      let options = new RequestOptions({headers: header});
       return this.http.get(constants.API_URL +'vote/stats/' + "VIDEO",options);
     }
+
+    postUserFeedback(feedbackBody:any):Observable<any>{
+      let header = new Headers();
+      header.set('Access-Control-Allow-Origin','*');
+      header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.set('Accept' ,'application/json');
+      header.set('Content-Type' ,'application/json');
+      header.set('X-Auth-UserId', this.userIdAuth);
+      header.set('X-Auth-Token', this.xAuthToken);
+      let options = new RequestOptions({headers: header});
+      return this.http.post(constants.API_URL +"feedback",feedbackBody,options);
+    }
 }
 
 interface Alltopics {

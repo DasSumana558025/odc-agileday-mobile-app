@@ -15,7 +15,7 @@ import { ServicesProvider } from './../../providers/services/services';
 })
 export class FeedbackPage {
   public allFeedback : AllFeedback [];
-
+  feedbackTempReq:any[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider) {
   }
@@ -27,6 +27,21 @@ export class FeedbackPage {
   });
 }
 
+submitFeedback() {
+  console.log("result = " + JSON.stringify(this.allFeedback));
+  let strUserId = localStorage.getItem('user_id');
+  
+  for(var i = 0; i < this.allFeedback.length; i++){
+    let feedbackReq = {"userId" : strUserId, "quetionId" :  this.allFeedback[i].id, "choiceId" : this.allFeedback[i].choiceId,
+                        "text" : this.allFeedback[i].selectedAnswer }
+    this.feedbackTempReq.push(feedbackReq);
+  }
+  console.log("req = "+JSON.stringify(this.feedbackTempReq));
+    this.apiProvider.postUserFeedback(this.feedbackTempReq).subscribe(data => {
+        console.log("Inside ContactPage and onInit() = "+JSON.stringify(data.json()));
+    });
+    
+  }
 }
 
 interface AllFeedback {
@@ -36,4 +51,6 @@ interface AllFeedback {
   sessionId : number;
   sessionName :string;
   questionDescription :any;
+  selectedAnswer :string;
+  choiceId:number;
 }

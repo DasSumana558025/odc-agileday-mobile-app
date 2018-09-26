@@ -1,5 +1,5 @@
 import { Component ,OnInit} from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ServicesProvider } from './../../providers/services/services';
 import { FlashMessagesService } from 'ngx-flash-messages';
 
@@ -32,7 +32,7 @@ export class PosterPage implements OnInit  {
   currPosterVote = false;
   currPostVoteId = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider,private flashMessagesService: FlashMessagesService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider,private alertCtrl: AlertController) {
   }
 
   
@@ -115,12 +115,23 @@ export class PosterPage implements OnInit  {
       
       confirmed(currPosterId) {
        this.postVote(currPosterId);
-       this.navCtrl.setRoot(PosterPage);
-       this.flashMessagesService.show('you are vote is sucessfully post.', {
-        classes: ['alert', 'alert-success'], // You can pass as many classes as you need
-        timeout: 3000, // Default is 3000
-      });
-     
+      //  this.flashMessagesService.show('you are vote is sucessfully post.', {
+      //   classes: ['alert', 'alert-success'], // You can pass as many classes as you need
+      //   timeout: 3000, // Default is 3000
+      // });
+      
+      this.navCtrl.setRoot(PosterPage);
+      this.showSuccess("you are vote is sucessfully post.");
+      }
+
+      showSuccess(text) {
+        let alert = this.alertCtrl.create({
+          title: 'Sucess',
+          subTitle: text,
+          cssClass:'customAlert',
+          buttons: ['OK']
+        });
+        alert.present();
       }
       
       cancelled() {
