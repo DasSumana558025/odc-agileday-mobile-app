@@ -2,4 +2,31 @@ page-sessions {
 .danger{
     background-color:red;
 }
+tbody:hover {
+    background-color:silver;
+  }
+.table-bordered th, .table-bordered td{
+    border:none !important;
+  }
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: none !important;
+}
+.allign-middle{
+    vertical-align:middle;
+    text-align: center;
+}
+.topicClass {
+    font-weight: bold;
+   }
+  .overflow{
+      overflow: auto;
+  }
+  
+  
+   .presenterClass {
+      color:blue;
+      font-weight: bold;
+     }
 }

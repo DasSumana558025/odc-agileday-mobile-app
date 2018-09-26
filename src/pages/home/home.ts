@@ -8,6 +8,7 @@ import { LogoutPage} from './../../pages/logout/logout';
 import {RegistrationPage} from './../../pages/registration/registration';
 import {SessionsPage} from './../../pages/sessions/sessions';
 import { ServicesProvider } from './../../providers/services/services';
+import {LoginPage} from './../login/login';
 import 'rxjs/add/operator/map';
 import {Events } from 'ionic-angular';
 
@@ -71,9 +72,13 @@ export class HomePage implements OnInit {
   }
 
   openPage(page) {
-    console.log(page.component);
-   // this.events.publish('allTopics:fetched', this.topics);
-    this.nav.setRoot(page.component);
+    if(page.title == "Logout"){
+      this.navCtrl.setRoot(LoginPage);
+    }
+    else{
+      this.nav.setRoot(page.component);
+    }
+    
     
   }
 
