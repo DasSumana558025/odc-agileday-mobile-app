@@ -20,7 +20,7 @@ export class SessionsPage implements OnInit{
   }
 
   ngOnInit(){
-    let strUserId = localStorage.getItem('userId');
+    let strUserId = localStorage.getItem('user_id');
     let promise = new Promise((resolve, reject) => {
       this.apiProvider.getRegisteredTopicForUser(strUserId)
         .toPromise()
@@ -112,7 +112,7 @@ export class SessionsPage implements OnInit{
 
   register(session){
     console.log("session",session);
-    let strUserId = localStorage.getItem('userId');
+    let strUserId = localStorage.getItem('user_id');
     if(this.registedredTopic.length > 0){
       let object =  this.registedredTopic.find(x => x.timeSlot == session.timeSlot );
       if(object !== undefined){
@@ -161,7 +161,7 @@ export class SessionsPage implements OnInit{
   }
 
   unregister(session){
-    let strUserId = localStorage.getItem('userId');
+    let strUserId = localStorage.getItem('user_id');
      this.apiProvider.unRegisterUserForTopic(session.id,strUserId).subscribe(data => {
      if(data.status == 200){
       let object =  this.registedredTopic.find(x => x.id == session.id );

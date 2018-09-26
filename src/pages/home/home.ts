@@ -73,8 +73,10 @@ export class HomePage implements OnInit {
 
   openPage(page) {
     if(page.title == "Logout"){
-      localStorage.removeItem('userId');
-      localStorage.removeItem('token');
+      localStorage.removeItem('X-Auth-UserId');
+      localStorage.removeItem('X-Auth-Token');
+      localStorage.removeItem('user_id');
+      localStorage.removeItem('auth_token');
       localStorage.clear();
       this.navCtrl.setRoot(LoginPage);
     }

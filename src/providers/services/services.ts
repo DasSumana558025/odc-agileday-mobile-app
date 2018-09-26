@@ -23,7 +23,8 @@ export class ServicesProvider {
   }
 
   getAllTopics() : Observable<any> {
-    
+    this.userIdAuth = localStorage.getItem("X-Auth-UserId");
+    this.xAuthToken = localStorage.getItem("X-Auth-Token");
     let header = new Headers();
     header.set('Access-Control-Allow-Origin','*');
     header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
@@ -66,18 +67,37 @@ export class ServicesProvider {
 
     getRegisteredTopicForUser(param:any):Observable<any>{
 
-      return this.http.get(constants.API_URL +'topics/user/'+ param);
+      let header = new Headers();
+      header.set('Access-Control-Allow-Origin','*');
+      header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.set('Accept' ,'application/json');
+      header.set('X-Auth-UserId', this.userIdAuth);
+      header.set('X-Auth-Token', this.xAuthToken);
+      let options = new RequestOptions({headers: header});
+      return this.http.get(constants.API_URL +'topics/user/'+ param,options);
     }
 
     registerUserForTopic(param1:any,param2:any):Observable<any>{
-      console.log(constants.API_URL +"topics/" + param1 + "/registerUser/" + param2);
-      return this.http.put(constants.API_URL +"topics/" + param1 + "/registerUser/" + param2,'test');
+      let header = new Headers();
+      header.set('Access-Control-Allow-Origin','*');
+      header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.set('Accept' ,'application/json');
+      header.set('X-Auth-UserId', this.userIdAuth);
+      header.set('X-Auth-Token', this.xAuthToken);
+      let options = new RequestOptions({headers: header});
+      return this.http.put(constants.API_URL +"topics/" + param1 + "/registerUser/" + param2,'test',options);
       
     }
 
     unRegisterUserForTopic(param1:any,param2:any):Observable<any>{
-      console.log(constants.API_URL +"topics/" + param1 + "/unRegisterUser/" + param2);
-      return this.http.put(constants.API_URL +"topics/" + param1 + "/unRegisterUser/" + param2,'test');
+      let header = new Headers();
+      header.set('Access-Control-Allow-Origin','*');
+      header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.set('Accept' ,'application/json');
+      header.set('X-Auth-UserId', this.userIdAuth);
+      header.set('X-Auth-Token', this.xAuthToken);
+      let options = new RequestOptions({headers: header});
+      return this.http.put(constants.API_URL +"topics/" + param1 + "/unRegisterUser/" + param2,'test',options);
       
     }
 
