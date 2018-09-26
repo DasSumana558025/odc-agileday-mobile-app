@@ -13,42 +13,46 @@
 </ion-header>
 
 <ion-content padding>
-        <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-   <div class="panel widget light-widget panel-bd-top vd_bdt-blue"  *ngFor="let feedbackObj of allFeedback">
-    <div id="anchor{{feedbackObj.sessionId}}"  class="panel-heading pd-5">
-        <a >
-            <h5 class="mgbt-xs-5"> {{feedbackObj.description}}</h5>
-        </a>
-    </div>
-    <div class="panel-body  pd-5">
-        <div class="content-list menu-action-right pd-0 ">
-            <div class="form-group">
+    <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+<div class="panel widget light-widget panel-bd-top vd_bdt-blue"  *ngFor="let feedbackObj of allFeedback">
+<div id="anchor{{feedbackObj.sessionId}}"  class="panel-heading pd-5">
+    <a >
+        <h5 class="mgbt-xs-5"> {{feedbackObj.description}}</h5>
+    </a>
+</div>
+<div class="panel-body  pd-5">
+    <div class="content-list menu-action-right pd-0 ">
+        <div class="form-group">
 
-                <ul class="list-wrapper pd-0">
-                    <li  style="list-style-type: none;" class="pd-0"  *ngFor="let question of feedbackObj.questionOptions">
-                        <div class="menu-action">
-                           
-                            <label class="radio-inline"> 
-                                <input type="radio" class="radio-inline" value="{{question.value}}"    [(ngModel)]="question.optionId">{{question.value}}
-                            </label>
-                        </div>
-                    </li>
-                     <li *ngIf="feedbackObj.id == 4" style="list-style-type: none;" class="pd-0">
-                            <select class="form-control">
-                                    <option *ngFor="let rating of feedbackObj.ratingOptions" value= "{{rating.optionId}}">
-                                      {{rating.value}}
-                                    </option>
-                            </select>  
-                     </li>
-                     <li *ngIf="feedbackObj.id == 5" style="list-style-type: none;" class="pd-0">
-                           <textarea class="form-control" rows="5"  [(ngModel)]="feedbackObj.selectedAnswer"></textarea>
-                        </li>
-                 </ul>
-            </div>
+            <ul class="list-wrapper pd-0">
+                <li  style="list-style-type: none;" class="pd-0"  *ngFor="let question of feedbackObj.questionOptions">
+                    <div class="menu-action">
+                       <label class="radio-inline"> 
+                            <input type="radio" class="radio-inline" value="{{question.value}}" name=""    [(ngModel)]="feedbackObj.selectedAnswer">{{question.value}}
+                        </label>
+                    </div>
+                </li>
+                 <li *ngIf="feedbackObj.id == 4" style="list-style-type: none;" class="pd-0">
+                        <select class="form-control" [(ngModel)]="feedbackObj.selectedAnswer">
+                                <option value="">Select rate</option>
+                                <option *ngFor="let rating of feedbackObj.ratingOptions" value= "{{rating.optionId}}">
+                                  {{rating.value}}
+                                </option>
+                        </select>  
+                 </li>
+                 <li *ngIf="feedbackObj.id == 5" style="list-style-type: none;" class="pd-0">
+                       <textarea class="form-control" rows="5"  [(ngModel)]="feedbackObj.selectedAnswer"></textarea>
+                </li>
+             </ul>
         </div>
     </div>
+</div>
+</div>
+<div >
+<button class="btn btn-primary btn-lg" (click) = "submitFeedback(allFeedback)" >Submit</button>
+
 </div>
 </div>
 </div>
