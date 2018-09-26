@@ -16,14 +16,14 @@ import { PARAMETERS } from '@angular/core/src/util/decorators';
 })
 export class AttendancePage {
   roomNumber : string ;
-
+  code : {} = "Select 4 digit code";
   allRoomNumber = ["Select","PN_TR01","PN_TR02"];
   
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider,private alertCtrl: AlertController) {
   }
 
-  attendence(){
-   
+  attendence(code){
+    code.value="";
     let strUserId = localStorage.getItem('user_id');
     let attendenceData = {"userId":strUserId};
     this.apiProvider.attendenceUser(attendenceData).subscribe(data => {

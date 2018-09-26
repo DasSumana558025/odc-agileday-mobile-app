@@ -14,11 +14,11 @@
 
   <ion-content padding>
       <div class="divmiddleallign bordered" style="margin-top:150px;">
-        &nbsp;&nbsp;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     s 
+        &nbsp;&nbsp;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
         <form #userform = "ngForm">
           <label class="middleallign">Input 4 digit number for authentication</label>&nbsp;&nbsp;
-          <input  type="text" class="form-control" style="width:200px;" name="code" [(ngModel)]="code" class="form-control middleallign" required minlength="4" >&nbsp;&nbsp;
-          <button class="btn btn-info middleallign" [disabled]= "!userform.form.valid && code == '4321'"  style="font-size: 15px;" (click)="attendence(roomNumber)">Click Here to Mark Your Attendence</button>
+          <input  type="text" style="width:200px; font-size:24px;" #code (keyup)="0" class="form-control middleallign" >&nbsp;&nbsp;
+          <button class="btn btn-info middleallign" [disabled] = "code.value != '5789' "  style="font-size: 15px;" (click)="attendence(code)">Click Here to Mark Your Attendence</button>
         </form>
       </div>
      

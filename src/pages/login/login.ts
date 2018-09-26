@@ -54,6 +54,7 @@ export class LoginPage{
   {
     this.showLoading();
     this.encriptDaseId =  btoa(this.model.dasid + ":" + this.model.pwd);
+    localStorage.clear();
     localStorage.setItem('auth_token', this.encriptDaseId);
     localStorage.setItem('user_id',this.model.dasid);
 

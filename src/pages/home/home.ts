@@ -34,7 +34,7 @@ export interface PageInterface {
 export class HomePage implements OnInit {
 
   @ViewChild('mycontent') nav: NavController
-  attendenceDisplay = 'false';
+  isAgileDay = false;
   rootPage : any = AgendaPage;
 
   topics: any[];
@@ -54,14 +54,22 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(){
-    let dateToBeCheckOut = new Date('Fri Sep 27 2018');
-    let today = new Date();
-    console.log("dateToBeCheckOut",dateToBeCheckOut,"today",today);
-    if(dateToBeCheckOut >  today){
-      this.attendenceDisplay = 'true';
+    let date = new Date();
+    let techForumDateStart = new Date(2018,8,28);
+    techForumDateStart.setHours(10,0,0);
+    
+    let techForumDateEnd = new Date(2018,8,28);
+    techForumDateEnd.setHours(23,0,0);
+
+    console.log("test date = "+date);
+    console.log("test techForumDateStart = "+techForumDateStart);
+    console.log("test techForumDateEnd = "+techForumDateEnd);
+    if(date > techForumDateStart && date < techForumDateEnd) {
+        this.isAgileDay = true;
+    } else {
+       this.isAgileDay = false;
     }
-    console.log(this.attendenceDisplay);
-    if(this.attendenceDisplay == 'false'){
+    if(this.isAgileDay == false){
     let object =  this.pages.find(x => x.pageName == 'AttendancePage' );
     const index: number = this.pages.indexOf(object);
       if (index !== -1) {
