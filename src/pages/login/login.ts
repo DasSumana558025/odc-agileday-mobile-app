@@ -25,6 +25,7 @@ export class LoginPage{
   encriptPass : string;
   model : any = {};
   public employee: User;
+
   constructor(public navCtrl: NavController,public http: Http, public navParams: NavParams,public apiProvider : ServicesProvider,private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
   }
 
@@ -54,12 +55,20 @@ export class LoginPage{
     this.showLoading();
     this.encriptDaseId =  btoa(this.model.dasid + ":" + this.model.pwd);
     localStorage.setItem('auth_token', this.encriptDaseId);
-    this.apiProvider.getUser().subscribe(data => {
-    if(data){
-      const token = data.json();
-      console.log("user",token.access_token);
-      localStorage.setItem('token', token.access_token);
-      localStorage.setItem('userId', this.model.dasid);
+    localStorage.setItem('user_id',this.model.dasid);
+
+    this.apiProvider.getUser().subscribe(data => {
+      if(data){
+      const token = data.json();
+     // console.log("user",token.access_token); 
+      
+      console.log("Inside login = "+  this.model.dasid + "auth token = "+token.access_token);
+       
+    let headerToken = {"X-Auth-UserId" : this.model.dasid, "X-Auth-Token" : token.access_token} ;
+   // console.log("currToken = "+JSON.stringify(headerToken));
+    localStorage.setItem("X-Auth-UserId",this.model.dasid);
+    localStorage.setItem("X-Auth-Token",token.access_token);
+    console.log("##############33 session = "+localStorage.getItem("headerToken"));
       this.navCtrl.setRoot(HomePage);
       
     }

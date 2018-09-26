@@ -13,42 +13,59 @@ import * as constants from '../constant/constants';
 @Injectable()
 export class ServicesProvider {
   products = [];
+  userIdAuth = '';
+  xAuthToken = '';
   constructor(public http: Http) {
     console.log('Hello ApiProvider Provider');
+    this.userIdAuth = localStorage.getItem("X-Auth-UserId");
+    this.xAuthToken = localStorage.getItem("X-Auth-Token");
+   
   }
 
   getAllTopics() : Observable<any> {
-    return this.http.get('http://localhost:5000/wlodc-techhub/api/topics','Topics');
+    
+    let header = new Headers();
+    header.set('Access-Control-Allow-Origin','*');
+    header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    header.set('Accept' ,'application/json');
+    header.set('X-Auth-UserId', this.userIdAuth);
+    header.set('X-Auth-Token', this.xAuthToken);
+    let options = new RequestOptions({headers: header});
+    return this.http.get(constants.API_URL+"topics",options);
   }
 
   getFeedbacks() : Observable<any> {
+    
     return this.http.get('assets/feedback.json');
   }
 
   getUser():Observable<any> {
     let data = localStorage.getItem('auth_token');
-    data = "BASIC "+ data;
+    data = "Basic "+ data;
     console.log(data);
     let header = new Headers();
-    header.append('Access-Control-Allow-Origin','*');
-    header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-    header.append('Accept' ,'application/json');
-    header.append('Authorization', data);
+    header.set('Access-Control-Allow-Origin','*');
+    header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    header.set('Accept' ,'application/json');
+    header.set('Authorization', data);
     let options = new RequestOptions({headers: header});
-        return this.http.post(constants.API_URL + 'auth/','test', options)
+      return this.http.post(constants.API_URL + 'auth','test', options);;
     };
 
     postUserVote(param:any) : Observable<any> {
       console.log("Inside uservote()..");
       let header = new Headers();
-      header.append('Access-Control-Allow-Origin','*');
-      header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-      header.append('Accept' ,'application/json');
+      header.set('Access-Control-Allow-Origin','*');
+      header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.set('Accept' ,'application/json');
+      header.set('X-Auth-UserId', this.userIdAuth);
+      header.set('X-Auth-Token', this.xAuthToken);
       let options = new RequestOptions({headers: header});
       return this.http.post(constants.API_URL +'vote/',param, options)
     }
 
     getRegisteredTopicForUser(param:any):Observable<any>{
+
       return this.http.get(constants.API_URL +'topics/user/'+ param);
     }
 
@@ -66,33 +83,59 @@ export class ServicesProvider {
 
     attendenceUser(attendenceData:any):Observable<any>{
       let header = new Headers();
-      header.append('Access-Control-Allow-Origin','*');
-      header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-      header.append('Accept' ,'application/json');
+      header.set('Access-Control-Allow-Origin','*');
+      header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.set('Accept' ,'application/json');
+      header.set('Content-Type' ,'application/json');
+      header.set('X-Auth-UserId', this.userIdAuth);
+      header.set('X-Auth-Token', this.xAuthToken);
       let options = new RequestOptions({headers: header});
-      return this.http.post(constants.API_URL +"attendance/",attendenceData,options);
+      return this.http.post(constants.API_URL +"attendance",attendenceData,options);
     }
 
     getPosters():Observable<any>{
-      return this.http.get(constants.API_URL +'posters');
+      let header = new Headers();
+      header.set('Access-Control-Allow-Origin','*');
+      header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.set('Accept' ,'application/json');
+      header.set('X-Auth-UserId', this.userIdAuth);
+      header.set('X-Auth-Token', this.xAuthToken);
+      let options = new RequestOptions({headers: header});
+      return this.http.get(constants.API_URL +'posters',options);
     }
 
     postUserVoteForVideo(param:any) : Observable<any> {
       console.log("Inside uservote()..");
       let header = new Headers();
-      header.append('Access-Control-Allow-Origin','*');
-      header.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-      header.append('Accept' ,'application/json');
-   let options = new RequestOptions({headers: header});
-          return this.http.post(constants.API_URL +'vote/',param, options)
+      header.set('Access-Control-Allow-Origin','*');
+      header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.set('Accept' ,'application/json');
+      header.set('X-Auth-UserId', this.userIdAuth);
+      header.set('X-Auth-Token', this.xAuthToken);
+     let options = new RequestOptions({headers: header});
+          return this.http.post(constants.API_URL +'vote',param, options)
     }
 
     getPosterUserVote() : Observable<any>{
-      return this.http.get(constants.API_URL +'vote/stats/' + "POSTER");
+      let header = new Headers();
+      header.set('Access-Control-Allow-Origin','*');
+      header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.set('Accept' ,'application/json');
+      header.set('X-Auth-UserId', this.userIdAuth);
+      header.set('X-Auth-Token', this.xAuthToken);
+     let options = new RequestOptions({headers: header});
+      return this.http.get(constants.API_URL +'vote/stats/' + "POSTER",options);
     }
 
     getVideoUserVote() : Observable<any>{
-      return this.http.get(constants.API_URL +'vote/stats/' + "VIDEO");
+      let header = new Headers();
+      header.set('Access-Control-Allow-Origin','*');
+      header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.set('Accept' ,'application/json');
+      header.set('X-Auth-UserId', this.userIdAuth);
+      header.set('X-Auth-Token', this.xAuthToken);
+     let options = new RequestOptions({headers: header});
+      return this.http.get(constants.API_URL +'vote/stats/' + "VIDEO",options);
     }
 }
 
