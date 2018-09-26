@@ -18,7 +18,7 @@ export class ServicesProvider {
   }
 
   getAllTopics() : Observable<any> {
-    return this.http.get(constants.API_URL + 'topics');
+    return this.http.get('http://localhost:5000/wlodc-techhub/api/topics','Topics');
   }
 
   getFeedbacks() : Observable<any> {

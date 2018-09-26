@@ -13,10 +13,10 @@
 </ion-header>
 
 <ion-content padding>
-  <div class="row">
-        Filter by :
-     <input type="radio" class="radio-inline" value="showAll" name="roomNumber" [(ngModel)]=roomNumber>Show All
-     <input type="radio" class="radio-inline" value={{filterValues[0]}} name="roomNumber"  [(ngModel)]=roomNumber>{{filterValues[0]}}
+  <div class="row allign-middl">
+        Filter by : &nbsp;
+     <input type="radio" class="radio-inline" value="showAll" name="roomNumber" [(ngModel)]=roomNumber>Show All&nbsp;&nbsp;
+     <input type="radio" class="radio-inline" value={{filterValues[0]}} name="roomNumber"  [(ngModel)]=roomNumber>{{filterValues[0]}}&nbsp;&nbsp;
      <input type="radio" class="radio-inline" value={{filterValues[1]}} name="roomNumber"  [(ngModel)]=roomNumber>{{filterValues[1]}}
     
      </div>
@@ -24,15 +24,14 @@
     <div class="panel-body overflow" >
      <table class="table table-striped table-bordered" style="width: 100%;" *ngFor="let session of topics | filter :  roomNumber">
         <tbody>
-            <tr><td colspan="3" class="allign-middle topicClass">{{session.description}}</td></tr>
-            <tr><td colspan="3" class="allign-middle presenterClass"> by {{session.presenterName}}</td></tr>
-            <tr><td class="allign-middle topicClass">at {{session.timeSlot}}</td>
-            <td class="topicClass">in {{session.roomNumber}}</td>
-            <td class="allign-middle">
-                <button *ngIf="session.registered == 'false' "  data-toggle="tooltip" data-placement="top" title="Click it for Register this session" (click)="register(session)"><img src="../../assets/imgs/unchecked.png"></button>
-                <button *ngIf="session.registered == 'true' "   data-toggle="tooltip" data-placement="top" title="Click it for Unregister this session" (click)="unregister(session)"><img src="../../assets/imgs/checked.png"></button>
+            <tr><td class="allign-middle topicClass">{{session.description}}</td></tr>
+            <tr><td  class="allign-middle presenterClass"> by {{session.presenterName}}</td></tr>
+            <tr><td  class="allign-middle topicClass"> {{session.roomNumber}} : {{session.timeSlot}}
+               <span *ngIf="!session.registered"><button class="allign-right unregisteredIconcls"  data-toggle="tooltip" data-placement="top" title="Click it for Register this session" (click)="register(session)"></button></span>
+                <span *ngIf="session.registered"><button class="allign-right registeredIconcls" data-toggle="tooltip" data-placement="top" title="Click it for Unregister this session" (click)="unregister(session)"></button></span>
     
             </td>
+            
         </tr>
         </tbody>
     </table>
