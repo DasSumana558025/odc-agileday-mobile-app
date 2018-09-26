@@ -31,11 +31,11 @@ export class RegistrationPage implements OnInit {
     });
 
   let date = new Date();
-        let techForumDateStart = new Date(2018,8,26);
+        let techForumDateStart = new Date(2018,8,28);
         techForumDateStart.setHours(10,0,0);
         
-        let techForumDateEnd = new Date(2018,8,26);
-        techForumDateEnd.setHours(23,0,0);
+        let techForumDateEnd = new Date(2018,8,28);
+        techForumDateEnd.setHours(18,0,0);
 
         console.log("test date = "+date);
         console.log("test techForumDateStart = "+techForumDateStart);
