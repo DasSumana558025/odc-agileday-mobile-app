@@ -20,7 +20,7 @@ export class LogoutPage {
   onLogout()
   {
     
-    this.navCtrl.setRoot(LoginPage);
+    
   }
  
 }
