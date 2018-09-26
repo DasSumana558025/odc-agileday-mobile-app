@@ -11,8 +11,8 @@ import { ServicesProvider } from './../../providers/services/services';
 })
 export class SessionsPage implements OnInit{
 
-  topics: any[];
-  registedredTopic : any[];
+  topics: any[] = [];
+  registedredTopic : any[] = [];
   filterValues = ["PN_TR01","PN_TR02"];
   public roomNumber : string = "showAll";
 
@@ -22,12 +22,13 @@ export class SessionsPage implements OnInit{
   ngOnInit(){
     let strUserId = localStorage.getItem('user_id');
     this.apiProvider.getRegisteredTopicForUser(strUserId).map(res=>res.json()).subscribe(data => {
-      this.registedredTopic=data;
+      this.registedredTopic=data as Topics[];
       console.log("this.registedredTopic",this.registedredTopic);
     });
 
     this.apiProvider.getAllTopics().map(res=>res.json()).subscribe(data => {
-      this.topics = data;
+      this.topics = data as Topics[];
+      console.log( this.topics);
       for(var i = 0; i < this.topics.length; i++){
         for(var j = 0; j < this.topics[i].presenters.length; j++)
         {
@@ -42,22 +43,25 @@ export class SessionsPage implements OnInit{
         
         if(this.registedredTopic != undefined && this.registedredTopic.length > 0){
           let object =  this.registedredTopic.find(x => x.id == this.topics[i].id );
-          if(object !== undefined){
-            this.topics[i]["registered"] = 'true';
+          console.log(object);
+          if(object != undefined){
+            this.topics[i].registered = true;
           }
           else{
-            this.topics[i]["registered"] = 'false';
+            this.topics[i].registered= false;
           }
         }
         else
         {
-          this.topics[i]["registered"] = 'false';
+          this.topics[i]["registered"] = false;
         }
       }
-      this.topics = this.topics.filter(x => x.description != 'Opening Key Notes');
-      this.topics = this.topics.filter(x => x.description != 'Closing Notes and Prize Distribution')
-    
+     this.topics = this.topics.filter(x => x.description != 'Opening Key Notes');
+     this.topics = this.topics.filter(x => x.description != 'Closing Notes and Prize Distribution')
+     
     });
+    //console.log("this.topics",this.topics);
+    //console.log("this.registedredTopic",this.registedredTopic);
   }
 
   register(session){
@@ -76,7 +80,7 @@ export class SessionsPage implements OnInit{
       else{
         this.apiProvider.registerUserForTopic(session.id,strUserId).subscribe(data => {
           if(data.status == 200){
-            session.registered = 'true';
+            session.registered = true;
             this.registedredTopic.push(session);
             console.log(this.registedredTopic);
             this.showSuccess('You have sucessfully registered for " '+  '<span class="alertclass">' +session.description +'</span> "');
@@ -93,7 +97,7 @@ export class SessionsPage implements OnInit{
      {
       this.apiProvider.registerUserForTopic(session.id,strUserId).subscribe(data => {
         if(data.status == 200){
-          session.registered = 'true';
+          session.registered = true;
           this.registedredTopic.push(session);
           console.log(this.registedredTopic);
           this.showSuccess('You have sucessfully registered for " '+  '<span class="alertclass">' +session.description +'</span> "');
@@ -117,7 +121,7 @@ export class SessionsPage implements OnInit{
             this.registedredTopic.splice(index, 1);
         } 
         console.log(this.registedredTopic);
-        session.registered='false';
+        session.registered=false;
         this.showSuccess('You have sucessfully unregistered for " '+  '<span class="alertclass">' +session.description +'</span> "');
     }
     else
@@ -146,4 +150,27 @@ export class SessionsPage implements OnInit{
     alert.present();
   }
 }
+ export interface Presenters{
+  id: number,
+  userId: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  mobile: string,
+  imageUrl: string
+ }
+
+ export interface Topics{
+  
+  presenters: Presenters[],
+  id: number,
+  name: string,
+  description: string,
+  imageUrl: string,
+  timeSlot: string,
+  roomNumber: string,
+  presenterName: string,
+  registered:boolean
+  
+ }
 
