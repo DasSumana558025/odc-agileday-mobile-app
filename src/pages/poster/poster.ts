@@ -45,6 +45,7 @@ export class PosterPage implements OnInit  {
     
     this.apiProvider.getPosterUserVote().subscribe(data => {
       this.posterDetail = data.json() as Vote[];
+      console.log("result = "+ this.posterDetail );
       if(this.posterDetail.length != 0){
         this.currPostVoteId = this.posterDetail[0].posterId;
       }
@@ -87,13 +88,11 @@ export class PosterPage implements OnInit  {
         let userVoteDetail = { "posterId" : currPosterId, userId : strUserId, voteType : "POSTER"} ;
         this.apiProvider.postUserVote(userVoteDetail).subscribe(data => {
         console.log("Inside submit login");
-        
+       
           if(data.status == 200){
-          // this.showSuccess("Attendence captured sucessfully");
-           console.log("vote post sucessfully...");
+            console.log("vote post sucessfully...");
           }
           else{
-           // this.showError("Sorry,Attendence cant be captured");
              console.log("fail during post...");
           }     
               
@@ -115,8 +114,8 @@ export class PosterPage implements OnInit  {
       
       confirmed(currPosterId) {
         this.postVote(currPosterId);
-        this.navCtrl.setRoot(PosterPage);
         this.showSuccess("you are vote is sucessfully post.");
+        this.navCtrl.setRoot(PosterPage);
       }
 
       showSuccess(text) {

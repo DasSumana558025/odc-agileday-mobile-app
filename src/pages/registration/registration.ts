@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ServicesProvider } from './../../providers/services/services';
 import { FlashMessagesService } from 'ngx-flash-messages';
 /**
@@ -17,7 +17,7 @@ export class RegistrationPage implements OnInit {
   isAgileDayVideo = false;
   currVideoVoteId = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider,private flashMessagesService: FlashMessagesService) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider,private alertCtrl: AlertController) {
   }
   ngOnInit(){
     this.apiProvider.getVideoUserVote().subscribe(data => {
@@ -26,9 +26,13 @@ export class RegistrationPage implements OnInit {
       if( videoDetail.length != 0){
         this.currVideoVoteId = videoDetail[0].videoId;
       }
-      
-      console.log("video vote id = "+this.currVideoVoteId);
+        console.log("video vote id = "+this.currVideoVoteId);
     });
+    
+    this.apiProvider.getAllVideos().subscribe(data => {
+
+    });
+
 
   let date = new Date();
         let techForumDateStart = new Date(2018,8,28);
@@ -47,25 +51,24 @@ export class RegistrationPage implements OnInit {
         }
         console.log("test isAgileDayVideo = "+this.isAgileDayVideo);
    }
-  options: any = {
-    confirmBtnClass: 'btn btn-success',      //DEFAULT VALUE
-   confirmBtnText: 'Confirm',      				//DEFAULT VALUE
-   cancelBtnClass: 'btn btn-danger',      //DEFAULT VALUE
-   cancelBtnText: 'Cancel',      				//DEFAULT VALUE
-   modalSize: 'lg',      							 //DEFAULT VALUE
-   modalClass: '' ,
-                    //DEFAULT VALUE
-  }
+  
   
   confirmedVideo(currPosterId) {
-   this.postVideoVote(currPosterId);
-       this.flashMessagesService.show('you are vote is sucessfully post.', {
-        classes: ['alert', 'alert-success'], // You can pass as many classes as you need
-        timeout: 3000, // Default is 3000
-      });
-      this.navCtrl.setRoot(RegistrationPage);
+    this.postVideoVote(currPosterId);
+    this.showSuccess("you are vote is sucessfully post.");
+    this.navCtrl.setRoot(RegistrationPage);
   }
   
+  showSuccess(text) {
+    let alert = this.alertCtrl.create({
+      title: 'Sucess',
+      subTitle: text,
+      cssClass:'customAlert',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
   cancelledVideo() {
    console.log('cancelled');
   }

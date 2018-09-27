@@ -144,7 +144,18 @@ export class ServicesProvider {
       header.set('X-Auth-UserId', this.userIdAuth);
       header.set('X-Auth-Token', this.xAuthToken);
      let options = new RequestOptions({headers: header});
-      return this.http.get(constants.API_URL +'vote/stats/' + "POSTER",options);
+      return this.http.get(constants.API_URL +'vote',options);
+    }
+
+    getAllVideos() : Observable<any>{
+      let header = new Headers();
+      header.set('Access-Control-Allow-Origin','*');
+      header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+      header.set('Accept' ,'application/json');
+      header.set('X-Auth-UserId', this.userIdAuth);
+      header.set('X-Auth-Token', this.xAuthToken);
+     let options = new RequestOptions({headers: header});
+      return this.http.get(constants.API_URL +'videos',options);
     }
 
     getVideoUserVote() : Observable<any>{
@@ -155,7 +166,7 @@ export class ServicesProvider {
       header.set('X-Auth-UserId', this.userIdAuth);
       header.set('X-Auth-Token', this.xAuthToken);
      let options = new RequestOptions({headers: header});
-      return this.http.get(constants.API_URL +'vote/stats/' + "VIDEO",options);
+      return this.http.get(constants.API_URL +'vote',options);
     }
 
     postUserFeedback(feedbackBody:any):Observable<any>{
