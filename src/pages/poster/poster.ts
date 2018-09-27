@@ -114,14 +114,9 @@ export class PosterPage implements OnInit  {
       }
       
       confirmed(currPosterId) {
-       this.postVote(currPosterId);
-      //  this.flashMessagesService.show('you are vote is sucessfully post.', {
-      //   classes: ['alert', 'alert-success'], // You can pass as many classes as you need
-      //   timeout: 3000, // Default is 3000
-      // });
-      
-      this.navCtrl.setRoot(PosterPage);
-      this.showSuccess("you are vote is sucessfully post.");
+        this.postVote(currPosterId);
+        this.navCtrl.setRoot(PosterPage);
+        this.showSuccess("you are vote is sucessfully post.");
       }
 
       showSuccess(text) {

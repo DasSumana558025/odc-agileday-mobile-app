@@ -18,7 +18,8 @@
         <form #userform = "ngForm">
           <label class="middleallign">Input 4 digit number for authentication</label>&nbsp;&nbsp;
           <input  type="text" style="width:200px; font-size:24px;" #code (keyup)="0" class="form-control middleallign" >&nbsp;&nbsp;
-          <button class="btn btn-info middleallign" [disabled] = "code.value != '5789' "  style="font-size: 15px;" (click)="attendence(code)">Click Here to Mark Your Attendence</button>
+          <button *ngIf="attendaceActive" class="btn btn-info middleallign" [disabled] = "code.value != '5789' "  style="font-size: 15px;" (click)="attendence(code)">Click Here to Mark Your Attendence</button>
+          <button *ngIf="!attendaceActive" class="btn btn-default btn-lg middleallign" >Click Here to Mark Your Attendence</button>
         </form>
       </div>
      

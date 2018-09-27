@@ -30,7 +30,7 @@
                 <li  style="list-style-type: none;" class="pd-0"  *ngFor="let question of feedbackObj.questionOptions">
                     <div class="menu-action">
                        <label class="radio-inline"> 
-                            <input type="radio" class="radio-inline" value="{{question.value}}" name=""    [(ngModel)]="feedbackObj.selectedAnswer">{{question.value}}
+                            <input type="radio" class="radio-inline" value="{{question.value}}"  [(ngModel)]="feedbackObj.selectedAnswer">{{question.value}}
                         </label>
                     </div>
                 </li>
@@ -51,8 +51,9 @@
 </div>
 </div>
 <div >
-<button class="btn btn-primary btn-lg" (click) = "submitFeedback()" >Submit</button>
 
+ <button *ngIf="checkfeedbackVisible" class="btn btn-primary btn-lg" (click) = "submitFeedback()" >Submit</button>
+<button *ngIf="!checkfeedbackVisible" class="btn btn-default btn-lg" >Submit</button>
 </div>
 </div>
 </div>

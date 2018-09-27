@@ -18,10 +18,26 @@ export class AttendancePage {
   roomNumber : string ;
   code : {} = "Select 4 digit code";
   allRoomNumber = ["Select","PN_TR01","PN_TR02"];
-  
+  attendaceActive = false;
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider,private alertCtrl: AlertController) {
   }
+  ngOnInit(){
+  let date = new Date();
+        let techForumDateStart = new Date(2018,8,27);
+        techForumDateStart.setHours(10,0,0);
+        
+        let techForumDateEnd = new Date(2018,8,28);
+        techForumDateEnd.setHours(18,0,0);
 
+        console.log("test date = "+date);
+        console.log("test techForumDateStart = "+techForumDateStart);
+        console.log("test techForumDateEnd = "+techForumDateEnd);
+        if(date > techForumDateStart && date < techForumDateEnd) {
+            this.attendaceActive = true;
+        } else {
+           this.attendaceActive = false;
+        }
+      }
   attendence(code){
     code.value="";
     let strUserId = localStorage.getItem('user_id');

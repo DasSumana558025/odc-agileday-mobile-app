@@ -54,29 +54,29 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(){
-    let date = new Date();
-    let techForumDateStart = new Date(2018,8,28);
-    techForumDateStart.setHours(10,0,0);
+     let date = new Date();
+     let techForumDateStart = new Date(2018,8,28);
+     techForumDateStart.setHours(10,0,0);
     
-    let techForumDateEnd = new Date(2018,8,28);
-    techForumDateEnd.setHours(23,0,0);
+     let techForumDateEnd = new Date(2018,8,28);
+     techForumDateEnd.setHours(18,0,0);
 
-    console.log("test date = "+date);
-    console.log("test techForumDateStart = "+techForumDateStart);
+     console.log("test date = "+date);
+     console.log("test techForumDateStart = "+techForumDateStart);
     console.log("test techForumDateEnd = "+techForumDateEnd);
-    if(date > techForumDateStart && date < techForumDateEnd) {
-        this.isAgileDay = true;
-    } else {
+     if(date > techForumDateStart && date < techForumDateEnd) {
+         this.isAgileDay = true;
+     } else {
        this.isAgileDay = false;
-    }
-    if(this.isAgileDay == false){
-    let object =  this.pages.find(x => x.pageName == 'AttendancePage' );
+     }
+     if(this.isAgileDay == false){
+     let object =  this.pages.find(x => x.pageName == 'RegisterPage' );
     const index: number = this.pages.indexOf(object);
-      if (index !== -1) {
-          this.pages.splice(index, 1);
-      }
-    }
-    console.log("pages",this.pages);
+       if (index !== -1) {
+           this.pages.splice(index, 1);
+       }
+     }
+    // console.log("pages",this.pages);
   }
 
   openPage(page) {
