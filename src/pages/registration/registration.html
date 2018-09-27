@@ -23,7 +23,7 @@
                       </iframe >
                     <div class="caption">
                       <p style="height: 30px;"><label style="color: black">Created By</label> - {{videoObj.participants}} </p>
-                       <p class="text-right"> 
+                       <p class=""> 
                           <button *ngIf="checkVideoVoteId(videoObj.id)" class="selectIconcls"></button> 
                           <button *ngIf="isAgileDayVideo" href="#" class="btn btn-info btn-lg "   ngConfirm  [title]="'Confirm'"
                           [message]="'By voting for this video, your earlier vote will be unregistered,are your sure you want to proceed.'"  [options]="options"  (onConfirm)="confirmedVideo(videoObj.id)"  (onCancel)="cancelledVideo()" >

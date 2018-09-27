@@ -31,7 +31,7 @@
                   <img alt="logo" height="90" (click)="openModalDialog(img.url,img.name)" style="align-items: center;" src="{{img.url}}" class="img-thumbnail" />
                   <div class="caption">
                     <p style="height: 30px;"><label style="color: black">Created By</label> - {{img.participants}} </p>
-                     <p class=""> 
+                     <p class="text-right"> 
                        <button *ngIf="checkPosterVoteId(img.id)" class="selectIconcls" title="selected vote"></button> 
                        <button *ngIf="isAgileDay"  class="btn btn-info btn-lg "  ngConfirm  [title]="'Confirm'"
                       [message]="'By voting for this poster, your earlier vote will be unregistered,are your sure you want to proceed.'"  [options]="options"  (onConfirm)="confirmed(img.id)"  (onCancel)="cancelled()"   >

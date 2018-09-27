@@ -25,16 +25,20 @@ export class RegistrationPage implements OnInit {
   ngOnInit(){
     this.apiProvider.getVideoUserVote().subscribe(data => {
       const videoDetail = data.json() as VoteDetail[];
-      console.log("test videoObj = "+JSON.stringify(data.json()));
+      console.log("Video vote list = "+JSON.stringify(data.json()));
       if( videoDetail.length != 0){
-        this.currVideoVoteId = videoDetail[0].videoId;
-      }
-        console.log("video vote id = "+this.currVideoVoteId);
+        for(var i =0; i<videoDetail.length; i++){
+          if(videoDetail[i].voteType == "VIDEO"){
+            this.currVideoVoteId = videoDetail[i].videoId;
+          }
+        }
+       }
+        console.log("final vote Id = "+this.currVideoVoteId);
     });
     
     this.apiProvider.getAllVideos().subscribe(data => {
         this.allVideos = data.json() as Video[];
-        console.log("video list = "+JSON.stringify(data.json()));
+        console.log("All video list = "+JSON.stringify(data.json()));
     });
 
 
@@ -45,9 +49,9 @@ export class RegistrationPage implements OnInit {
         let techForumDateEnd = new Date(2018,8,28);
         techForumDateEnd.setHours(18,0,0);
 
-        console.log("test date = "+date);
-        console.log("test techForumDateStart = "+techForumDateStart);
-        console.log("test techForumDateEnd = "+techForumDateEnd);
+        // console.log("test date = "+date);
+        // console.log("test techForumDateStart = "+techForumDateStart);
+        // console.log("test techForumDateEnd = "+techForumDateEnd);
         if(date > techForumDateStart && date < techForumDateEnd) {
             this.isAgileDayVideo = true;
         } else {
@@ -66,7 +70,8 @@ export class RegistrationPage implements OnInit {
   confirmedVideo(currPosterId) {
     this.postVideoVote(currPosterId);
     this.showSuccess("you are vote is sucessfully post.");
-    this.navCtrl.setRoot(RegistrationPage);
+    this.currVideoVoteId = currPosterId;
+   // this.navCtrl.setRoot(RegistrationPage);
   }
   
   showSuccess(text) {
@@ -114,7 +119,9 @@ export class RegistrationPage implements OnInit {
 }
 interface VoteDetail{
   videoId:number,
-  totalVotes:number
+  posterId:number,
+  voteType:string
+ 
 }
 
 interface Video{

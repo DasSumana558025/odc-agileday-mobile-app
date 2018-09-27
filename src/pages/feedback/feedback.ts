@@ -81,6 +81,7 @@ submitFeedback() {
          console.log("Inside ContactPage and onInit() = "+data.status);
          if(data.status == 200){
           this.showSuccess("your feedback is successfully submitted");
+          this.navCtrl.setRoot(FeedbackPage);
          }
      });
     

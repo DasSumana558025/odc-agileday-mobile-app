@@ -45,12 +45,17 @@ export class PosterPage implements OnInit  {
     
     this.apiProvider.getPosterUserVote().subscribe(data => {
       this.posterDetail = data.json() as Vote[];
-      console.log("result = "+ this.posterDetail );
+      console.log("poster vote list = "+ JSON.stringify(data.json()) );
       if(this.posterDetail.length != 0){
+        for(var i =0; i<this.posterDetail.length; i++){
+          if(this.posterDetail[i].voteType == "POSTER"){
+            this.currPostVoteId = this.posterDetail[i].videoId;
+          }
+        }
         this.currPostVoteId = this.posterDetail[0].posterId;
       }
       
-      console.log("test posters = "+JSON.stringify(data.json()) + "vote id = "+this.currPostVoteId);
+      console.log( "selected poster vote id = "+this.currPostVoteId);
     });
 
         let date = new Date();
@@ -105,7 +110,8 @@ export class PosterPage implements OnInit  {
       confirmed(currPosterId) {
         this.postVote(currPosterId);
         this.showSuccess("you are vote is sucessfully post.");
-        this.navCtrl.setRoot(PosterPage);
+        this.currPostVoteId = currPosterId;
+       // this.navCtrl.setRoot(PosterPage);
       }
 
       showSuccess(text) {
@@ -143,5 +149,7 @@ interface Poster{
 
 interface Vote{
   posterId:number,
-  totalVotes:number
+  videoId:number,
+  voteType:string,
+  totalVotes:number,
 }
