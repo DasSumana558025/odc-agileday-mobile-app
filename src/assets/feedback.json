@@ -27,7 +27,7 @@
           "value": "No relevance at all"
         }
       ],
-      "sessionName": "Deep Neural Network"
+      "sessionName": "test1"
     },
     {
       "id": 2,
@@ -57,7 +57,7 @@
           "value": "Not at all"
         }
       ],
-      "sessionName": "Deep Neural Network"
+      "sessionName": "test2"
     },
     {
       "id": 3,
@@ -87,7 +87,7 @@
           "value": "Completely unorganized"
         }
       ],
-      "sessionName": "Deep Neural Network"
+      "sessionName": "test3"
     },
     {
       "id": 4,

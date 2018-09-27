@@ -6,7 +6,7 @@
     <ion-title>
             <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/agileDayLogo.jpg" style="float:left;" />
             FeedBack
-            <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/atosWorldline.png" style="float:right;" />
+            <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/atosWorldline.png" style="float:right;width:100px;" />
           
     </ion-title>
   </ion-navbar>
@@ -30,7 +30,7 @@
                 <li  style="list-style-type: none;" class="pd-0"  *ngFor="let question of feedbackObj.questionOptions">
                     <div class="menu-action">
                        <label class="radio-inline"> 
-                            <input type="radio" class="radio-inline" value="{{question.value}}" name="{{question.optionId}}_index"  [(ngModel)]="feedbackObj.selectedAnswer">{{question.value}}
+                            <input type="radio" class="radio-inline" value="{{question.value}}" name="{{question.optionId}}_{{feedbackObj.sessionName}}"  [(ngModel)]="feedbackObj.selectedAnswer">{{question.value}}
                         </label>
                     </div>
                 </li>
