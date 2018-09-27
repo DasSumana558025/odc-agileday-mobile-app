@@ -31,11 +31,19 @@ submitFeedback() {
   console.log("result = " + JSON.stringify(this.allFeedback));
   let strUserId = localStorage.getItem('user_id');
   
-  for(var i = 0; i < this.allFeedback.length; i++){
-    let feedbackReq = {"userId" : strUserId, "quetionId" :  this.allFeedback[i].id, "choiceId" : this.allFeedback[i].choiceId,
-                        "text" : this.allFeedback[i].selectedAnswer }
-    this.feedbackTempReq.push(feedbackReq);
-  }
+      for(var i = 0; i < this.allFeedback.length; i++){
+        let curranswer = "";
+        let feedbackReq = {};
+        if(this.allFeedback[i].choiceId == "LONG_TEXT"){
+          feedbackReq = {"userId" : strUserId, "quetionId" :  this.allFeedback[i].id,
+          "text" : this.allFeedback[i].selectedAnswer };
+        }else{
+          feedbackReq = {"userId" : strUserId, "quetionId" :  this.allFeedback[i].id, "choiceId" : this.allFeedback[i].selectedAnswer,
+          };
+        }
+        
+        this.feedbackTempReq.push(feedbackReq);
+      }
   console.log("req = "+JSON.stringify(this.feedbackTempReq));
     this.apiProvider.postUserFeedback(this.feedbackTempReq).subscribe(data => {
         console.log("Inside ContactPage and onInit() = "+JSON.stringify(data.json()));
@@ -52,5 +60,5 @@ interface AllFeedback {
   sessionName :string;
   questionDescription :any;
   selectedAnswer :string;
-  choiceId:number;
+  choiceId:string;
 }
