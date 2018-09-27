@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ServicesProvider } from './../../providers/services/services';
+import { DomSanitizer } from '@angular/platform-browser';
 
 /**
  * Generated class for the RegistrationPage page.
@@ -17,8 +18,9 @@ export class RegistrationPage implements OnInit {
   isAgileDayVideo = false;
   currVideoVoteId = 0;
   allVideos : Video[];
+
  
-  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider,private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider,private alertCtrl: AlertController,public sanitizer: DomSanitizer) {
   }
   ngOnInit(){
     this.apiProvider.getVideoUserVote().subscribe(data => {
@@ -54,6 +56,12 @@ export class RegistrationPage implements OnInit {
         console.log("test isAgileDayVideo = "+this.isAgileDayVideo);
    }
   
+   getUrlSafe(url){
+    console.log("URL" + url);
+    let newUrl = this.sanitizer.bypassSecurityTrustResourceUrl('http://www.youtube.com/embed/' + url);
+    console.log("newUrl" + newUrl);
+    return newUrl;   
+  }
   
   confirmedVideo(currPosterId) {
     this.postVideoVote(currPosterId);
