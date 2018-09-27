@@ -109,6 +109,7 @@ export class PosterPage implements OnInit  {
    
       confirmed(currPosterId) {
         this.postVote(currPosterId);
+        this.showSuccess("Your vote is sucessfully post.");
         this.currPostVoteId = currPosterId;
        // this.navCtrl.setRoot(PosterPage);
       }
