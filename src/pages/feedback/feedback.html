@@ -30,7 +30,7 @@
                 <li  style="list-style-type: none;" class="pd-0"  *ngFor="let question of feedbackObj.questionOptions">
                     <div class="menu-action">
                        <label class="radio-inline"> 
-                            <input type="radio" class="radio-inline" value="{{question.value}}"  [(ngModel)]="feedbackObj.selectedAnswer">{{question.value}}
+                            <input type="radio" class="radio-inline" value="{{question.value}}" name="{{question.optionId}}_index"  [(ngModel)]="feedbackObj.selectedAnswer">{{question.value}}
                         </label>
                     </div>
                 </li>
