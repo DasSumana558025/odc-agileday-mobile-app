@@ -216,3 +216,11 @@ interface Vote{
   voteType : string
 }
 
+interface Video{
+  id : number;
+  name : string;
+  participants : string;
+  url : string;
+}
+
+

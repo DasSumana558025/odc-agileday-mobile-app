@@ -1,7 +1,7 @@
 import { Component ,OnInit} from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ServicesProvider } from './../../providers/services/services';
-import { FlashMessagesService } from 'ngx-flash-messages';
+
 
 /**
  * Generated class for the PosterPage page.
@@ -97,21 +97,11 @@ export class PosterPage implements OnInit  {
           }     
               
            }), err => {
-          console.log(err);
-          this.navCtrl.setRoot(PosterPage);
+            console.log(err);
+            this.navCtrl.setRoot(PosterPage);
            }
       }
-
-      options: any = {
-        confirmBtnClass: 'btn btn-success',      //DEFAULT VALUE
-       confirmBtnText: 'Confirm',      				//DEFAULT VALUE
-       cancelBtnClass: 'btn btn-danger',      //DEFAULT VALUE
-       cancelBtnText: 'Cancel',      				//DEFAULT VALUE
-       modalSize: 'lg',      							 //DEFAULT VALUE
-       modalClass: '' ,
-        								//DEFAULT VALUE
-      }
-      
+   
       confirmed(currPosterId) {
         this.postVote(currPosterId);
         this.showSuccess("you are vote is sucessfully post.");

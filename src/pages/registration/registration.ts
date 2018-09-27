@@ -1,7 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { ServicesProvider } from './../../providers/services/services';
-import { FlashMessagesService } from 'ngx-flash-messages';
+
 /**
  * Generated class for the RegistrationPage page.
  *
@@ -16,7 +16,8 @@ import { FlashMessagesService } from 'ngx-flash-messages';
 export class RegistrationPage implements OnInit {
   isAgileDayVideo = false;
   currVideoVoteId = 0;
-
+  allVideos : Video[];
+ 
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider : ServicesProvider,private alertCtrl: AlertController) {
   }
   ngOnInit(){
@@ -30,7 +31,8 @@ export class RegistrationPage implements OnInit {
     });
     
     this.apiProvider.getAllVideos().subscribe(data => {
-
+        this.allVideos = data.json() as Video[];
+        console.log("video list = "+JSON.stringify(data.json()));
     });
 
 
@@ -105,4 +107,11 @@ export class RegistrationPage implements OnInit {
 interface VoteDetail{
   videoId:number,
   totalVotes:number
+}
+
+interface Video{
+  id : number;
+  name : string;
+  participants : string;
+  url : string;
 }

@@ -20,7 +20,7 @@ import { ApiProvider } from '../providers/api/api';
 import { FilterPipe} from './filter.pipe';
 import { ServicesProvider } from '../providers/services/services';
 import { ConfirmationModalModule } from 'ng-confirmation-modal';
-import { FlashMessagesModule } from 'ngx-flash-messages';
+
 
 @NgModule({
   declarations: [
@@ -34,11 +34,12 @@ import { FlashMessagesModule } from 'ngx-flash-messages';
     AttendancePage,
     RegistrationPage,
     LogoutPage,
-    FilterPipe
+    FilterPipe,
+    
 
   ],
   imports: [
-    BrowserModule,FormsModule,HttpModule,FlashMessagesModule,
+    BrowserModule,FormsModule,HttpModule,
     IonicModule.forRoot(MyApp),
     IonicPageModule.forChild(MyApp),
     ConfirmationModalModule.forRoot({
