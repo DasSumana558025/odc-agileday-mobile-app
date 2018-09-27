@@ -69,7 +69,7 @@ export class RegistrationPage implements OnInit {
   
   confirmedVideo(currPosterId) {
     this.postVideoVote(currPosterId);
-    this.showSuccess("you are vote is sucessfully post.");
+    this.showSuccess("Your vote is sucessfully post.");
     this.currVideoVoteId = currPosterId;
    // this.navCtrl.setRoot(RegistrationPage);
   }

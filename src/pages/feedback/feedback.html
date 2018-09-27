@@ -35,7 +35,7 @@
                     </div>
                 </li>
                  <li *ngIf="feedbackObj.id == 4" style="list-style-type: none;" class="pd-0">
-                        <select class="form-control" [(ngModel)]="feedbackObj.selectedAnswer">
+                        <select class="form-control" style="font-size:100%" [(ngModel)]="feedbackObj.selectedAnswer">
                                 <option value="">Select rate</option>
                                 <option *ngFor="let rating of feedbackObj.ratingOptions" value= "{{rating.optionId}}">
                                   {{rating.value}}
@@ -43,7 +43,7 @@
                         </select>  
                  </li>
                  <li *ngIf="feedbackObj.id == 5" style="list-style-type: none;" class="pd-0">
-                       <textarea class="form-control" rows="5"  [(ngModel)]="feedbackObj.selectedAnswer"></textarea>
+                       <textarea class="form-control" style="font-size:100%" rows="5"  [(ngModel)]="feedbackObj.selectedAnswer"></textarea>
                 </li>
              </ul>
         </div>
