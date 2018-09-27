@@ -8,7 +8,7 @@
       "description": "How relevant were the topics for the event?",
       "sessionId": 1,
       "selectedAnswer" : "",
-      "choiceId" : 1,
+      "choiceId" : "SINGLE_CHOICE",
       "questionOptions": [
         {
           "optionId": 1,
@@ -38,7 +38,7 @@
       "description": "Do you think the learning from this event will be useful to you?",
       "sessionId": 2,
       "selectedAnswer" : "",
-      "choiceId" : 2,
+      "choiceId" : "SINGLE_CHOICE",
       "questionOptions": [
         {
           "optionId": 1,
@@ -68,7 +68,7 @@
       "description": "How well was the event organized?",
       "sessionId": 3,
       "selectedAnswer" : "",
-      "choiceId" : 3,
+      "choiceId" : "SINGLE_CHOICE",
       "questionOptions": [
         {
           "optionId": 1,
@@ -98,7 +98,7 @@
       "description": "Overall rating",
       "sessionId": 5,
       "selectedAnswer" : "",
-      "choiceId" : 5,
+      "choiceId" : "SINGLE_SELECT",
       "ratingOptions": [
         {
           "optionId": 1,
@@ -132,7 +132,7 @@
       "description": "Give any suggestions / feedback",
       "sessionId":4,
       "selectedAnswer" : "",
-      "choiceId" : 4,
+      "choiceId" : "LONG_TEXT",
       "sessionName": "Deep Neural Network"
     }
     
