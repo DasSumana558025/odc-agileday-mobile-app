@@ -1,8 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { NavController, NavParams,AlertController } from 'ionic-angular';
-import { HttpClientModule } from '@angular/common/http';
-import { FilterPipe } from './../../app/filter.pipe';
-import {Events } from 'ionic-angular';
+import { NavController, NavParams,AlertController,LoadingController,Loading} from 'ionic-angular';
 import { ServicesProvider } from './../../providers/services/services';
 
 @Component({
@@ -15,8 +12,8 @@ export class SessionsPage implements OnInit{
   registedredTopic : any[] = [];
   filterValues = ["TR02","TR03"];
   public roomNumber : string = "showAll";
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider,private alertCtrl: AlertController) {
+  loading: Loading;
+  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider,private alertCtrl: AlertController,private loadingCtrl: LoadingController) {
   }
 
   ngOnInit(){
@@ -73,6 +70,7 @@ export class SessionsPage implements OnInit{
   }
 
   register(session){
+    
     console.log("session",session);
     let strUserId = localStorage.getItem('user_id');
     if(this.registedredTopic.length > 0){
@@ -86,6 +84,7 @@ export class SessionsPage implements OnInit{
         alert.present();
       }
       else{
+        this.showLoading();
         this.apiProvider.registerUserForTopic(session.id,strUserId).subscribe(data => {
           if(data.status == 200){
             session.registered = true;
@@ -106,6 +105,7 @@ export class SessionsPage implements OnInit{
      }
      else
      {
+      this.showLoading();
       this.apiProvider.registerUserForTopic(session.id,strUserId).subscribe(data => {
         if(data.status == 200){
           session.registered = true;
@@ -123,6 +123,7 @@ export class SessionsPage implements OnInit{
   }
 
   unregister(session){
+    this.showLoading();
     let strUserId = localStorage.getItem('user_id');
      this.apiProvider.unRegisterUserForTopic(session.id,strUserId).subscribe(data => {
      if(data.status == 200){
@@ -143,6 +144,7 @@ export class SessionsPage implements OnInit{
   }
 
   showSuccess(text) {
+    this.loading.dismiss();
     let alert = this.alertCtrl.create({
       title: 'Sucess',
       subTitle: text,
@@ -153,12 +155,21 @@ export class SessionsPage implements OnInit{
   }
 
   showError(text) {
+    this.loading.dismiss();
     let alert = this.alertCtrl.create({
       title: 'Fail',
       subTitle: text,
       buttons: ['OK']
     });
     alert.present();
+  }
+
+  showLoading() {
+    this.loading = this.loadingCtrl.create({
+    content: 'Please wait...',
+    dismissOnPageChange: true
+    });
+    this.loading.present();
   }
 }
  export interface Presenters{
