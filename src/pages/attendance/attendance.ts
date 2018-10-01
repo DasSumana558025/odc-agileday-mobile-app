@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams ,AlertController} from 'ionic-angular';
+import { NavController, NavParams ,AlertController,Platform} from 'ionic-angular';
 import { ServicesProvider } from './../../providers/services/services';
 import { PARAMETERS } from '@angular/core/src/util/decorators';
 
@@ -19,8 +19,24 @@ export class AttendancePage {
   code : {} = "Select 4 digit code";
   allRoomNumber = ["Select","PN_TR01","PN_TR02"];
   attendaceActive = false;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider,private alertCtrl: AlertController) {
+  public unregisterBackButtonAction: any;
+  constructor(public platform :Platform, public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider,private alertCtrl: AlertController) {
   }
+
+  ionViewDidLoad() {
+    this.initializeBackButtonCustomHandler();
+}
+
+ionViewWillLeave() {
+    // Unregister the custom back button action for this page
+    this.unregisterBackButtonAction && this.unregisterBackButtonAction();
+}
+
+initializeBackButtonCustomHandler(): void {
+    this.unregisterBackButtonAction = this.platform.registerBackButtonAction(function(event){
+        console.log('Prevent Back Button Page Change');
+    }, 101); // Priority 101 will override back button handling (we set in app.component.ts) as it is bigger then priority 100 configured in app.component.ts file */
+}
   ngOnInit(){
   let date = new Date();
         let techForumDateStart = new Date(2018,8,27);
