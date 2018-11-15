@@ -19,16 +19,19 @@
           <thead>
             <tr>
               <td class="allign-middle topicClass">Time Slot</td>
-              <td class="allign-middle topicClass">TR02 - Topic/Speaker</td>
-              <td class="allign-middle topicClass">TR03 - Topic/Speaker</td>
+              <td class="allign-middle topicClass" *ngFor ="let room of roomNos">{{room}} - Topic/Speaker</td>
+             <!-- <td class="allign-middle topicClass">TR03 - Topic/Speaker</td>-->
             </tr>
           </thead>
             <tbody>
             <tr *ngFor="let timeSlotSpecificTopic of timeSlotSpecificTopics">
               <td class="allign-middle">{{timeSlotSpecificTopic.timeSlot}}</td>
-              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.room2 == undefined"  colspan="2"><span class="topicClass">{{timeSlotSpecificTopic.room1}}</span> <span *ngIf="timeSlotSpecificTopic.room1Presenter != undefined"> by <span class="presenterClass">{{timeSlotSpecificTopic.room1Presenter}}</span></span></td>
-              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.room2 != undefined"><span class="topicClass">{{timeSlotSpecificTopic.room1}}</span> by <span class="presenterClass">{{timeSlotSpecificTopic.room1Presenter}}</span></td>
-              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.room2 != undefined"><span class="topicClass">{{timeSlotSpecificTopic.room2}}</span> by <span class="presenterClass">{{timeSlotSpecificTopic.room2Presenter}}</span></td>
+              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length === 0" [attr.colspan] = "totalRoomNo"><span class="topicClass">Lunch Break</span></td>
+			       <ng-container *ngFor = "let roomsession of timeSlotSpecificTopic.roomDetails">
+              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length === 1"  [attr.colspan] = "totalRoomNo"><span class="topicClass">{{roomsession.topic}}</span> by <span class="presenterClass">{{roomsession.presentername}}</span></td>
+              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length !== 1"><span class="topicClass">{{roomsession.topic}}</span> by <span class="presenterClass">{{roomsession.presentername}}</span></td>
+             
+            </ng-container>
             </tr>
             </tbody>
           </table>
