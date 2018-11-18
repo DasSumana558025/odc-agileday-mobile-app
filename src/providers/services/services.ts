@@ -13,7 +13,7 @@ import * as constants from '../constant/constants';
 @Injectable()
 export class ServicesProvider {
   products = [];
-  userIdAuth = '';
+  userIdAuth = ''
   xAuthToken = '';
   constructor(public http: Http) {
     console.log('Hello ApiProvider Provider');
@@ -35,9 +35,17 @@ export class ServicesProvider {
     return this.http.get(constants.API_URL+"topics",options);
   }
 
-  getFeedbacks() : Observable<any> {
-    
-    return this.http.get('assets/feedback.json');
+  getFeedbacks(param:any) : Observable<any> {
+    let header = new Headers();
+    header.set('Access-Control-Allow-Origin','*');
+    header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    header.set('Accept' ,'application/json');
+    header.set('Content-Type' ,'application/json');
+    header.set('X-Auth-UserId', this.userIdAuth);
+    header.set('X-Auth-Token', this.xAuthToken);
+    let options = new RequestOptions({headers: header});
+ //   return this.http.get(constants.API_URL + "questions/",options);
+   return this.http.get('assets/feedback.json');
   }
 
   getUser():Observable<any> {
@@ -62,7 +70,7 @@ export class ServicesProvider {
       header.set('X-Auth-UserId', this.userIdAuth);
       header.set('X-Auth-Token', this.xAuthToken);
       let options = new RequestOptions({headers: header});
-      return this.http.post(constants.API_URL +'vote/',param, options)
+      return this.http.post(constants.API_URL +'vote/',param, options);
     }
 
     getRegisteredTopicForUser(param:any):Observable<any>{

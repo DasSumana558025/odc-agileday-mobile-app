@@ -134,6 +134,40 @@
       "selectedAnswer" : "",
       "choiceId" : "LONG_TEXT",
       "sessionName": "Deep Neural Network"
+    },
+    {
+      "id": 6,
+      "feedback": true,
+      "session": null,
+      "options": [],
+      "correctOption": 0,
+      "description": "How do want to rate a brand new agile app?",
+      "sessionId": 6,
+      "selectedAnswer" : "",
+      "choiceId" : "SINGLE_SELECT",
+      "ratingOptions": [
+        {
+          "optionId": 1,
+          "value": 1
+        },
+        {
+          "optionId": 2,
+          "value": 2
+        },
+        {
+          "optionId": 3,
+          "value": 3
+        },
+        {
+          "optionId": 4,
+          "value": 4
+        },
+        {
+          "optionId": 5,
+          "value": 5
+        }
+      ],
+      "sessionName": "Angular2"
     }
     
 ]

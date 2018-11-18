@@ -27,14 +27,16 @@
         <div class="form-group">
 
             <ul class="list-wrapper pd-0">
-                <li  style="list-style-type: none;" class="pd-0"  *ngFor="let question of feedbackObj.questionOptions">
+               <div *ngIf="feedbackObj.choiceId === 'SINGLE_CHOICE'">
+               <li   style="list-style-type: none;" class="pd-0"  *ngFor="let question of feedbackObj.questionOptions">
                     <div class="menu-action">
                        <label class="radio-inline"> 
                             <input type="radio" class="radio-inline" value="{{question.value}}" name="{{question.optionId}}_{{feedbackObj.sessionName}}"  [(ngModel)]="feedbackObj.selectedAnswer">{{question.value}}
                         </label>
                     </div>
                 </li>
-                 <li *ngIf="feedbackObj.id == 4" style="list-style-type: none;" class="pd-0">
+            </div>
+                 <li *ngIf="feedbackObj.choiceId === 'SINGLE_SELECT'" style="list-style-type: none;" class="pd-0">
                         <select class="form-control" style="font-size:100%" [(ngModel)]="feedbackObj.selectedAnswer">
                                 <option value="">Select rate</option>
                                 <option *ngFor="let rating of feedbackObj.ratingOptions" value= "{{rating.optionId}}">
@@ -42,9 +44,10 @@
                                 </option>
                         </select>  
                  </li>
-                 <li *ngIf="feedbackObj.id == 5" style="list-style-type: none;" class="pd-0">
+                 <li *ngIf="feedbackObj.choiceId === 'LONG_TEXT'" style="list-style-type: none;" class="pd-0">
                        <textarea class="form-control" style="font-size:100%" rows="5"  [(ngModel)]="feedbackObj.selectedAnswer"></textarea>
                 </li>
+                
              </ul>
         </div>
     </div>

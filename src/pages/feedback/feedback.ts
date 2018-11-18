@@ -22,9 +22,11 @@ export class FeedbackPage {
   }
 
   ngOnInit(){
-    this.apiProvider.getFeedbacks().subscribe(data => {
+    let strUserId = localStorage.getItem('user_id');
+    let questionDetail = { userId : strUserId, questionType : "FEEDBACK"} ;
+    this.apiProvider.getFeedbacks(questionDetail).subscribe(data => {
       this.allFeedback = data.json() as AllFeedback[];
-      console.log("Inside ContactPage and onInit() = "+this.allFeedback);
+      console.log("Inside FeedbackPage and onInit() feedbackForm = "+this.allFeedback);
   });
 
   let date = new Date();
