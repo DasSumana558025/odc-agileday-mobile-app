@@ -44,8 +44,8 @@ export class ServicesProvider {
     header.set('X-Auth-UserId', this.userIdAuth);
     header.set('X-Auth-Token', this.xAuthToken);
     let options = new RequestOptions({headers: header});
- //   return this.http.get(constants.API_URL + "questions/",options);
-   return this.http.get('assets/feedback.json');
+   return this.http.get(constants.API_URL + "questions/",options);
+  // return this.http.get('assets/feedback.json');
   }
 
   getUser():Observable<any> {

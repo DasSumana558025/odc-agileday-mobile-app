@@ -26,14 +26,14 @@ export class FeedbackPage {
     let questionDetail = { userId : strUserId, questionType : "FEEDBACK"} ;
     this.apiProvider.getFeedbacks(questionDetail).subscribe(data => {
       this.allFeedback = data.json() as AllFeedback[];
-      console.log("Inside FeedbackPage and onInit() feedbackForm = "+this.allFeedback);
+      console.log("Inside FeedbackPage and onInit() feedbackForm = "+ JSON.stringify(this.allFeedback) );
   });
 
   let date = new Date();
-        let techForumDateStart = new Date(2018,8,28);
+        let techForumDateStart = new Date(2018,11,18);
         techForumDateStart.setHours(14,0,0);
         
-        let techForumDateEnd = new Date(2018,8,28);
+        let techForumDateEnd = new Date(2018,11,20);
         techForumDateEnd.setHours(18,0,0);
 
         console.log("test date = "+date);
@@ -53,23 +53,23 @@ submitFeedback() {
       for(var i = 0; i < this.allFeedback.length; i++){
         let curranswer = "";
         let feedbackReq = {};
-        if(this.allFeedback[i].choiceId == "LONG_TEXT"){
+        if(this.allFeedback[i].answerType == "LONG_TEXT"){
           feedbackReq = {"userId" : strUserId, "questionId" :  this.allFeedback[i].id,
           "text" : this.allFeedback[i].selectedAnswer };
         }else{
           console.log("tempchoice = "+JSON.stringify(this.allFeedback[i]));
-          if(this.allFeedback[i].choiceId == "SINGLE_CHOICE"){
-            for(var j=0; j<this.allFeedback[i].questionOptions.length;j++){
-              let option = this.allFeedback[i].questionOptions[j].value;
+          if(this.allFeedback[i].answerType == "SINGLE_CHOICE"){
+            for(var j=0; j<this.allFeedback[i].choices.length;j++){
+              let option = this.allFeedback[i].choices[j].number;
               console.log("option = "+option);
               if(option == this.allFeedback[i].selectedAnswer){
-                curranswer = this.allFeedback[i].questionOptions[j].optionId;
+                curranswer = this.allFeedback[i].choices[j].number;
               }
               console.log("1tempchoice = "+curranswer);
             }
             
            }
-           if(this.allFeedback[i].choiceId == "SINGLE_SELECT"){
+           if(this.allFeedback[i].answerType == "SINGLE_SELECT"){
              curranswer = this.allFeedback[i].selectedAnswer;
            }
           console.log("tempchoice = "+curranswer);
@@ -79,13 +79,13 @@ submitFeedback() {
         this.feedbackTempReq.push(feedbackReq);
       }
   console.log("req = "+JSON.stringify(this.feedbackTempReq));
-     this.apiProvider.postUserFeedback(this.feedbackTempReq).subscribe(data => {
-         console.log("Inside ContactPage and onInit() = "+data.status);
-         if(data.status == 200){
-          this.showSuccess("your feedback is successfully submitted");
-          this.navCtrl.setRoot(FeedbackPage);
-         }
-     });
+    //  this.apiProvider.postUserFeedback(this.feedbackTempReq).subscribe(data => {
+    //      console.log("Inside ContactPage and onInit() = "+data.status);
+    //      if(data.status == 200){
+    //       this.showSuccess("your feedback is successfully submitted");
+    //       this.navCtrl.setRoot(FeedbackPage);
+    //      }
+    //  });
     
   }
 
@@ -102,12 +102,10 @@ submitFeedback() {
 
 interface AllFeedback {
   id : number;
-  session : number;
+  number : number;
   description: string;
-  sessionId : number;
-  sessionName :string;
-  questionDescription :any;
+  questionType : string;
+  answerType :string;
   selectedAnswer :string;
-  choiceId:string;
-  questionOptions :any[];
+  choices :any[];
 }

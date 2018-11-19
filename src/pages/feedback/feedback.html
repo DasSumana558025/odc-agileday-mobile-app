@@ -27,24 +27,24 @@
         <div class="form-group">
 
             <ul class="list-wrapper pd-0">
-               <div *ngIf="feedbackObj.choiceId === 'SINGLE_CHOICE'">
-               <li   style="list-style-type: none;" class="pd-0"  *ngFor="let question of feedbackObj.questionOptions">
+               <div *ngIf="feedbackObj.answerType === 'SINGLE_CHOICE'">
+               <li   style="list-style-type: none;" class="pd-0"  *ngFor="let choice of feedbackObj.choices">
                     <div class="menu-action">
                        <label class="radio-inline"> 
-                            <input type="radio" class="radio-inline" value="{{question.value}}" name="{{question.optionId}}_{{feedbackObj.sessionName}}"  [(ngModel)]="feedbackObj.selectedAnswer">{{question.value}}
+                            <input type="radio" class="radio-inline" value="{{choice.number}}" name="{{choice.id}}"  [(ngModel)]="feedbackObj.selectedAnswer">{{choice.description}}
                         </label>
                     </div>
                 </li>
             </div>
-                 <li *ngIf="feedbackObj.choiceId === 'SINGLE_SELECT'" style="list-style-type: none;" class="pd-0">
-                        <select class="form-control" style="font-size:100%" [(ngModel)]="feedbackObj.selectedAnswer">
-                                <option value="">Select rate</option>
-                                <option *ngFor="let rating of feedbackObj.ratingOptions" value= "{{rating.optionId}}">
-                                  {{rating.value}}
+                 <li *ngIf="feedbackObj.answerType === 'SINGLE_SELECT'" style="list-style-type: none;" class="pd-0">
+                         <select  class="form-control" style="font-size:100%" [(ngModel)]="feedbackObj.selectedAnswer" ng-init="feedbackObj.selectedAnswer=0">
+                                <option  value="0" >Please Select</option>   
+                                <option *ngFor="let rating of feedbackObj.choices" value= "{{rating.number}}" >
+                                  {{rating.description}}
                                 </option>
-                        </select>  
+                        </select>   
                  </li>
-                 <li *ngIf="feedbackObj.choiceId === 'LONG_TEXT'" style="list-style-type: none;" class="pd-0">
+                 <li *ngIf="feedbackObj.answerType === 'LONG_TEXT'" style="list-style-type: none;" class="pd-0">
                        <textarea class="form-control" style="font-size:100%" rows="5"  [(ngModel)]="feedbackObj.selectedAnswer"></textarea>
                 </li>
                 
