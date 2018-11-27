@@ -22,6 +22,18 @@ export class ServicesProvider {
    
   }
 
+  getRoomDetailsBylocation(param:any) : Observable<any> {
+    let header = new Headers();
+    header.set('Access-Control-Allow-Origin','*');
+    header.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    header.set('Accept' ,'application/json');
+    header.set('Content-Type' ,'application/json');
+    header.set('X-Auth-UserId', this.userIdAuth);
+    header.set('X-Auth-Token', this.xAuthToken);
+    let options = new RequestOptions({headers: header});
+   return this.http.get(constants.API_URL + "location/" + param,options);
+  }
+
   getAllTopics() : Observable<any> {
     this.userIdAuth = localStorage.getItem("X-Auth-UserId");
     this.xAuthToken = localStorage.getItem("X-Auth-Token");

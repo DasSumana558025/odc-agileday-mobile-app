@@ -27,6 +27,14 @@
           <ion-label floating>Password</ion-label>
           <ion-input [(ngModel)]="model.pwd"  type="password" value=""></ion-input>
         </ion-item>
+
+        <ion-item>
+          <ion-label>Location</ion-label>
+          <ion-select [(ngModel)]="model.location">
+            <ion-option value="PNCP">Pune</ion-option>
+            <ion-option value="BNG">Bengaluru</ion-option>
+          </ion-select>
+        </ion-item>
       
       </ion-list>
       </ion-col>

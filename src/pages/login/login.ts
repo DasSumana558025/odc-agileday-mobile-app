@@ -57,11 +57,12 @@ export class LoginPage{
     localStorage.clear();
     localStorage.setItem('auth_token', this.encriptDaseId);
     localStorage.setItem('user_id',this.model.dasid);
-
+    localStorage.setItem('user_location',this.model.location);
+    console.log("location",this.model.location); 
     this.apiProvider.getUser().subscribe(data => {
       if(data){
       const token = data.json();
-     // console.log("user",token.access_token); 
+    
       
       console.log("Inside login = "+  this.model.dasid + "auth token = "+token.access_token);
        

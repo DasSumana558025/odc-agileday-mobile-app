@@ -1,40 +1,39 @@
 <ion-header>
-    <ion-navbar>
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-     
-      <ion-title> 
-          <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/agileDayLogo.jpg" style="float:left;" />
-          Agenda
-          <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/atosWorldline.png" style="float:right;width:100px;" />
-      </ion-title>
-    </ion-navbar>
-  </ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+   
+    <ion-title> 
+        <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/agileDayLogo.jpg" style="float:left;" />
+        Agenda
+        <img alt="logo" height="40"  style="align-items: center;" src="../../assets/imgs/atosWorldline.png" style="float:right;width:100px;" />
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
-  <ion-content>
-  
-      <div class="panel-body overflow">
-        <table class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <td class="allign-middle topicClass">Time Slot</td>
-              <td class="allign-middle topicClass" *ngFor ="let room of roomNos">{{room}} - Topic/Speaker</td>
-             <!-- <td class="allign-middle topicClass">TR03 - Topic/Speaker</td>-->
-            </tr>
-          </thead>
-            <tbody>
-            <tr *ngFor="let timeSlotSpecificTopic of timeSlotSpecificTopics">
-              <td class="allign-middle">{{timeSlotSpecificTopic.timeSlot}}</td>
-              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length === 0" [attr.colspan] = "totalRoomNo"><span class="topicClass">Lunch Break</span></td>
-			       <ng-container *ngFor = "let roomsession of timeSlotSpecificTopic.roomDetails">
-              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length === 1"  [attr.colspan] = "totalRoomNo"><span class="topicClass">{{roomsession.topic}}</span> by <span class="presenterClass">{{roomsession.presentername}}</span></td>
-              <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length !== 1"><span class="topicClass">{{roomsession.topic}}</span> by <span class="presenterClass">{{roomsession.presentername}}</span></td>
-             
+<ion-content>
+
+    <div class="panel-body overflow">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <td class="allign-middle topicClass">Time Slot</td>
+            <td class="allign-middle topicClass" *ngFor ="let room of presentersRoom">{{room}} - Topic/Speaker</td>
+           <!-- <td class="allign-middle topicClass">TR03 - Topic/Speaker</td>-->
+          </tr>
+        </thead>
+          <tbody>
+          <tr *ngFor="let timeSlotSpecificTopic of timeSlotSpecificTopics">
+            <td class="allign-middle">{{timeSlotSpecificTopic.timeSlot}}</td>
+            <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length === 0" [attr.colspan] = "totalRoomNo"><span class="topicClass">Lunch Break</span></td>
+           <ng-container *ngFor = "let roomsession of timeSlotSpecificTopic.roomDetails">
+            <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length === 1"  [attr.colspan] = "totalRoomNo"><span class="topicClass">{{roomsession.topic}}</span> by <span class="presenterClass">{{roomsession.presentername}}</span></td>
+            <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length !== 1"><span class="topicClass">{{roomsession.topic}}</span> by <span class="presenterClass">{{roomsession.presentername}}</span></td>
             </ng-container>
-            </tr>
-            </tbody>
-          </table>
-       </div>
-     
-  </ion-content>
+          </tr>
+          </tbody>
+        </table>
+     </div>
+   
+</ion-content>

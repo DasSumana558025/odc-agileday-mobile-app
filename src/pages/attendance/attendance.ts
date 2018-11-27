@@ -39,10 +39,10 @@ initializeBackButtonCustomHandler(): void {
 }
   ngOnInit(){
   let date = new Date();
-        let techForumDateStart = new Date(2018,8,27);
+        let techForumDateStart = new Date(2018,12,5);
         techForumDateStart.setHours(10,0,0);
         
-        let techForumDateEnd = new Date(2018,8,28);
+        let techForumDateEnd = new Date(2018,12,5);
         techForumDateEnd.setHours(18,0,0);
 
         console.log("test date = "+date);

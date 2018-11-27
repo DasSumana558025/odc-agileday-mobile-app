@@ -30,10 +30,10 @@ export class FeedbackPage {
   });
 
   let date = new Date();
-        let techForumDateStart = new Date(2018,11,18);
+        let techForumDateStart = new Date(2018,12,5);
         techForumDateStart.setHours(14,0,0);
         
-        let techForumDateEnd = new Date(2018,11,20);
+        let techForumDateEnd = new Date(2018,12,5);
         techForumDateEnd.setHours(18,0,0);
 
         console.log("test date = "+date);
@@ -79,13 +79,13 @@ submitFeedback() {
         this.feedbackTempReq.push(feedbackReq);
       }
   console.log("req = "+JSON.stringify(this.feedbackTempReq));
-    //  this.apiProvider.postUserFeedback(this.feedbackTempReq).subscribe(data => {
-    //      console.log("Inside ContactPage and onInit() = "+data.status);
-    //      if(data.status == 200){
-    //       this.showSuccess("your feedback is successfully submitted");
-    //       this.navCtrl.setRoot(FeedbackPage);
-    //      }
-    //  });
+     this.apiProvider.postUserFeedback(this.feedbackTempReq).subscribe(data => {
+          console.log("Inside ContactPage and onInit() = "+data.status);
+         if(data.status == 200){
+           this.showSuccess("your feedback is successfully submitted");
+           this.navCtrl.setRoot(FeedbackPage);
+         }
+     });
     
   }
 
