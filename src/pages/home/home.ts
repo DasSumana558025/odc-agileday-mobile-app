@@ -36,7 +36,9 @@ export class HomePage implements OnInit {
   @ViewChild('mycontent') nav: NavController
   isAgileDay = false;
   rootPage : any = AgendaPage;
-
+  presentersRoom=[];
+  posterLength : Number;
+  videoLength :Number;
   topics: any[];
 
  pages: PageInterface[] = [
@@ -54,29 +56,80 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(){
-  //  let date = new Date();
-  //    let techForumDateStart = new Date(2018,8,28);
-  //    techForumDateStart.setHours(10,0,0);
-    
-  //    let techForumDateEnd = new Date(2018,8,28);
-  //    techForumDateEnd.setHours(18,0,0);
+    this.apiProvider.getAllTopics().map(res=>res.json()).subscribe(data => {
+      this.topics = data;
+      this.getAllTimeSlot();
+      console.log(" presentersRoom = "+this.presentersRoom.length);
+    });
 
-  //    console.log("test date = "+date);
-  //    console.log("test techForumDateStart = "+techForumDateStart);
-  //   console.log("test techForumDateEnd = "+techForumDateEnd);
-  //    if(date > techForumDateStart && date < techForumDateEnd) {
-  //        this.isAgileDay = true;
-  //    } else {
-  //      this.isAgileDay = false;
-  //    }
-  //    if(this.isAgileDay == false){
-  //    let object =  this.pages.find(x => x.pageName == 'RegisterPage' );
-  //   const index: number = this.pages.indexOf(object);
-  //      if (index !== -1) {
-  //          this.pages.splice(index, 1);
-  //      }
-  //    }
+    this.apiProvider.getPosters().subscribe(data => {
+      this.posterLength = data.json().length;
+      console.log("test posters = "+this.posterLength);
+    });
+
+    this.apiProvider.getAllVideos().subscribe(data => {
+      this.videoLength = data.json().length ;
+      console.log("All video list = "+this.videoLength);
+  });
+
+    let date = new Date();
+      let techForumDateStart = new Date(2018,12,5);
+      techForumDateStart.setHours(10,0,0);
+    
+      let techForumDateEnd = new Date(2018,12,5);
+      techForumDateEnd.setHours(18,0,0);
+
+      console.log("test date = "+date);
+      console.log("test techForumDateStart = "+techForumDateStart);
+     console.log("test techForumDateEnd = "+techForumDateEnd);
+      if(date > techForumDateStart && date < techForumDateEnd) {
+          this.isAgileDay = true;
+      } else {
+        this.isAgileDay = false;
+      }
+      if(this.isAgileDay == false){
+          let object =  this.pages.find(x => x.pageName == 'RegisterPage' );
+          const index: number = this.pages.indexOf(object);
+          if (index !== -1) {
+              this.pages.splice(index, 1);
+          }
+      }
+
+      if(this.presentersRoom.length == 1){
+        let object =  this.pages.find(x => x.pageName == 'SessionsPage' );
+        const index: number = this.pages.indexOf(object);
+        if (index !== -1) {
+            this.pages.splice(index, 1);
+        }
+      }
+
+      if(this.posterLength < 1){
+        let object =  this.pages.find(x => x.pageName == 'PosterPage' );
+        const index: number = this.pages.indexOf(object);
+        if (index !== -1) {
+            this.pages.splice(index, 1);
+        }
+    }
+
+    if(this.videoLength < 1){
+      let object =  this.pages.find(x => x.pageName == 'RegisterPage' );
+      const index: number = this.pages.indexOf(object);
+      if (index !== -1) {
+          this.pages.splice(index, 1);
+      }
+  }
     // console.log("pages",this.pages);
+  }
+
+  getAllTimeSlot(){
+    if(null != this.topics){
+      for(var i=0; i<this.topics.length; i++){
+        if(this.presentersRoom.indexOf(this.topics[i].roomNumber) == -1){
+          this.presentersRoom.push(this.topics[i].roomNumber);
+        }
+        
+      }
+    }
   }
 
   openPage(page) {

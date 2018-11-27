@@ -31,7 +31,7 @@ export class AgendaPage implements OnInit {
   }
 
   ngOnInit(){
-    this.getRoomDetails();
+  this.getRoomDetails();
    this.apiProvider.getAllTopics().map(res=>res.json()).subscribe(data => {
       this.topics = data;
       this.getAllTimeSlot();
@@ -71,7 +71,6 @@ export class AgendaPage implements OnInit {
       for(var i=0; i<this.topics.length; i++){
         
         if(this.filterValues.indexOf(this.topics[i].timeSlot) == -1){
-         // var timeObj = {"time" : this.topics[i].timeSlot};
           this.filterValues.push(this.topics[i].timeSlot);
         }
         if(this.presentersRoom.indexOf(this.topics[i].roomNumber) == -1){
