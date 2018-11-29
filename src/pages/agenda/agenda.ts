@@ -47,8 +47,7 @@ export class AgendaPage implements OnInit {
         let sessions = this.topics.filter(x=> x.timeSlot == this.filterValues[i]);
         let roomSpecificTopic = [];
         for(var j=0;j<this.presentersRoom.length;j++){
-          if("" != this.getRoomNameByCode(this.presentersRoom[j])){
-            this.isDataAvailable = true;
+          
             let roomspecificsessions = sessions.find(x=> x.roomNumber == this.presentersRoom[j]);
             if(roomspecificsessions !== undefined){
               for(var k = 0; k < roomspecificsessions.presenters.length; k++)
@@ -63,7 +62,7 @@ export class AgendaPage implements OnInit {
             }
               roomSpecificTopic.push({"room":this.presentersRoom[j],"topic":roomspecificsessions.description,"presentername":roomspecificsessions.presenterName});
             }
-        }
+       
         this.timeSlotSpecificTopics.push({"timeSlot":this.filterValues[i],"roomDetails":roomSpecificTopic});
       }
     }
@@ -72,9 +71,7 @@ export class AgendaPage implements OnInit {
      
   });
 
-  if(!this.isDataAvailable){
-    this.responseMsg = "No Data available";
-  }
+  
   }
 
   getAllTimeSlot(){
@@ -94,7 +91,7 @@ export class AgendaPage implements OnInit {
 
   getRoomDetails(){
     var location =  localStorage.getItem("user_location");
-     
+    console.log("locationService - "+location);
         this.apiProvider.getRoomDetailsBylocation(location).subscribe(data => {
           this.locationDetail = data.json() as AllLocation[];
           console.log("location Detail() = " + JSON.stringify(this.locationDetail));

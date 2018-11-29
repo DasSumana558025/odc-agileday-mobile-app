@@ -57,8 +57,8 @@ export class LoginPage{
     localStorage.clear();
     localStorage.setItem('auth_token', this.encriptDaseId);
     localStorage.setItem('user_id',this.model.dasid);
-    localStorage.setItem('user_location',this.model.location);
-    console.log("location",this.model.location); 
+    localStorage.setItem('user_location','BNG');
+    console.log("location",localStorage.getItem("user_location")); 
     this.apiProvider.getUser().subscribe(data => {
       if(data){
       const token = data.json();
@@ -70,7 +70,7 @@ export class LoginPage{
    // console.log("currToken = "+JSON.stringify(headerToken));
     localStorage.setItem("X-Auth-UserId",this.model.dasid);
     localStorage.setItem("X-Auth-Token",token.access_token);
-    console.log("##############33 session = "+localStorage.getItem("headerToken"));
+   // console.log("##############33 session = "+localStorage.getItem("headerToken"));
       this.navCtrl.setRoot(HomePage);
       
     }

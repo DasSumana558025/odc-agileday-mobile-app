@@ -15,8 +15,8 @@ import { ServicesProvider } from './../../providers/services/services';
 })
 export class FeedbackPage {
   public allFeedback : AllFeedback [];
-  feedbackTempReq:any[] = [];
-  checkfeedbackVisible = false;
+  feedbackTempReq=[];
+  checkfeedbackVisible :boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider,private alertCtrl: AlertController) {
   }
@@ -28,12 +28,13 @@ export class FeedbackPage {
       this.allFeedback = data.json() as AllFeedback[];
       console.log("Inside FeedbackPage and onInit() feedbackForm = "+ JSON.stringify(this.allFeedback) );
   });
-
-  let date = new Date();
-        let techForumDateStart = new Date(2018,12,5);
+  
+      this.checkfeedbackVisible = false;
+      let date = new Date();
+        let techForumDateStart = new Date(2018,11,5);
         techForumDateStart.setHours(14,0,0);
         
-        let techForumDateEnd = new Date(2018,12,5);
+        let techForumDateEnd = new Date(2018,11,5);
         techForumDateEnd.setHours(18,0,0);
 
         console.log("test date = "+date);
@@ -41,10 +42,8 @@ export class FeedbackPage {
         console.log("test techForumDateEnd = "+techForumDateEnd);
         if(date > techForumDateStart && date < techForumDateEnd) {
             this.checkfeedbackVisible = true;
-        } else {
-           this.checkfeedbackVisible = false;
-        }
-}
+        } 
+  }
 
 submitFeedback() {
  // console.log("result = " + JSON.stringify(this.allFeedback));
@@ -60,10 +59,10 @@ submitFeedback() {
           console.log("tempchoice = "+JSON.stringify(this.allFeedback[i]));
           if(this.allFeedback[i].answerType == "SINGLE_CHOICE"){
             for(var j=0; j<this.allFeedback[i].choices.length;j++){
-              let option = this.allFeedback[i].choices[j].number;
+              let option = this.allFeedback[i].choices[j].id;
               console.log("option = "+option);
               if(option == this.allFeedback[i].selectedAnswer){
-                curranswer = this.allFeedback[i].choices[j].number;
+                curranswer = this.allFeedback[i].choices[j].id;
               }
               console.log("1tempchoice = "+curranswer);
             }

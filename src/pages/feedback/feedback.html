@@ -31,7 +31,7 @@
                <li   style="list-style-type: none;" class="pd-0"  *ngFor="let choice of feedbackObj.choices">
                     <div class="menu-action">
                        <label class="radio-inline"> 
-                            <input type="radio" class="radio-inline" value="{{choice.number}}" name="{{choice.id}}"  [(ngModel)]="feedbackObj.selectedAnswer">{{choice.description}}
+                            <input type="radio" class="radio-inline" value="{{choice.id}}" name="{{choice.id}}"  [(ngModel)]="feedbackObj.selectedAnswer">{{choice.description}}
                         </label>
                     </div>
                 </li>
@@ -39,7 +39,7 @@
                  <li *ngIf="feedbackObj.answerType === 'SINGLE_SELECT'" style="list-style-type: none;" class="pd-0">
                          <select  class="form-control" style="font-size:100%" [(ngModel)]="feedbackObj.selectedAnswer" ng-init="feedbackObj.selectedAnswer=0">
                                 <option  value="0" >Please Select</option>   
-                                <option *ngFor="let rating of feedbackObj.choices" value= "{{rating.number}}" >
+                                <option *ngFor="let rating of feedbackObj.choices" value= "{{rating.id}}" >
                                   {{rating.description}}
                                 </option>
                         </select>   

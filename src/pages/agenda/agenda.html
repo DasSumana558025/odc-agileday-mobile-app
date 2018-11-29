@@ -15,8 +15,8 @@
 <ion-content>
 
     <div class="panel-body overflow">
-      <div *ngIf="!isDataAvailable" style = "text-align: center">{{responseMsg}}</div> 
-      <table *ngIf="isDataAvailable" class="table table-striped table-bordered">
+ 
+      <table  class="table table-striped table-bordered">
         <thead>
           <tr>
             <td class="allign-middle topicClass">Time Slot</td>
@@ -29,7 +29,7 @@
             <td class="allign-middle">{{timeSlotSpecificTopic.timeSlot}}</td>
             <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length === 0" [attr.colspan] = "totalRoomNo"><span class="topicClass">Lunch Break</span></td>
            <ng-container *ngFor = "let roomsession of timeSlotSpecificTopic.roomDetails">
-            <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length === 1"  [attr.colspan] = "totalRoomNo"><span class="topicClass">{{roomsession.topic}}</span> by <span class="presenterClass">{{roomsession.presentername}}</span></td>
+            <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length === 1"  [attr.colspan] = "totalRoomNo"><span class="topicClass">{{roomsession.topic}}</span> <span *ngIf="timeSlotSpecificTopic.roomDetails.topic != 'Lunch Break'"> by </span> <span class="presenterClass">{{roomsession.presentername}}</span></td>
             <td class="allign-middle" *ngIf = "timeSlotSpecificTopic.roomDetails.length !== 1"><span class="topicClass">{{roomsession.topic}}</span> by <span class="presenterClass">{{roomsession.presentername}}</span></td>
             </ng-container>
           </tr>

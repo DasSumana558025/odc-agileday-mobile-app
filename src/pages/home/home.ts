@@ -73,10 +73,10 @@ export class HomePage implements OnInit {
   });
 
     let date = new Date();
-      let techForumDateStart = new Date(2018,12,5);
+      let techForumDateStart = new Date(2018,11,5);
       techForumDateStart.setHours(10,0,0);
     
-      let techForumDateEnd = new Date(2018,12,5);
+      let techForumDateEnd = new Date(2018,11,5);
       techForumDateEnd.setHours(18,0,0);
 
       console.log("test date = "+date);
@@ -95,7 +95,7 @@ export class HomePage implements OnInit {
           }
       }
 
-      if(this.presentersRoom.length == 1){
+      if(this.presentersRoom.length == 0 ){
         let object =  this.pages.find(x => x.pageName == 'SessionsPage' );
         const index: number = this.pages.indexOf(object);
         if (index !== -1) {
