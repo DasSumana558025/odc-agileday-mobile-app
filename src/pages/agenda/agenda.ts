@@ -27,10 +27,13 @@ export class AgendaPage implements OnInit {
   roomNos = [];
   presentersRoom = [];
   totalRoomNo : string ;
+  responseMsg : string;
+  isDataAvailable : boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams,public apiProvider: ServicesProvider,public events: Events) {
   }
 
   ngOnInit(){
+    this.isDataAvailable = false;
   this.getRoomDetails();
    this.apiProvider.getAllTopics().map(res=>res.json()).subscribe(data => {
       this.topics = data;
@@ -39,31 +42,39 @@ export class AgendaPage implements OnInit {
       console.log("presentersRoom - "+JSON.stringify(this.presentersRoom));
       console.log("filterValues - "+JSON.stringify(this.filterValues));
       this.totalRoomNo = this.presentersRoom.length.toString();
+
       for(var i=0;i<this.filterValues.length;i++){
         let sessions = this.topics.filter(x=> x.timeSlot == this.filterValues[i]);
         let roomSpecificTopic = [];
         for(var j=0;j<this.presentersRoom.length;j++){
-          let roomspecificsessions = sessions.find(x=> x.roomNumber == this.presentersRoom[j]);
-		      if(roomspecificsessions !== undefined){
-            for(var k = 0; k < roomspecificsessions.presenters.length; k++)
-            {
-              if(roomspecificsessions.presenterName === undefined){
-                roomspecificsessions["presenterName"]= roomspecificsessions.presenters[k].firstName + " " + roomspecificsessions.presenters[k].lastName;
-              }
-              else
+          if("" != this.getRoomNameByCode(this.presentersRoom[j])){
+            this.isDataAvailable = true;
+            let roomspecificsessions = sessions.find(x=> x.roomNumber == this.presentersRoom[j]);
+            if(roomspecificsessions !== undefined){
+              for(var k = 0; k < roomspecificsessions.presenters.length; k++)
               {
-               roomspecificsessions.presenterName = roomspecificsessions.presenterName + " , " + roomspecificsessions.presenters[k].firstName + " " + roomspecificsessions.presenters[k].lastName;
-              } 
-           }
-		        roomSpecificTopic.push({"room":this.presentersRoom[j],"topic":roomspecificsessions.description,"presentername":roomspecificsessions.presenterName});
-		      }
+                if(roomspecificsessions.presenterName === undefined){
+                  roomspecificsessions["presenterName"]= roomspecificsessions.presenters[k].firstName + " " + roomspecificsessions.presenters[k].lastName;
+                }
+                else
+                {
+                roomspecificsessions.presenterName = roomspecificsessions.presenterName + " , " + roomspecificsessions.presenters[k].firstName + " " + roomspecificsessions.presenters[k].lastName;
+                } 
+            }
+              roomSpecificTopic.push({"room":this.presentersRoom[j],"topic":roomspecificsessions.description,"presentername":roomspecificsessions.presenterName});
+            }
         }
         this.timeSlotSpecificTopics.push({"timeSlot":this.filterValues[i],"roomDetails":roomSpecificTopic});
       }
+    }
       console.log("FinalArray - " + JSON.stringify(this.timeSlotSpecificTopics));
 
      
   });
+
+  if(!this.isDataAvailable){
+    this.responseMsg = "No Data available";
+  }
   }
 
   getAllTimeSlot(){
@@ -91,15 +102,26 @@ export class AgendaPage implements OnInit {
 
           for(var i=0; i<roomsArray.length; i++)
           {
-        //    var currRoom = {"roomName" :roomsArray[i].name, "roomCode": roomsArray[i].code};
+            var currRoom = {"roomName" :roomsArray[i].name, "roomCode": roomsArray[i].code};
          //   console.log("room - "+currRoom);
-            this.roomNos.push(roomsArray[i].code);
+            this.roomNos.push(currRoom);
             
           }
+          console.log("roomNos - "+JSON.stringify(this.roomNos));
       });
 
     }
 
+    getRoomNameByCode(code)
+    {
+        for(var i=0; i<this.roomNos.length; i ++){
+          var roomDetail = this.roomNos[i];
+          if(roomDetail.roomCode === code){
+            return roomDetail.roomName + "- Topic/Speaker";
+          }
+        }
+        return "";
+    }
 }
 
 interface AllLocation {
