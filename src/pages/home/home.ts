@@ -60,16 +60,42 @@ export class HomePage implements OnInit {
       this.topics = data;
       this.getAllTimeSlot();
       console.log(" presentersRoom = "+this.presentersRoom.length);
+      if(this.presentersRoom.length == 1 ){
+        let object =  this.pages.find(x => x.pageName == 'SessionsPage' );
+        const index: number = this.pages.indexOf(object);
+        if (index !== -1) {
+            this.pages.splice(index, 1);
+        }
+      }
     });
 
-    this.apiProvider.getPosters().subscribe(data => {
-      this.posterLength = data.json().length;
+    this.apiProvider.getPosters().toPromise()
+    .then(
+      res => {
+      this.posterLength = res.json().length;
       console.log("test posters = "+this.posterLength);
+      if(this.posterLength < 1){
+        let object =  this.pages.find(x => x.pageName == 'PosterPage' );
+        const index: number = this.pages.indexOf(object);
+        if (index !== -1) {
+            this.pages.splice(index, 1);
+        }
+    }
+
     });
 
-    this.apiProvider.getAllVideos().subscribe(data => {
-      this.videoLength = data.json().length ;
+    this.apiProvider.getAllVideos().toPromise()
+    .then(
+      res => {
+      this.videoLength = res.json().length ;
       console.log("All video list = "+this.videoLength);
+      if(this.videoLength < 1){
+        let object =  this.pages.find(x => x.pageName == 'RegisterPage' );
+        const index: number = this.pages.indexOf(object);
+        if (index !== -1) {
+            this.pages.splice(index, 1);
+        }
+    }
   });
 
     let date = new Date();
@@ -87,37 +113,12 @@ export class HomePage implements OnInit {
       } else {
         this.isAgileDay = false;
       }
-      if(this.isAgileDay == false){
-          let object =  this.pages.find(x => x.pageName == 'RegisterPage' );
-          const index: number = this.pages.indexOf(object);
-          if (index !== -1) {
-              this.pages.splice(index, 1);
-          }
-      }
+     
+     
 
-      if(this.presentersRoom.length == 0 ){
-        let object =  this.pages.find(x => x.pageName == 'SessionsPage' );
-        const index: number = this.pages.indexOf(object);
-        if (index !== -1) {
-            this.pages.splice(index, 1);
-        }
-      }
+      
 
-      if(this.posterLength < 1){
-        let object =  this.pages.find(x => x.pageName == 'PosterPage' );
-        const index: number = this.pages.indexOf(object);
-        if (index !== -1) {
-            this.pages.splice(index, 1);
-        }
-    }
-
-    if(this.videoLength < 1){
-      let object =  this.pages.find(x => x.pageName == 'RegisterPage' );
-      const index: number = this.pages.indexOf(object);
-      if (index !== -1) {
-          this.pages.splice(index, 1);
-      }
-  }
+   
     // console.log("pages",this.pages);
   }
 
